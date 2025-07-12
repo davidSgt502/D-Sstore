@@ -777,18 +777,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const { blob: pdfBlob, fileName } = utils.generateOrderPDF(formData, state.cart, subtotal, shippingCost, total);
 
             // Crear mensaje para WhatsApp
-            let message = `*NOTA DE PEDIDO - ${APP_CONFIG.storeName.toUpperCase()}*%0A%0A`;
-            message += `%F0%9F%93%9D *No. Pedido:* ${Math.floor(1000 + Math.random() * 9000)}%0A`;
-            message += `%F0%9F%93%85 *Fecha:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric'})}%0A`;
-            message += `%F0%9F%91%A4 *Cliente:* ${formData.name}%0A`;
-            message += `%E2%9E%96 *Teléfono:* ${formData.phone}%0A`;
-            message += `%E2%9E%96 *Total:* Q${total.toFixed(2)}%0A%0A`;
-            message += `%E2%9A%A0 *Por favor:*%0A`;
-            message += `1. Descargue el PDF adjunto%0A`;
-            message += `2. Envíelo por este chat%0A`;
-            message += `3. Realice el pago según los datos bancarios en el PDF%0A%0A`;
-            message += `%F0%9F%93%88 *El PDF contiene todos los detalles del pedido y datos bancarios para pago.*`;
-            
+           let message = `📝 *No. Pedido:* ${Math.floor(1000 + Math.random() * 9000)}%0A`;
+           message += `📅 *Fecha:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric'})}%0A`;
+         message += `👤 *Cliente:* ${formData.name}%0A`;
+         message += `➖ *Teléfono:* ${formData.phone}%0A`;
+         message += `➖ *Total:* Q${total.toFixed(2)}%0A%0A`;
+        message += `⚠ *Por favor:*%0A`;
+        message += `1. Descargue el PDF adjunto%0A`;
+        message += `2. Envíelo por este chat%0A`;
+        message += `3. Realice el pago según los datos bancarios en el PDF%0A%0A`;
+        message += `4. Recuerde que para proceder con el envío es previo depósito%0A%0A`;
+message += `📈 *El PDF contiene todos los detalles del pedido y datos bancarios para pago.*`;
+
+
+
+
             // Crear enlace de descarga del PDF
             const pdfUrl = URL.createObjectURL(pdfBlob);
             const downloadLink = document.createElement('a');
