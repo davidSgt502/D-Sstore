@@ -20,7 +20,7 @@ const PRODUCTS = [
         image: "img/Audifonos bluetooth magneticos.jpg",
         description: "Liviano,Cordón evita la formación de nudos y Largo: 1.2 metros ",
        // badge: { text: "NUEVO", type: "new" },
-        stock: 0 
+        stock: 1
     },
     {
         id: 3,
