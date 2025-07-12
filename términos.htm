@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones | D&S Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --primary-light: #93C5FD;
+            --secondary: #10B981;
+            --accent: #EF4444;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --light-bg: #F9FAFB;
+            --border: #E5E7EB;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .terms-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .terms-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terms-header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .terms-header::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            max-width: 180px;
+            max-height: 80px;
+            height: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .terms-header h1 {
+            margin: 15px 0 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .terms-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .last-update {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .terms-content {
+            padding: 50px;
+        }
+        
+        .section {
+            margin-bottom: 45px;
+            position: relative;
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .section-content {
+            padding-left: 52px;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            background-color: var(--secondary);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .warning-list li:before {
+            background-color: var(--accent);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z'/%3E%3Cpath d='M12 16c.8 0 1.5-.7 1.5-1.5S12.8 13 12 13s-1.5.7-1.5 1.5.7 1.5 1.5 1.5zM11 10h2v5h-2z'/%3E%3C/svg%3E");
+        }
+        
+        .info-box {
+            background-color: #F0F9FF;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-box i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .info-box.warning {
+            background-color: #FEF2F2;
+            border-left-color: var(--accent);
+        }
+        
+        .info-box.warning i {
+            color: var(--accent);
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, #F9FAFB, #F3F4F6);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+        
+        .contact-title {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .contact-title i {
+            margin-right: 12px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            position: relative;
+        }
+        
+        .contact-method i {
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+        
+        .contact-method div {
+            flex: 1;
+        }
+        
+        .contact-method strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--text);
+        }
+        
+        .highlight {
+            background-color: #EFF6FF;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 30px auto;
+            }
+            
+            .terms-header {
+                padding: 25px 20px;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
+            
+            .terms-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .terms-content {
+                padding: 30px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .section-content {
+                padding-left: 0;
+            }
+            
+            .contact-card {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .terms-content {
+                padding: 25px 20px;
+            }
+            
+            .section-title i {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+                margin-right: 10px;
+            }
+            
+            .contact-method i {
+                width: 36px;
+                height: 36px;
+                margin-right: 12px;
+            }
+            
+            .logo {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terms-card">
+            <div class="terms-header">
+                <div class="header-content">
+                    <!-- Reemplaza la URL con la de tu logo -->
+                    <div class="logo-container">
+                        <img src="https://via.placeholder.com/180x80?text=D%26S+Store+Logo" alt="D&S Store Logo" class="logo">
+                    </div>
+                    <h1>Términos y Condiciones de Compra</h1>
+                    <p>Por favor, lea detenidamente antes de realizar su pedido</p>
+                    <div class="last-update">Actualizado: <span id="current-date"></span></div>
+                </div>
+            </div>
+            
+            <div class="terms-content">
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-file-contract"></i> 1. Información General</h2>
+                    <div class="section-content">
+                        <p>Bienvenido/a a <span class="highlight">D&S Store</span> ("la Tienda"). Al realizar una compra en nuestro sitio web, aceptas los siguientes términos y condiciones que regulan nuestra relación comercial.</p>
+                        <p>Nos reservamos el derecho de actualizar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-shopping-bag"></i> 2. Proceso de Compra</h2>
+                    <div class="section-content">
+                        <ul class="feature-list">
+                            <li>Los precios se muestran en moneda local (GTQ) e incluyen todos los impuestos aplicables, salvo indicación expresa.</li>
+                            <li>Para comprar, debes ser mayor de 18 años o contar con autorización de tus padres/tutores.</li>
+                            <li>Debes proporcionar información veraz y completa durante el registro y proceso de compra.</li>
+                            <li>Nos reservamos el derecho de rechazar pedidos que no cumplan con nuestros requisitos.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-credit-card"></i> 3. Métodos de Pago</h2>
+                    <div class="section-content">
+                        <p>Actualmente aceptamos los siguientes métodos de pago:</p>
+                        <ul class="feature-list">
+                            <li>Transferencia bancaria directa</li>
+                            <li>Depósitos en cuenta bancaria</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div>
+                                <p><strong>Importante:</strong> Los pedidos se procesan solo después de confirmar el pago completo. El tiempo de verificación puede tardar hasta 24 horas hábiles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-truck-moving"></i> 4. Política de Envíos</h2>
+                    <div class="section-content">
+                        <ul class="feature-list">
+                            <li>Realizamos envíos a todo el territorio de Ciudad de Guatemala y Cobán, Alta Verapaz.</li>
+                            <li>Tiempo de entrega estimado: 3-5 días hábiles después de confirmar el pago.</li>
+                            <li>Los costos de envío se calculan automáticamente al finalizar la compra según tu ubicación.</li>
+                            <li>Todas las entregas son realizadas por nuestro socio logístico Guatex.</li>
+                            <li>Para seguimiento de pedidos, proporcionaremos un número de rastreo una vez despachado.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-undo-alt"></i> 5. Devoluciones y Reembolsos</h2>
+                    <div class="section-content">
+                        <ul class="feature-list">
+                            <li>Plazo máximo para solicitar devoluciones: 20 días calendario desde la recepción del producto.</li>
+                            <li>Los productos deben estar en su estado original, con empaque y etiquetas intactas.</li>
+                            <li>No aceptamos devoluciones de productos personalizados, íntimos o de higiene personal.</li>
+                            <li>Los reembolsos se procesarán en un plazo máximo de 15 días hábiles al método de pago original.</li>
+                        </ul>
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <p>Para iniciar una devolución, contacta a nuestro servicio al cliente con tu número de pedido y motivo de la devolución.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-certificate"></i> 6. Garantías</h2>
+                    <div class="section-content">
+                        <ul class="feature-list">
+                            <li>Todos nuestros productos tienen garantía de 20 días contra defectos de fabricación.</li>
+                            <li>La garantía no cubre daños por uso inadecuado, accidentes o modificaciones no autorizadas.</li>
+                            <li>Para hacer válida la garantía, debes presentar tu comprobante de compra original.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3 class="contact-title"><i class="fas fa-headset"></i> Contacto y Soporte</h3>
+                    <p>Para cualquier pregunta sobre estos Términos y Condiciones o sobre tu pedido:</p>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Correo Electrónico</strong>
+                            legal@tutienda.com
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Teléfono</strong>
+                            +502 5639 3305 (Horario: 8:00 a 17:00, Lunes a Viernes)
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Oficinas Principales</strong>
+                            Ciudad de Guatemala, Guatemala
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horario de Atención</strong>
+                            Lunes a Viernes: 8:00 - 17:00 | Sábados: 9:00 - 13:00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Actualiza la fecha automáticamente
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            timeZone: 'America/Guatemala'
+        };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-GT', options);
+    </script>
+</body>
+</html>
