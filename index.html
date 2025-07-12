@@ -12,15 +12,15 @@
 
 </head>
 <body>
-   <!-- Header -->
+    <!-- Header -->
     <header class="modern-header">
         <div class="header-container">
             <div class="logo-container">
                 <div class="logo">
-                    <img src="img/DyS.png" alt="Logo DyS Store">
+                    <img src="productos/DyS.png" alt="Logo DyS Store">
                     <div class="logo-text">
                         <h1>D&S Store</h1>
-                     <p>Donde cada compra es una bendición.</p>
+                        <p>Donde cada compra es una bendición.</p>
                     </div>
                 </div>
                 <div class="header-actions">
@@ -52,14 +52,10 @@
     <!-- Categorías -->
     <nav class="modern-categories">
         <div class="categories-container">
-            <button class="category-btn  active" data-category="utiles" >
-                <i class="fas fa-tag"></i>
-                <span>Oficina y escolar</span>
-            </button>
-             <!--<button class="category-btn active" data-category="temporada">
+            <button class="category-btn active" data-category="temporada">
                 <i class="fas fa-th-large"></i>
                 <span>Temporada</span>
-            </button>-->
+            </button>
             <button class="category-btn" data-category="audio">
                 <i class="fas fa-headphones"></i>
                 <span>Audio</span>
@@ -88,11 +84,10 @@
                 <i class="fas fa-laptop"></i>
                 <span>Tecnología</span>
             </button>
-            <button class="category-btn" data-category="bebe">
+            <button class="category-btn" data-category="ofertas">
                 <i class="fas fa-tag"></i>
                 <span>BeBe</span>
             </button>
-            
         </div>
     </nav>
 
@@ -158,7 +153,14 @@
                                 <span id="summary-total">Q0.00</span>
                             </div>
                         </div>
-                         
+                        <!-- <div class="delivery-options">
+                            <h4>Opciones de entrega</h4>
+                            <select id="deliveryMethod">
+                                <option value="pickup" selected>Recoger en tienda - Gratis</option>
+                                <option value="standard">Envío estándar (3-5 días) - Q25.00</option>
+                                <option value="express">Envío express (24 horas) - Q50.00</option>
+                            </select>
+                        </div> -->
                       
                   
                     
@@ -224,9 +226,9 @@
                         <div class="form-group">
                             <label for="deliveryMethodCheckout">Método de envío*</label>
                             <select id="deliveryMethodCheckout" required>
-                                
-                                <option value="capital">Envío dentro de la capital (1-2 días) - Q25.00</option>
-                              <option value="standard">Envío fuera de la capital (3-5 días) - Q35.00</option>
+                                <option value="pickup">Recoger en tienda - Gratis</option>
+                                <option value="standard">Envío estándar (3-5 días) - Q25.00</option>
+                                <option value="express">Envío express (24 horas) - Q50.00</option>
                             </select>
                         </div>
                     </div>
@@ -259,11 +261,13 @@
                     <button type="submit" class="btn-checkout">
                         <i class="fab fa-whatsapp"></i> Confirmar y enviar pedido
                     </button>
-                    
+                    <button type="button" id="generateShippingDoc" class="btn-secondary" style="margin-top: 10px;">
+                        <i class="fas fa-file-pdf"></i> Generar documento de envío
+                    </button>
                 </form>
             </div>
         </div>
-    </div> 
+    </div>
 
     <!-- Footer -->
     <footer class="modern-footer">
@@ -280,17 +284,17 @@
             <div class="footer-section">
                 <h3>Categorías</h3>
                 <ul>
-                    <li><a href="ropa-hombre">Ropa para Hombre</a></li>
-                    <li><a href="ropa-mujer">Ropa para Mujer</a></li>
-                    <li><a href="bebe">BeBe</a></li>
+                    <li><a href="#">Ropa para Hombre</a></li>
+                    <li><a href="#">Ropa para Mujer</a></li>
+                    <li><a href="#">BeBe</a></li>
                     <!-- <li><a href="#">Deporte y aire libre</a></li> -->
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Información</h3>
                 <ul>
-                    <!--<a href="#">Sobre nosotros</a></li>--> 
-                    <li><a href="terms.html">Términos y condiciones</a></li>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
                     
                 </ul>
             </div>
@@ -298,7 +302,7 @@
                 <h3>Contacto</h3>
                 <ul>
                     <li><i class="fas fa-phone"></i> +502 5639-3305</li>
-                    <!--<i class="fas fa-envelope"></i> info@D&S_store.com</li>-->
+                    <li><i class="fas fa-envelope"></i> info@D&S_store.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> Ciudad de Guatemala</li>
                 </ul>
             </div>
