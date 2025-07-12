@@ -346,30 +346,30 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         searchProducts: utils.debounce(function(query) {
-    state.currentSearchQuery = query.toLowerCase();
-    
-    if (!query.trim()) {
-        productFunctions.displayProducts(state.currentCategory);
-        return;
-    }
-    
-    // Buscar en todos los campos relevantes del producto
-    const filtered = PRODUCTS.filter(product => {
-        const searchText = query.toLowerCase();
-        const searchFields = [
-            product.title.toLowerCase(),
-            product.description.toLowerCase(),
-            product.category.toLowerCase(),
-            product.badge?.text.toLowerCase() || '',
-            `q${product.price.toFixed(2)}`, // Para buscar por precio (ej. "q50.00")
-            product.originalPrice ? `q${product.originalPrice.toFixed(2)}` : ''
-        ];
-        
-        return searchFields.some(field => field.includes(searchText));
-    });
-    
-    productFunctions.displayProducts('all', filtered);
-}, 300)
+            state.currentSearchQuery = query.toLowerCase();
+            
+            if (!query.trim()) {
+                productFunctions.displayProducts(state.currentCategory);
+                return;
+            }
+            
+            // Buscar en todos los campos relevantes del producto
+            const filtered = PRODUCTS.filter(product => {
+                const searchText = query.toLowerCase();
+                const searchFields = [
+                    product.title.toLowerCase(),
+                    product.description.toLowerCase(),
+                    product.category.toLowerCase(),
+                    product.badge?.text.toLowerCase() || '',
+                    `q${product.price.toFixed(2)}`, // Para buscar por precio (ej. "q50.00")
+                    product.originalPrice ? `q${product.originalPrice.toFixed(2)}` : ''
+                ];
+                
+                return searchFields.some(field => field.includes(searchText));
+            });
+            
+            productFunctions.displayProducts('all', filtered);
+        }, 300)
     };
 
     // FUNCIONES DEL CARRITO
@@ -508,17 +508,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 DOM.cartItemsList.appendChild(cartItem);
             });
             
-            // Event listeners para los controles del carrito
-            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-                btn.addEventListener('click', this.decreaseQuantity.bind(this));
-            });
-            
-            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-                btn.addEventListener('click', this.increaseQuantity.bind(this));
-            });
-            
-            document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', this.removeItem.bind(this));
+            // Usar delegación de eventos para los controles del carrito
+            DOM.cartItemsList.addEventListener('click', (e) => {
+                const target = e.target.closest('.quantity-btn.minus');
+                if (target) {
+                    this.decreaseQuantity(e);
+                    return;
+                }
+
+                const plusBtn = e.target.closest('.quantity-btn.plus');
+                if (plusBtn) {
+                    this.increaseQuantity(e);
+                    return;
+                }
+
+                const removeBtn = e.target.closest('.remove-item');
+                if (removeBtn) {
+                    this.removeItem(e);
+                }
             });
             
             this.updateCartSummary();
@@ -552,66 +559,71 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         decreaseQuantity: function(e) {
-            const itemId = parseInt(e.target.closest('.cart-item').dataset.id);
+            const itemElement = e.target.closest('.cart-item');
+            const itemId = parseInt(itemElement.dataset.id);
             const itemIndex = state.cart.findIndex(item => item.id === itemId);
             
             if (itemIndex === -1) return;
             
-            if (state.cart[itemIndex].quantity > 1) {
-                state.cart[itemIndex].quantity--;
-                // Devolver 1 unidad al stock
-                const product = PRODUCTS.find(p => p.id === itemId);
+            const cartItem = state.cart[itemIndex];
+            const product = PRODUCTS.find(p => p.id === itemId);
+            
+            if (cartItem.quantity > 1) {
+                cartItem.quantity--;
                 if (product) {
                     product.stock += 1;
-                    // Actualizar la vista si el producto estaba agotado
+                    // Actualizar vista si el producto estaba agotado
                     if (product.stock === 1) {
                         productFunctions.displayProducts(state.currentCategory);
                     }
                 }
             } else {
-                // Devolver 1 unidad al stock antes de eliminar
-                const product = PRODUCTS.find(p => p.id === itemId);
+                // Eliminar el artículo si la cantidad llega a 0
                 if (product) {
-                    product.stock += 1;
-                    // Actualizar la vista si el producto estaba agotado
-                    if (product.stock === 1) {
+                    product.stock += cartItem.quantity;
+                    if (product.stock === cartItem.quantity) {
                         productFunctions.displayProducts(state.currentCategory);
                     }
                 }
                 state.cart.splice(itemIndex, 1);
+                itemElement.classList.add('removing');
+                setTimeout(() => {
+                    itemElement.remove();
+                }, 300);
             }
             
             this.updateCart();
         },
         
         increaseQuantity: function(e) {
-            const itemId = parseInt(e.target.closest('.cart-item').dataset.id);
-            const item = state.cart.find(item => item.id === itemId);
+            const itemElement = e.target.closest('.cart-item');
+            const itemId = parseInt(itemElement.dataset.id);
+            const cartItem = state.cart.find(item => item.id === itemId);
             const product = PRODUCTS.find(p => p.id === itemId);
             
-            if (item && product) {
+            if (cartItem && product) {
                 // Verificar stock antes de aumentar cantidad
-                if (item.quantity >= product.stock) {
+                if (cartItem.quantity >= product.stock) {
                     utils.showNotification('No hay suficiente stock disponible', 'fa-exclamation-circle');
+                    utils.animateElement(itemElement.querySelector('.quantity-btn.plus'), 'shake');
                     return;
                 }
-                item.quantity++;
-                product.stock -= 1;
-                this.updateCart();
                 
-                // Si el stock llegó a 0, actualizar la vista
+                cartItem.quantity++;
+                product.stock -= 1;
+                
+                // Actualizar la vista si el producto se agotó
                 if (product.stock === 0) {
                     productFunctions.displayProducts(state.currentCategory);
                 }
+                
+                this.updateCart();
             }
         },
         
         removeItem: function(e) {
-            const button = e.target.closest('.remove-item');
-            if (!button) return;
-            
-            const itemId = parseInt(button.closest('.cart-item').dataset.id);
-            const itemElement = button.closest('.cart-item');
+            const itemElement = e.target.closest('.cart-item');
+            const itemId = parseInt(itemElement.dataset.id);
             const cartItem = state.cart.find(item => item.id === itemId);
             
             if (!cartItem) return;
@@ -621,13 +633,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (product) {
                 product.stock += cartItem.quantity;
                 // Actualizar la vista si el producto estaba agotado
-                if (product.stock > 0 && product.stock === cartItem.quantity) {
+                if (product.stock === cartItem.quantity) {
                     productFunctions.displayProducts(state.currentCategory);
                 }
             }
             
             itemElement.classList.add('removing');
-            
             setTimeout(() => {
                 state.cart = state.cart.filter(item => item.id !== itemId);
                 this.updateCart();
@@ -777,20 +788,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const { blob: pdfBlob, fileName } = utils.generateOrderPDF(formData, state.cart, subtotal, shippingCost, total);
 
             // Crear mensaje para WhatsApp
-           let message = `📝 *No. Pedido:* ${Math.floor(1000 + Math.random() * 9000)}%0A`;
-           message += `📅 *Fecha:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric'})}%0A`;
-         message += `👤 *Cliente:* ${formData.name}%0A`;
-         message += `➖ *Teléfono:* ${formData.phone}%0A`;
-         message += `➖ *Total:* Q${total.toFixed(2)}%0A%0A`;
-        message += `⚠ *Por favor:*%0A`;
-        message += `1. Descargue el PDF adjunto%0A`;
-        message += `2. Envíelo por este chat%0A`;
-        message += `3. Realice el pago según los datos bancarios en el PDF%0A%0A`;
-        message += `4. Recuerde que para proceder con el envío es previo depósito%0A%0A`;
-message += `📈 *El PDF contiene todos los detalles del pedido y datos bancarios para pago.*`;
-
-
-
+            let message = `📝 *No. Pedido:* ${Math.floor(1000 + Math.random() * 9000)}%0A`;
+            message += `📅 *Fecha:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric'})}%0A`;
+            message += `👤 *Cliente:* ${formData.name}%0A`;
+            message += `➖ *Teléfono:* ${formData.phone}%0A`;
+            message += `➖ *Total:* Q${total.toFixed(2)}%0A%0A`;
+            message += `⚠ *Por favor:*%0A`;
+            message += `1. Descargue el PDF adjunto%0A`;
+            message += `2. Envíelo por este chat%0A`;
+            message += `3. Realice el pago según los datos bancarios en el PDF%0A%0A`;
+            message += `4. Recuerde que para proceder con el envío es previo depósito%0A%0A`;
+            message += `📈 *El PDF contiene todos los detalles del pedido y datos bancarios para pago.*`;
 
             // Crear enlace de descarga del PDF
             const pdfUrl = URL.createObjectURL(pdfBlob);
