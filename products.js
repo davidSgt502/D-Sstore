@@ -25,11 +25,12 @@ const PRODUCTS = [
     {
         id: 3,
         title: "Audifonos bluetooth XT81PRO",
-        price: 234,
+        price: 396,
+        originalPrice:495,
         category: "audio",
         image: "img/Audifonos bluetooth XT81PRO.jpg",
         description: "Compatible con Bluetooth 5.1 recientemente actualizado, puede reducir la pérdida de señal y la desconexión causada por interferencias, sin retraso en la sincronización de la pantalla del juego",
-        //badge: { text: "TOP", type: "featured" }
+        badge: { text: "20% OFF", type: "discount" },
          stock: 12 
     },
     {
@@ -97,7 +98,7 @@ const PRODUCTS = [
         id: 10,
         title: "Base de metal para 3 tacos x4 ",
         price: 150,
-        originalPrice: 499.99,
+        originalPrice: 175,
         category: "hogar",
         image: "img/Base de metal para 3 tacos x4.jpg",
         description: "Paquete de 4 soportes para tacos de , estantes para tacos, de acero inoxidable",
@@ -130,11 +131,11 @@ const PRODUCTS = [
     id: 13,
         title: "Bombilla led con ventilador",
         price: 283,
-      // originalPrice: 499.99,
+       originalPrice:339,
         category: "hogar",
         image: "img/Bombilla led con ventilador.jpg",
         description: "Ventilador de techo con luz: luz de ventilador, diseño novedoso, ultraligero y nivel de alta tecnología",
-       // badge: { text: "OFERTA", type: "offer" }
+       badge: { text: "OFERTA", type: "offer" },
         stock: 12 
 },
 {
