@@ -14,7 +14,7 @@ const APP_CONFIG = {
     },
     NPT_ENVIO : {
         Number: "+502 5639-3305",
-        storeEmail: "lenninrevolorio55@gmail.com"
+        storeEmail: "gtdavidsara@gmail.com"
     }
     
 };
