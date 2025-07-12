@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 doc.setFontSize(10);
                 doc.setTextColor(40, 40, 40);
                 doc.text(
-                    `Teléfono: ${APP_CONFIG.NPT_ENVIO.telefono} | ${APP_CONFIG.NPT_ENVIO.storeEmail || ''}`,
+                    `Teléfono: ${APP_CONFIG.NPT_ENVIO.Number} | ${APP_CONFIG.NPT_ENVIO.storeEmail || ''}`,
                     105,
                     35,
                     { align: 'center' }
@@ -346,20 +346,30 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         searchProducts: utils.debounce(function(query) {
-            state.currentSearchQuery = query.toLowerCase();
-            
-            if (!query.trim()) {
-                productFunctions.displayProducts(state.currentCategory);
-                return;
-            }
-            
-            const filtered = PRODUCTS.filter(product => 
-                product.title.toLowerCase().includes(state.currentSearchQuery) || 
-                product.description.toLowerCase().includes(state.currentSearchQuery)
-            );
-            
-            productFunctions.displayProducts('all', filtered);
-        }, 300)
+    state.currentSearchQuery = query.toLowerCase();
+    
+    if (!query.trim()) {
+        productFunctions.displayProducts(state.currentCategory);
+        return;
+    }
+    
+    // Buscar en todos los campos relevantes del producto
+    const filtered = PRODUCTS.filter(product => {
+        const searchText = query.toLowerCase();
+        const searchFields = [
+            product.title.toLowerCase(),
+            product.description.toLowerCase(),
+            product.category.toLowerCase(),
+            product.badge?.text.toLowerCase() || '',
+            `q${product.price.toFixed(2)}`, // Para buscar por precio (ej. "q50.00")
+            product.originalPrice ? `q${product.originalPrice.toFixed(2)}` : ''
+        ];
+        
+        return searchFields.some(field => field.includes(searchText));
+    });
+    
+    productFunctions.displayProducts('all', filtered);
+}, 300)
     };
 
     // FUNCIONES DEL CARRITO

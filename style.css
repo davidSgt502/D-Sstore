@@ -118,7 +118,7 @@ body {
 /* Hero Banner */
 .hero-banner {
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('productos/Disney.jpg'); /* Reemplaza con tu imagen real */
+                url('img/Disney.jpg'); /* Reemplaza con tu imagen real */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
