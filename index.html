@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David y Sara Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="productos/DyS.png" alt="Logo DyS Store">
+                    <div class="logo-text">
+                        <h1>D&S Store</h1>
+                        <p>Donde cada compra es una bendición.</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar productos...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="cart-icon-container">
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">0</span>
+                        </div>
+                        <span class="cart-text">Carrito</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h2>LIQUIDACIÓN DE MEDIO AÑO</h2>
+            <p>Hasta 50% de descuento en productos seleccionados</p>
+            <button class="cta-button">Ver Ofertas</button>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <nav class="modern-categories">
+        <div class="categories-container">
+            <button class="category-btn active" data-category="temporada">
+                <i class="fas fa-th-large"></i>
+                <span>Temporada</span>
+            </button>
+            <button class="category-btn" data-category="audio">
+                <i class="fas fa-headphones"></i>
+                <span>Audio</span>
+            </button>
+            <button class="category-btn" data-category="hogar">
+                <i class="fas fa-home"></i>
+                <span>Hogar</span>
+            </button>
+            <button class="category-btn" data-category="herramientas">
+                <i class="fas fa-tools"></i>
+                <span>Herramientas</span>
+            </button>
+            <button class="category-btn" data-category="ropa-hombre">
+                <i class="fas fa-running"></i>
+                <span>Ropa para Hombre</span>
+            </button>
+            <button class="category-btn" data-category="ropa-mujer">
+                <i class="fas fa-running"></i>
+                <span>Ropa para Mujer</span>
+            </button>
+            <button class="category-btn" data-category="belleza">
+                <i class="fas fa-spa"></i>
+                <span>Belleza</span>
+            </button>
+            <button class="category-btn" data-category="tecnologia">
+                <i class="fas fa-laptop"></i>
+                <span>Tecnología</span>
+            </button>
+            <button class="category-btn" data-category="ofertas">
+                <i class="fas fa-tag"></i>
+                <span>BeBe</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="modern-container">
+        <div class="section-header">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="view-all">Ver todos <i class="fas fa-chevron-right"></i></div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Los productos se cargarán dinámicamente con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal del carrito -->
+    <div class="modern-modal" id="cartModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h2>Tu Carrito de Compras</h2>
+                    <p class="modal-subtitle">
+                        <span id="item-count">0 artículos</span> 
+                        <span id="cart-subtotal">Total: Q0.00</span>
+                    </p>
+                </div>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <div class="cart-content">
+                    <!-- Sección de productos en el carrito -->
+                    <div class="cart-items-container">
+                        <div class="cart-items" id="cartItemsList">
+                            <!-- Mensaje cuando el carrito está vacío -->
+                            <div class="empty-cart-message">
+                                <i class="fas fa-shopping-bag"></i>
+                                <p>Tu carrito está vacío</p>
+                                <button class="btn-primary close-cart">Seguir comprando</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Resumen del pedido -->
+                    <div class="cart-summary">
+                        <h3>Resumen del Pedido</h3>
+                        
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="summary-subtotal">Q0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Envío</span>
+                                <span id="summary-shipping">Q0.00</span>
+                            </div>
+                            <div class="summary-row discount">
+                                <span>Descuentos</span>
+                                <span id="summary-discount">-Q0.00</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span id="summary-total">Q0.00</span>
+                            </div>
+                        </div>
+                        <!-- <div class="delivery-options">
+                            <h4>Opciones de entrega</h4>
+                            <select id="deliveryMethod">
+                                <option value="pickup" selected>Recoger en tienda - Gratis</option>
+                                <option value="standard">Envío estándar (3-5 días) - Q25.00</option>
+                                <option value="express">Envío express (24 horas) - Q50.00</option>
+                            </select>
+                        </div> -->
+                      
+                  
+                    
+                        <button class="btn-checkout" id="proceedCheckout">
+                            <i class="fas fa-shopping-bag"></i> Proceder al pago
+                        </button>
+                       
+                       <div class="payment-alert">
+                       <strong>🧾 Instrucciones de Pago:</strong>
+                     <ol>
+                    <li>Realiza un <strong>depósito o transferencia</strong> por el monto total de tu pedido.</li>
+                     <li>Envía el <strong>comprobante</strong> por este chat.</li>
+                     <li>Tu pedido será preparado <strong>una vez confirmado el pago</strong>.</li>
+                       </ol>
+                      <p>¡Gracias por tu confianza! 💖</p>
+                     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de checkout -->
+    <div class="modern-modal" id="checkoutModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h2>Finalizar Compra</h2>
+                    <p class="modal-subtitle">Complete sus datos para procesar el pedido</p>
+                </div>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-user-circle"></i> Información del cliente
+                        </h3>
+                        <div class="form-group">
+                            <label for="name">Nombre Completo*</label>
+                            <input type="text" id="name" placeholder="Ej: Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono*</label>
+                            <input type="tel" id="phone" placeholder="Ej: 5555-1234" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico*</label>
+                            <input type="email" id="email" placeholder="Ej: juan@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-truck"></i> Dirección de envío
+                        </h3>
+                        <div class="form-group">
+                            <label for="address">Dirección exacta*</label>
+                            <textarea id="address" rows="3" placeholder="Calle, avenida, número, colonia, zona, ciudad..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="deliveryMethodCheckout">Método de envío*</label>
+                            <select id="deliveryMethodCheckout" required>
+                                <option value="pickup">Recoger en tienda - Gratis</option>
+                                <option value="standard">Envío estándar (3-5 días) - Q25.00</option>
+                                <option value="express">Envío express (24 horas) - Q50.00</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <h3 class="summary-title">
+                            <i class="fas fa-shopping-bag"></i> Resumen de tu pedido
+                        </h3>
+                        
+                        <div class="order-items" id="checkoutItemsList">
+                            <!-- Los productos se agregarán dinámicamente aquí -->
+                        </div>
+                        
+                        <div class="order-summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="checkoutSubtotal">Q0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Envío:</span>
+                                <span id="checkoutShipping">Q0.00</span>
+                            </div>
+                            <div class="order-total">
+                                <span>Total a pagar:</span>
+                                <span id="checkoutTotal">Q0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-checkout">
+                        <i class="fab fa-whatsapp"></i> Confirmar y enviar pedido
+                    </button>
+                    <button type="button" id="generateShippingDoc" class="btn-secondary" style="margin-top: 10px;">
+                        <i class="fas fa-file-pdf"></i> Generar documento de envío
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3> D&S Store</h3>
+                <p>Donde cada compra es una bendición.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Categorías</h3>
+                <ul>
+                    <li><a href="#">Ropa para Hombre</a></li>
+                    <li><a href="#">Ropa para Mujer</a></li>
+                    <li><a href="#">BeBe</a></li>
+                    <!-- <li><a href="#">Deporte y aire libre</a></li> -->
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Información</h3>
+                <ul>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +502 5639-3305</li>
+                    <li><i class="fas fa-envelope"></i> info@D&S_store.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Ciudad de Guatemala</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 D&S Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
