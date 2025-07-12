@@ -118,13 +118,25 @@ body {
 /* Hero Banner */
 .hero-banner {
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('img/Disney.jpg'); /* Reemplaza con tu imagen real */
+                url('img/SYD.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    padding: 80px 20px;
+    padding: 90px 20px; /* Aumenté el padding vertical */
     text-align: center;
+    min-height: 40vh; /* Añadí altura mínima viewport */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Opcional: Ajustar para móviles */
+@media (max-width: 768px) {
+    .hero-banner {
+        min-height: 70vh;
+        padding: 60px 20px;
+    }
 }
 
 .hero-content h2 {
@@ -293,7 +305,7 @@ body {
 
 .product-description {
     font-size: 0.8rem;
-    color: #7f8c8d;
+    color: #595a5a;
     margin-bottom: 15px;
 }
 
@@ -305,7 +317,7 @@ body {
 
 .product-original-price {
     text-decoration: line-through;
-    color: #95a5a6;
+    color: #555555;
     font-size: 0.9rem;
 }
 
