@@ -10,7 +10,7 @@ const APP_CONFIG = {
     shippingMethods: {
         pickup: { name: "Recojo en tienda", cost: 0, days: "1-2 días" },
         standard: { name: "Envío estándar", cost: 25, days: "2-3 días" },
-        express: { name: "Envío express", cost: 40, days: "1-2 días" }
+        express: { name: "Envío express", cost: 50, days: "1-2 días" }
     },
     NPT_ENVIO : {
         Number: "+502 5639-3305",
