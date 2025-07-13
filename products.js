@@ -1501,8 +1501,15 @@ id: 69,
     stock: 20
   },
 
-  
-  
-
+  //Mujer 
+{
+  id: 1,
+    title: "Moldeador de cuerpo short S/M",
+    price: 65,
+    category: "ropa-mujer",
+    image: "img/Moldeador de cuerpo short S,M.jpg",
+    description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
+    stock: 12
+},
 
 ];
