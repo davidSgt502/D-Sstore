@@ -169,7 +169,7 @@ body {
 
 /* Categorías */
 .modern-categories {
-    background-color: white;
+    background-color: rgb(9, 9, 9);
     padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
