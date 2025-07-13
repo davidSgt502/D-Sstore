@@ -197,9 +197,9 @@ body {
 }
 
 .category-btn.active {
-    background-color: #3498db;
+    background-color: #00bfff;
     color: white;
-    border-color: #00ffee;
+    border-color: #0004ff;
 }
 
 .category-btn:hover {
