@@ -1511,6 +1511,91 @@ id: 69,
     description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
     stock: 12
 },
+
+//Hombre
+
+{
+  id: 1,
+    title: "Goorin Bros - fierce yellow",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de tigre.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 2,
+    title: "Goorin Bros - Panther red",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de puma.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 3,
+    title: "Goorin Bros - Tiger red",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de Tigre roja.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 4,
+    title: "Goorin Bros - Cock black",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de gallo.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 5,
+    title: "Goorin Bros - colorful rooster",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de gallo rojo.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 6,
+    title: "Goorin Bros - Wildking red ",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de mono.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 7,
+    title: "Goorin Bros - Cock Cofe ",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de gallo cafe.jpeg",
+    description: "",
+    stock: 1
+
+},
+{
+  id: 8,
+    title: "Goorin Bros - Cock Grey ",
+    price: 65,
+    category: "ropa-hombre",
+    image: "img/Gorra de gallo gris.jpeg",
+    description: "",
+    stock: 1
+
+},
+
+
 //EXTERIOR
 
   {
