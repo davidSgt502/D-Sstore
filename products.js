@@ -1512,7 +1512,7 @@ id: 69,
     stock: 12
 },
 //EXTERIOR
-[
+
   {
     id: 1,
     title: "Carpa impermeable de 2 personas",
@@ -1603,6 +1603,6 @@ id: 69,
     stock: 12,
     
   }
-]
+
 
 ];
