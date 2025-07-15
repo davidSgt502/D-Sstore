@@ -1559,7 +1559,7 @@ id: 69,
     title: "Goorin Bros - colorful rooster",
     price: 65,
     category: "ropa-hombre",
-    image: "img/Gorra de gallo rojo.jpeg",
+    image: "iimg/Gorra de Tigre rojo .jpeg",
     description: "",
     stock: 1
 
