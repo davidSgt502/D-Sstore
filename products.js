@@ -1511,5 +1511,98 @@ id: 69,
     description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
     stock: 12
 },
+//EXTERIOR
+[
+  {
+    id: 1,
+    title: "Carpa impermeable de 2 personas",
+    price: 65,
+    category: "exterior",
+    image: "img/Carpa impermeable 2 personas.jpg",
+    description: "Carpa ligera e impermeable para 2 personas con protección anti-mosquitos, doble cremallera y fácil transporte",
+    stock: 12,
+    features: ["Anti-mosquitoes", "Light Rainproof", "Double Zippers", "Lightweight"]
+  },
+  {
+    id: 2,
+    title: "Carpa impermeable de 5 personas",
+    price: 120,
+    category: "exterior",
+    image: "img/Carpa impermeable 5 personas.jpg",
+    description: "Carpa espaciosa para 5 personas con malla ventilada, tejido impermeable y accesorios incluidos",
+    stock: 8,
+    features: ["Espacio Grande", "Bolsillo Pequeño", "Malla Ventilada", "Tejido Impermeable", "Clavo de Tierra"]
+  },
+  {
+    id: 3,
+    title: "Hielera de 50 litros (70 latas) gris",
+    price: 45,
+    category: "exterior",
+    image: "img/Hielera de 50 litros 70 latas gris.jpg",
+    description: "Hielera con capacidad para 70 latas, ideal para excursiones y días de campo",
+    stock: 15,
+    features: ["Capacidad: 70 latas", "Material resistente"]
+  },
+  {
+    id: 4,
+    title: "Hielera termo de 3 litros",
+    price: 25,
+    category: "exterior",
+    image: "img/Hielera Termo de 3 litros.jpg",
+    description: "Hielera térmica portátil de 3 litros con aislamiento eficiente",
+    stock: 20,
+    features: ["Aislamiento térmico", "Compacta", "Portátil"]
+  },
+  {
+    id: 5,
+    title: "Lámpara solar recargable 200W",
+    price: 80,
+    category: "exterior",
+    image: "img/Lampara solar recargable 200W.jpg",
+    description: "Lámpara solar potente con panel de 200W, ideal para camping y exteriores",
+    stock: 10,
+    features: ["200W de potencia", "Dimensiones: 265mm x 145mm", "Energía solar"]
+  },
+  {
+    id: 6,
+    title: "Lámpara solar recargable 400W",
+    price: 120,
+    category: "exterior",
+    image: "img/Lampara solar recargable 400W.png",
+    description: "Lámpara solar de alta potencia con 192 LEDs, perfecta para iluminación exterior",
+    stock: 7,
+    features: ["400W de potencia", "192 LEDs", "Dimensiones: 350mm/365mm"]
+  },
+  {
+    id: 7,
+    title: "Lámpara solar recargable 500W",
+    price: 150,
+    category: "exterior",
+    image: "img/Lampara solar recargable 500W.jpg",
+    description: "Lámpara solar profesional de 500W para iluminación intensiva en exteriores",
+    stock: 5,
+    features: ["500W de potencia", "Alta eficiencia", "Resistente a la intemperie"]
+  },
+  {
+    id: 8,
+    title: "Linterna LED de metal con zoom",
+    price: 35,
+    category: "exterior",
+    image: "img/Linterna LED de metal con zoom.png",
+    description: "Linterna profesional de metal con función zoom ajustable",
+    stock: 18,
+    features: ["Zoom ajustable", "Cuerpo de metal", "Alcance potente"]
+  },
+  {
+    id: 9,
+    title: "Pack de 5 linternas LED recargables T21",
+    price: 60,
+    category: "exterior",
+    image: "img/Linterna LEDx5 recargable T21.jpg",
+    description: "Pack de 5 linternas LED recargables con alcance de 5km",
+    stock: 12,
+    features: ["Alcance 5km", "Recargable USB", "Pack de 5 unidades"]
+  }
+]
 
 ];
