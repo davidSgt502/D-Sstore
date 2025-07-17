@@ -1679,7 +1679,7 @@ id: 69,
   {
     id: 9,
     title: "Linterna recargable 11 LED",
-    price: 75,
+    price: 250,
     category: "exterior",
     image: "img/Linterna recargable 11 LED.jpg",
     description: "",
