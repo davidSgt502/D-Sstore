@@ -1688,13 +1688,44 @@ id: 69,
   },
   {
     id: 10,
-    title: "Hamaca doble",
+    title: "Hamaca doble azul",
     price: 250,
     category: "exterior",
     image: "img/Hamaca doble + ganchos y lazos azul.jpg",
     description: "",
     stock: 12,
   },
+  {
+    id: 11,
+    title: "Hamaca doble naranja",
+    price: 250,
+    category: "exterior",
+    image: "img/Hamaca doble + ganchos y lazos naranja.jpg",
+    description: "",
+    stock: 12,
+  },
+  {
+    id: 12,
+    title: "Hamaca doble negra",
+    price: 250,
+    category: "exterior",
+    image: "img/Hamaca doble + ganchos y lazos negra.jpg",
+    description: "",
+    stock: 12,
+  },
+  {
+    id: 12,
+    title: "Hamaca doble  verde",
+    price: 250,
+    category: "exterior",
+    image: "img/Hamaca doble + ganchos y lazos verde.jpg",
+    description: "",
+    stock: 12,
+  },
+  
+  
 
 
 ];
+
+
