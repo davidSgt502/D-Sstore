@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         `Nombre: ${formData.name}`,
                         `Teléfono: ${formData.phone}`,
                         formData.email ? `Email: ${formData.email}` : null,
-                        `Dirección:\n${formData.address.replace(/, /g, '\n')}`,
+                        `Dirección: ${formData.address}`,
                         `Método de entrega: ${APP_CONFIG.shippingMethods[formData.deliveryMethod].name}`
                     ].filter(Boolean);
                     
