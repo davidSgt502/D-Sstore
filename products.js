@@ -1685,7 +1685,16 @@ id: 69,
     description: "",
     stock: 12,
     
-  }
+  },
+  {
+    id: 10,
+    title: "Hamaca doble",
+    price: 75,
+    category: "exterior",
+    image: "img/Hamaca doble + ganchos y lazos azul.jpg",
+    description: "",
+    stock: 12,
+  },
 
 
 ];
