@@ -13,8 +13,12 @@ body {
 
 /* Header */
 .modern-header {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
-    color: white;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-container {
@@ -40,12 +44,13 @@ body {
 }
 
 .logo-text h1 {
-    color: white;
-    font-weight: 700;
+    font-size: 1.5rem;
+    color: #2c3e50;
 }
 
 .logo-text p {
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    color: #7f8c8d;
 }
 
 .header-actions {
@@ -109,6 +114,7 @@ body {
     margin-top: 5px;
     color: #7f8c8d;
 }
+
 /**/
 .cart-item-size {
     font-size: 0.9rem;
@@ -147,14 +153,13 @@ body {
 }
 
 .hero-content h2 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
 .hero-content p {
-    font-size: 1.4rem;
-    margin-bottom: 30px;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
 }
 
 .cta-button {
