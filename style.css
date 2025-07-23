@@ -213,9 +213,9 @@ body {
 }
 
 .category-btn.active {
-    background-color: #00bfff;
-    color: white;
-    border-color: #0091ff;
+    background: linear-gradient(135deg, #4a6bff, #2541b2);
+    color: #ffffff;
+    border: none;
 }
 
 .category-btn:hover {
