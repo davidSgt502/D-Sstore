@@ -1723,7 +1723,7 @@ id: 69,
     stock: 12,
   },
   
-      {
+/*      {
 id: 1,
     title: "Camisa puma blanca BMW",
     price: 250,
@@ -1731,8 +1731,8 @@ id: 1,
     sizes: ["S", "M", "L", "XL"], // Agregar array de tallas disponibles
     image: "productos/ropa-hombre/bmw-blanco.jpg", // Asegúrate de tener la imagen en la carpeta correcta
     description: "Camisa deportiva Puma edición especial BMW",
-    stock: 122,
-  },
+    stock: 0,
+  },*/
 
 
 
