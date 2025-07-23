@@ -127,19 +127,20 @@ body {
 }
 /**/
 /* Hero Banner */
-.hero-banner {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/SYD.png');
+hero-banner {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+     url('img/SYD.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: rgb(230, 34, 34);
-    padding: 90px 20px;
+    color: white;
+    padding: 90px 20px; /* Aumenté el padding vertical */
     text-align: center;
-    min-height: 40vh;
+    min-height: 40vh; /* Añadí altura mínima viewport */
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative; /* Añadido para mejor control */
+
 }
 
 /* Opcional: Ajustar para móviles */
