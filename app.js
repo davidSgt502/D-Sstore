@@ -139,7 +139,7 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     
    try {
     // Ruta local relativa a la imagen
-    const localImagePath = './assets/images/logo.png'; // ajusta la ruta según tu estructura
+    const localImagePath = 'img/DyS.png'; // ajusta la ruta según tu estructura
     
     // Crear una imagen para verificar si existe
     const testImg = new Image();
