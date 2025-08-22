@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones | D&S Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #0e0e0f;
+            --primary-light: #c3dafe;
+            --secondary: #047857;
+            --accent: #dc2626;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --light-bg: #f9fafb;
+            --border: #e5e7eb;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04);
+            --gold: #d4af37;
+            --silver: #c0c0c0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(to bottom, #f0f4ff, #e6e6ff);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        .legal-notice {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (min-width: 992px) {
+            .sidebar {
+                display: block;
+            }
+        }
+        
+        .sidebar-header {
+            padding: 0 25px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .sidebar-logo {
+            max-width: 240px;
+            margin: 0 auto 20px;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .last-update-sidebar {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            color: var(--primary-light);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 14px 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: var(--gold);
+        }
+        
+        .sidebar-nav i {
+            width: 24px;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 40px;
+            background: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .terms-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+        
+        .terms-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .terms-header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .terms-header::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            max-width: 380px;
+            max-height: 120px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .terms-header h1 {
+            margin: 20px 0 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .terms-header p {
+            margin: 15px 0 0;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+        }
+        
+        .last-update {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-top: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .terms-content {
+            padding: 50px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+            scroll-margin-top: 20px;
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .section-title i {
+            margin-right: 15px;
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-content {
+            padding-left: 60px;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+        }
+        
+        .feature-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+        }
+        
+        .warning-list li:before {
+            background-color: var(--accent);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z'/%3E%3Cpath d='M12 16c.8 0 1.5-.7 1.5-1.5S12.8 13 12 13s-1.5.7-1.5 1.5.7 1.5 1.5 1.5zM11 10h2v5h-2z'/%3E%3C/svg%3E");
+        }
+        
+        .info-box {
+            background-color: #F0F9FF;
+            border-left: 4px solid var(--primary);
+            padding: 22px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+            display: flex;
+            align-items: flex-start;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-box i {
+            color: var(--primary);
+            margin-right: 18px;
+            font-size: 1.3rem;
+            margin-top: 2px;
+        }
+        
+        .info-box.warning {
+            background-color: #FEF2F2;
+            border-left-color: var(--accent);
+        }
+        
+        .info-box.warning i {
+            color: var(--accent);
+        }
+        
+        .legal-text {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+        
+        .legal-text h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .legal-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, #F9FAFB, #F3F4F6);
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 50px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+        
+        .contact-title {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .contact-title i {
+            margin-right: 15px;
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .contact-method i {
+            width: 45px;
+            height: 45px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-right: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+        
+        .contact-method div {
+            flex: 1;
+        }
+        
+        .contact-method strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+        
+        .highlight {
+            background-color: #EFF6FF;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+            font-size: 1.05rem;
+        }
+        
+        .mobile-nav {
+            display: block;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        @media (min-width: 992px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+        
+        .nav-select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231a56db'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 99;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: auto;
+            border-top: 2px solid var(--gold);
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .content-area {
+                padding: 25px;
+            }
+            
+            .terms-header {
+                padding: 35px 20px;
+            }
+            
+            .logo {
+                max-width: 300px;
+            }
+            
+            .terms-header h1 {
+                font-size: 2rem;
+            }
+            
+            .terms-content {
+                padding: 35px;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .section-content {
+                padding-left: 0;
+            }
+            
+            .contact-card {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .terms-content {
+                padding: 25px 20px;
+            }
+            
+            .section-title i {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                margin-right: 12px;
+            }
+            
+            .contact-method i {
+                width: 40px;
+                height: 40px;
+                margin-right: 15px;
+            }
+            
+            .logo {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="legal-notice">
+            <i class="fas fa-balance-scale"></i> Documento legal con términos y condiciones de compra en D&S Store
+        </div>
+        
+        <div class="mobile-nav">
+            <select class="nav-select" id="section-select">
+                <option value="">Navegar a una sección...</option>
+                <option value="#section-1">1. Información General</option>
+                <option value="#section-2">2. Proceso de Compra</option>
+                <option value="#section-3">3. Métodos de Pago</option>
+                <option value="#section-4">4. Política de Envíos</option>
+                <option value="#section-5">5. Devoluciones y Reembolsos</option>
+                <option value="#section-6">6. Garantías</option>
+                <option value="#section-7">7. Propiedad Intelectual</option>
+                <option value="#section-8">8. Protección de Datos</option>
+                <option value="#section-9">9. Limitación de Responsabilidad</option>
+                <option value="#section-10">10. Legislación Aplicable</option>
+                <option value="#contact">Contacto y Soporte</option>
+            </select>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <img src="img/DyS.png" alt="D&S Store Logo" class="sidebar-logo">
+                    <h2 class="sidebar-title">Términos y Condiciones</h2>
+                    <div class="last-update-sidebar">Actualizado: <span id="current-date-sidebar"></span></div>
+                </div>
+                
+                <ul class="sidebar-nav">
+                    <li><a href="#section-1" class="active"><i class="fas fa-file-contract"></i> Información General</a></li>
+                    <li><a href="#section-2"><i class="fas fa-shopping-bag"></i> Proceso de Compra</a></li>
+                    <li><a href="#section-3"><i class="fas fa-credit-card"></i> Métodos de Pago</a></li>
+                    <li><a href="#section-4"><i class="fas fa-truck-moving"></i> Política de Envíos</a></li>
+                    <li><a href="#section-5"><i class="fas fa-undo-alt"></i> Devoluciones y Reembolsos</a></li>
+                    <li><a href="#section-6"><i class="fas fa-certificate"></i> Garantías</a></li>
+                    <li><a href="#section-7"><i class="fas fa-copyright"></i> Propiedad Intelectual</a></li>
+                    <li><a href="#section-8"><i class="fas fa-database"></i> Protección de Datos</a></li>
+                    <li><a href="#section-9"><i class="fas fa-gavel"></i> Limitación de Responsabilidad</a></li>
+                    <li><a href="#section-10"><i class="fas fa-scale-balanced"></i> Legislación Aplicable</a></li>
+                    <li><a href="#contact"><i class="fas fa-headset"></i> Contacto y Soporte</a></li>
+                </ul>
+            </div>
+            
+            <div class="content-area">
+                <div class="container">
+                    <div class="terms-card">
+                        <div class="terms-header">
+                            <div class="header-content">
+                                <div class="logo-container">
+                                    <img src="img/DyS.png" alt="D&S Store Logo" class="logo">
+                                </div>
+                                <h1>Términos y Condiciones de Compra</h1>
+                                <p>Por favor, lea detenidamente antes de realizar su pedido</p>
+                                <div class="last-update">Actualizado: <span id="current-date"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="terms-content">
+                            <div class="section" id="section-1">
+                                <h2 class="section-title"><i class="fas fa-file-contract"></i> 1. Información General</h2>
+                                <div class="section-content">
+                                    <p>Bienvenido/a a <span class="highlight">D&S Store</span> ("la Tienda"). Al realizar una compra en nuestro sitio web, aceptas los siguientes términos y condiciones que regulan nuestra relación comercial.</p>
+                                    <p>Nos reservamos el derecho de actualizar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web.</p>
+                                    
+                                    <div class="legal-text">
+                                        <h4>Información Legal</h4>
+                                        <p>D&S Store es una empresa registrada en Guatemala, con NIT: [Número de NIT]. Nuestra dirección registrada es: Ciudad de Guatemala, Guatemala.</p>
+                                        <p>Todas las transacciones se realizan en Quetzales Guatemaltecos (GTQ) e incluyen los impuestos aplicables según la legislación guatemalteca.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-2">
+                                <h2 class="section-title"><i class="fas fa-shopping-bag"></i> 2. Proceso de Compra</h2>
+                                <div class="section-content">
+                                    <ul class="feature-list">
+                                        <li>Los precios se muestran en moneda local (GTQ) e incluyen todos los impuestos aplicables, salvo indicación expresa.</li>
+                                        <li>Para comprar, debes ser mayor de 18 años o contar con autorización de tus padres/tutores.</li>
+                                        <li>Debes proporcionar información veraz y completa durante el registro y proceso de compra.</li>
+                                        <li>Nos reservamos el derecho de rechazar pedidos que no cumplan con nuestros requisitos.</li>
+                                        <li>La confirmación del pedido se enviará por correo electrónico una vez verificado el pago.</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <p>Al completar una compra, usted acepta que todos los detalles proporcionados son verdaderos y exactos. Cualquier error en la información puede resultar en retrasos o la cancelación de su pedido.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-3">
+                                <h2 class="section-title"><i class="fas fa-credit-card"></i> 3. Métodos de Pago</h2>
+                                <div class="section-content">
+                                    <p>Actualmente aceptamos los siguientes métodos de pago:</p>
+                                    <ul class="feature-list">
+                                        <li>Transferencia bancaria directa</li>
+                                        <li>Depósitos en cuenta bancaria</li>
+                                        <li>Tarjetas de crédito/débito (próximamente)</li>
+                                    </ul>
+                                    <div class="info-box warning">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <div>
+                                            <p><strong>Importante:</strong> Los pedidos se procesan solo después de confirmar el pago completo. El tiempo de verificación puede tardar hasta 24 horas hábiles.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="legal-text">
+                                        <h4>Protección de Pagos</h4>
+                                        <p>Todas las transacciones se procesan de forma segura. D&S Store no almacena información confidencial de tarjetas de crédito/débito. Los pagos con tarjeta se procesan a través de pasarelas de pago certificadas PCI DSS.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-4">
+                                <h2 class="section-title"><i class="fas fa-truck-moving"></i> 4. Política de Envíos</h2>
+                                <div class="section-content">
+                                    <ul class="feature-list">
+                                        <li>Realizamos envíos a todo el territorio de Ciudad de Guatemala y Cobán, Alta Verapaz.</li>
+                                        <li>Tiempo de entrega estimado: 3-5 días hábiles después de confirmar el pago.</li>
+                                        <li>Los costos de envío se calculan automáticamente al finalizar la compra según tu ubicación.</li>
+                                        <li>Todas las entregas son realizadas por nuestro socio logístico Guatex.</li>
+                                        <li>Para seguimiento de pedidos, proporcionaremos un número de rastreo una vez despachado.</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <p>Los retrasos en la entrega por causas ajenas a D&S Store (condiciones climáticas, eventos de fuerza mayor, etc.) no darán derecho a compensación, aunque haremos todo lo posible por minimizar cualquier inconveniente.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-5">
+                                <h2 class="section-title"><i class="fas fa-undo-alt"></i> 5. Devoluciones y Reembolsos</h2>
+                                <div class="section-content">
+                                    <ul class="feature-list">
+                                        <li>Plazo máximo para solicitar devoluciones: 20 días calendario desde la recepción del producto.</li>
+                                        <li>Los productos deben estar en su estado original, con empaque y etiquetas intactas.</li>
+                                        <li>No aceptamos devoluciones de productos personalizados, íntimos o de higiene personal.</li>
+                                        <li>Los reembolsos se procesarán en un plazo máximo de 15 días hábiles al método de pago original.</li>
+                                        <li>Los gastos de envío para devoluciones corren por cuenta del cliente, excepto en casos de error de D&S Store.</li>
+                                    </ul>
+                                    <div class="info-box">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <p>Para iniciar una devolución, contacta a nuestro servicio al cliente con tu número de pedido y motivo de la devolución. Te proporcionaremos instrucciones para el proceso.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-6">
+                                <h2 class="section-title"><i class="fas fa-certificate"></i> 6. Garantías</h2>
+                                <div class="section-content">
+                                    <ul class="feature-list">
+                                        <li>Todos nuestros productos tienen garantía de 20 días contra defectos de fabricación.</li>
+                                        <li>La garantía no cubre daños por uso inadecuado, accidentes o modificaciones no autorizadas.</li>
+                                        <li>Para hacer válida la garantía, debes presentar tu comprobante de compra original.</li>
+                                        <li>El proceso de garantía puede requerir la evaluación del producto por técnicos autorizados.</li>
+                                        <li>En caso de ser válida la garantía, puedes optar por reparación, reposición o reembolso.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-7">
+                                <h2 class="section-title"><i class="fas fa-copyright"></i> 7. Propiedad Intelectual</h2>
+                                <div class="section-content">
+                                    <p>Todos los contenidos del sitio web de D&S Store, incluyendo but no limitado a logotipos, marcas, textos, gráficos, imágenes y software, son propiedad de D&S Store o de sus licenciantes y están protegidos por las leyes de propiedad intelectual.</p>
+                                    
+                                    <div class="legal-text">
+                                        <h4>Uso del Contenido</h4>
+                                        <p>Queda prohibida la reproducción, distribución, modificación o uso comercial de cualquier contenido del sitio sin autorización expresa por escrito de D&S Store. El uso personal no comercial está permitido siempre que se mantengan intactos todos los avisos de propiedad.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-8">
+                                <h2 class="section-title"><i class="fas fa-database"></i> 8. Protección de Datos</h2>
+                                <div class="section-content">
+                                    <p>De acuerdo con la Ley de Protección de Datos Personales de Guatemala, D&S Store se compromete a proteger la privacidad de sus clientes.</p>
+                                    
+                                    <ul class="feature-list">
+                                        <li>Sus datos personales se utilizan exclusivamente para procesar pedidos y mejorar nuestra servicio.</li>
+                                        <li>No compartimos sus datos con terceros excepto para los fines necesarios del servicio (ej: empresas de envío).</li>
+                                        <li>Puede ejercer sus derechos de acceso, rectificación, cancelación y oposición contactándonos.</li>
+                                        <li>Utilizamos medidas de seguridad técnicas y organizativas para proteger sus datos.</li>
+                                    </ul>
+                                    
+                                    <div class="info-box">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <p>Para más información sobre cómo manejamos sus datos personales, consulte nuestra Política de Privacidad completa disponible en nuestro sitio web.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-9">
+                                <h2 class="section-title"><i class="fas fa-gavel"></i> 9. Limitación de Responsabilidad</h2>
+                                <div class="section-content">
+                                    <p>D&S Store no será responsable por:</p>
+                                    
+                                    <ul class="feature-list warning-list">
+                                        <li>Daños o perjuicios indirectos, incidentales o consecuentes.</li>
+                                        <li>Interrupciones del servicio debido a fuerza mayor o causas beyond nuestro control.</li>
+                                        <li>Errores tipográficos o inexactitudes en las descripciones de productos o precios.</li>
+                                        <li>El uso inadecuado o malintencionado de los productos adquiridos.</li>
+                                    </ul>
+                                    
+                                    <div class="legal-text">
+                                        <h4>Responsabilidad del Cliente</h4>
+                                        <p>El cliente es responsable de proporcionar información veraz y actualizada, así como de utilizar los productos de acuerdo con las instrucciones del fabricante y las normativas aplicables.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section" id="section-10">
+                                <h2 class="section-title"><i class="fas fa-scale-balanced"></i> 10. Legislación Aplicable</h2>
+                                <div class="section-content">
+                                    <p>Estos términos y condiciones se rigen por las leyes de la República de Guatemala. Cualquier disputa relacionada con estos términos será resuelta en los tribunales competentes de Guatemala.</p>
+                                    
+                                    <div class="legal-text">
+                                        <h4>Resolución de Conflictos</h4>
+                                        <p>En caso de disputa, ambas partes se comprometen a intentar resolverla amistosamente. Si no se alcanza una solución mutuamente satisfactoria en un plazo de 30 días, cualquier parte podrá someter la controversia a los tribunales competentes de Guatemala.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-card" id="contact">
+                                <h3 class="contact-title"><i class="fas fa-headset"></i> Contacto y Soporte</h3>
+                                <p>Para cualquier pregunta sobre estos Términos y Condiciones o sobre tu pedido:</p>
+                                
+                                <div class="contact-method">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <strong>Correo Electrónico</strong>
+                                        gtdavidsara@gmail.com
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <div>
+                                        <strong>Teléfono</strong>
+                                        +502 5639 3305 (Horario: 8:00 a 17:00, Lunes a Viernes)
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <strong>Oficinas Principales</strong>
+                                        Ciudad de Guatemala, Guatemala
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <strong>Horario de Atención</strong>
+                                        Lunes a Viernes: 8:00 - 17:00 | Sábados: 9:00 - 13:00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Actualiza la fecha automáticamente
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            timeZone: 'America/Guatemala'
+        };
+        const currentDate = new Date().toLocaleDateString('es-GT', options);
+        document.getElementById('current-date').textContent = currentDate;
+        document.getElementById('current-date-sidebar').textContent = currentDate;
+        
+        // Navegación para móviles
+        document.getElementById('section-select').addEventListener('change', function() {
+            if (this.value) {
+                window.location.href = this.value;
+            }
+        });
+        
+        // Botón volver arriba
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Navegación lateral
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        const sections = document.querySelectorAll('.section, .contact-card');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
