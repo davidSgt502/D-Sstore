@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
 // Función optimizada para generar PDF con manejo mejorado de imágenes
+// Reemplaza la función generateOrderPDF con esta versión mejorada
 generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -125,133 +126,117 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     const pageWidth = 210;
     const contentWidth = pageWidth - (margin * 2);
     
-    // Colores corporativos
+    // Colores corporativos (puedes ajustarlos según tu marca)
     const primaryColor = [57, 181, 74];  // Verde
-    const darkColor = [0, 0, 0];
-    const lightColor = [240, 240, 240];
+    const secondaryColor = [41, 128, 185]; // Azul
+    const accentColor = [231, 76, 60]; // Rojo
+    const darkColor = [44, 62, 80]; // Gris oscuro
+    const lightColor = [245, 245, 245]; // Gris claro
     
     // Variables de posición
     let yPosition = 15;
     
     // ===== ENCABEZADO PROFESIONAL =====
-    // Logo - Intentamos cargarlo pero con manejo de errores mejorado
-    let logoLoaded = false;
-    
-   try {
-    // Ruta local relativa a la imagen
-    const localImagePath = 'img/DyS.png'; // ajusta la ruta según tu estructura
-    
-    // Crear una imagen para verificar si existe
-    const testImg = new Image();
-    testImg.onload = function() {
-        logoLoaded = true;
-        // Una vez que la imagen se carga, agregarla al documento
-        doc.addImage(localImagePath, 'PNG', pageWidth / 2 - 15, yPosition, 30, 30);
-        yPosition += 35;
-    };
-    testImg.onerror = function() {
-        logoLoaded = false;
-        throw new Error("Imagen local no disponible");
-    };
-    testImg.src = localImagePath;
-    
-} catch (error) {
-    // Si falla la imagen, usar texto
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(16);
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text(APP_CONFIG.storeName.toUpperCase(), pageWidth / 2, yPosition, { align: 'center' });
-    yPosition += 7;
-}
+    // Logo (usando texto como alternativa si no hay imagen)
+    try {
+        // Intenta cargar el logo
+        const logoImg = new Image();
+        logoImg.src = 'img/ds.png';
+        doc.addImage(logoImg, 'PNG', margin, yPosition, 30, 30);
+    } catch (e) {
+        // Si falla, usar texto
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+        doc.text(APP_CONFIG.storeName.toUpperCase(), margin, yPosition + 10);
+    }
     
     // Información de la empresa
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
+    doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text("Donde cada compra es una bendición", pageWidth / 2, yPosition, { align: 'center' });
-    yPosition += 4;
+    doc.text("Donde cada compra es una bendición", margin, yPosition + 17);
+    doc.text("Ciudad de Guatemala", margin, yPosition + 22);
+    doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, margin, yPosition + 27);
     
-    doc.text("Ciudad de Guatemala", pageWidth / 2, yPosition, { align: 'center' });
-    yPosition += 4;
-    
-    doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, pageWidth / 2, yPosition, { align: 'center' });
-    yPosition += 10;
-    
-    // ===== INFORMACIÓN DEL PEDIDO =====
+    // Número de pedido y fecha (alineado a la derecha)
     const orderNumber = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
     const currentDate = new Date().toLocaleDateString('es-GT', {
-        day: '2-digit',
-        month: '2-digit', 
-        year: 'numeric'
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
     });
     
-    // Fondo para información del pedido
-    doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
-    doc.roundedRect(margin, yPosition, contentWidth, 20, 2, 2, 'F');
-    
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
+    doc.setFontSize(10);
     doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text("NOTA DE ENVÍO", pageWidth / 2, yPosition + 8, { align: 'center' });
+    doc.text(`Pedido: ${orderNumber}`, pageWidth - margin, yPosition + 10, { align: 'right' });
     
+    doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.text(`No. Pedido: ${orderNumber}`, margin + 5, yPosition + 15);
-    doc.text(`Fecha: ${currentDate}`, pageWidth - margin - 5, yPosition + 15, { align: 'right' });
+    doc.setTextColor(100, 100, 100);
+    doc.text(currentDate, pageWidth - margin, yPosition + 15, { align: 'right' });
     
-    yPosition += 30;
+    yPosition = 45;
     
-    // ===== DATOS DEL CLIENTE =====
+    // Línea separadora
+    doc.setDrawColor(200, 200, 200);
+    doc.line(margin, yPosition, pageWidth - margin, yPosition);
+    yPosition += 10;
+    
+    // ===== INFORMACIÓN DEL CLIENTE =====
     const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
     
     // Título sección
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text("DATOS DEL CLIENTE", margin, yPosition);
-    
-    yPosition += 5;
-    
-    // Línea decorativa
-    doc.setDrawColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.line(margin, yPosition, margin + 50, yPosition);
+    doc.setFontSize(12);
+    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.text("INFORMACIÓN DEL CLIENTE", margin, yPosition);
     
     yPosition += 8;
     
-    // Información del cliente
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text(formData.name, margin, yPosition);
-    yPosition += 6;
+    // Información del cliente en dos columnas
+    const clientInfoLeft = [
+        `Nombre: ${formData.name}`,
+        `Teléfono: +502 ${formData.phone}`,
+        formData.email ? `Email: ${formData.email}` : null
+    ].filter(Boolean);
+    
+    const clientInfoRight = [
+        `Dirección: ${formData.address}`,
+        region ? `Región: ${region}` : null,
+        zone ? `Zona: ${zone}` : null
+    ].filter(Boolean);
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
+    doc.setTextColor(80, 80, 80);
     
-    const clientInfo = [
-        `📱 Teléfono: +502 ${formData.phone}`,
-        formData.email && `📧 Email: ${formData.email}`,
-        `📍 Dirección: ${formData.address}`,
-        region && `🏙️ Región: ${region}`,
-        zone && `🏘️ Zona/Municipio: ${zone}`
-    ].filter(Boolean);
-    
-    clientInfo.forEach(info => {
-        doc.text(info, margin, yPosition);
-        yPosition += 5;
+    // Columna izquierda
+    clientInfoLeft.forEach((info, i) => {
+        doc.text(info, margin, yPosition + (i * 6));
     });
     
-    yPosition += 10;
+    // Columna derecha
+    clientInfoRight.forEach((info, i) => {
+        doc.text(info, pageWidth / 2, yPosition + (i * 6));
+    });
     
-    // ===== TABLA DE PRODUCTOS =====
-    // Encabezado de tabla
+    yPosition += Math.max(clientInfoLeft.length, clientInfoRight.length) * 6 + 15;
+    
+    // ===== DETALLES DEL PEDIDO =====
+    // Encabezado de la tabla
     doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.roundedRect(margin, yPosition, contentWidth, 10, 2, 2, 'F');
+    doc.rect(margin, yPosition, contentWidth, 10, 'F');
     
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(255, 255, 255);
     doc.setFontSize(10);
+    doc.setTextColor(255, 255, 255);
     
-    const colWidths = [20, 85, 30, 30, 25];
+    const colWidths = [15, 95, 25, 25, 30];
     const colPositions = [margin];
     
     for (let i = 1; i < colWidths.length; i++) {
@@ -259,7 +244,7 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     }
     
     // Encabezados de tabla
-    doc.text("Cant.", colPositions[0] + 5, yPosition + 7);
+    doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
     doc.text("Producto", colPositions[1] + 5, yPosition + 7);
     doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
     doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
@@ -269,22 +254,37 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     
     // Productos
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
     doc.setFontSize(9);
-    
-    let needsNewPage = false;
+    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
     
     cartItems.forEach((item, index) => {
         // Verificar si necesita nueva página
         if (yPosition > 250) {
             doc.addPage();
             yPosition = 20;
-            needsNewPage = true;
+            
+            // Volver a dibujar encabezados en nueva página
+            doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.rect(margin, yPosition, contentWidth, 10, 'F');
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
+            doc.text("Producto", colPositions[1] + 5, yPosition + 7);
+            doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
+            doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
+            doc.text("Total", colPositions[4] + 5, yPosition + 7);
+            
+            yPosition += 15;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
         }
         
-        // Fondos alternados para filas
-        if (index % 2 === 0 && !needsNewPage) {
-            doc.setFillColor(248, 248, 248);
+        // Fondo alternado para filas
+        if (index % 2 === 0) {
+            doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
             doc.rect(margin, yPosition - 3, contentWidth, 10, 'F');
         }
         
@@ -309,7 +309,7 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     });
     
     // Línea al final de la tabla
-    doc.setDrawColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.setDrawColor(200, 200, 200);
     doc.line(margin, yPosition, pageWidth - margin, yPosition);
     yPosition += 10;
     
@@ -333,47 +333,26 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     doc.text(`Q${total.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
     yPosition += 15;
     
-    // ===== FIRMA =====
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text("FIRMA DE CONFORMIDAD:", margin, yPosition);
-    yPosition += 10;
-    
-    // Línea para firma
-    doc.setDrawColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.line(margin, yPosition, margin + 80, yPosition);
-    yPosition += 15;
-    
-    // ===== INFORMACIÓN DE CONTACTO =====
-    if (yPosition > 220) {
-        doc.addPage();
-        yPosition = 20;
-    }
-    
-    doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
-    doc.roundedRect(margin, yPosition, contentWidth, 45, 2, 2, 'F');
-    
+    // ===== MÉTODO DE PAGO =====
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text("INFORMACIÓN DE CONTACTO", pageWidth / 2, yPosition + 7, { align: 'center' });
-    
-    yPosition += 12;
+    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.text("MÉTODO DE PAGO", margin, yPosition);
+    yPosition += 7;
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.setTextColor(80, 80, 80);
     
-    const contactInfo = [
-        `📞 Teléfono: +502 ${APP_CONFIG.whatsappNumber}`,
-        `✉️ Email: ${APP_CONFIG.storeEmail}`,
-        `🏠 Dirección: Ciudad de Guatemala`,
-        `🌐 Sitio web: ${window.location.hostname}`
+    const paymentInfo = [
+        `Banco: ${APP_CONFIG.bankName}`,
+        `Cuenta: ${APP_CONFIG.accountNumber}`,
+        `Tipo: ${APP_CONFIG.accountType}`,
+        `A nombre de: ${APP_CONFIG.accountHolder}`
     ];
     
-    contactInfo.forEach(info => {
-        doc.text(info, margin + 5, yPosition);
+    paymentInfo.forEach(info => {
+        doc.text(info, margin, yPosition);
         yPosition += 5;
     });
     
@@ -381,21 +360,19 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
     
     // ===== INSTRUCCIONES =====
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text("INSTRUCCIONES DE PAGO", margin, yPosition);
-    yPosition += 6;
+    doc.setFontSize(11);
+    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.text("INSTRUCCIONES", margin, yPosition);
+    yPosition += 7;
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
     
     const instructions = [
-        `1. Realice el pago a: ${APP_CONFIG.bankName}`,
-        `2. Número de cuenta: ${APP_CONFIG.accountNumber} (${APP_CONFIG.accountType})`,
-        `3. A nombre de: ${APP_CONFIG.accountHolder}`,
-        `4. Envíe el comprobante por WhatsApp al +502 ${APP_CONFIG.whatsappNumber}`,
-        `5. Su pedido será procesado al confirmar el pago`
+        "1. Realice el pago según los datos bancarios indicados",
+        "2. Envíe el comprobante por WhatsApp al número indicado",
+        "3. Su pedido será procesado al confirmar el pago",
+        "4. Recibirá una confirmación de entrega una vez enviado"
     ];
     
     instructions.forEach(instruction => {
@@ -403,12 +380,25 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
         yPosition += 5;
     });
     
-    // ===== PIE DE PÁGINA =====
-    const footerY = 280;
+    yPosition += 15;
+    
+    // ===== FIRMA Y SELLO =====
+    if (yPosition > 200) {
+        doc.addPage();
+        yPosition = 20;
+    }
+    
+    doc.setDrawColor(200, 200, 200);
+    doc.line(margin, yPosition, margin + 80, yPosition);
     doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8);
+    doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
-    doc.text("¡Gracias por su compra! - Este documento es una nota de envío oficial", pageWidth / 2, footerY, { align: 'center' });
+    doc.text("Firma de conformidad", margin, yPosition + 5);
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Documento generado automáticamente - " + new Date().toLocaleDateString(), pageWidth / 2, 285, { align: 'center' });
     
     // Generar PDF
     const fileName = `Nota_Envio_${orderNumber}_${formData.name.replace(/\s+/g, '_')}.pdf`;
