@@ -9,20 +9,18 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-
 </head>
 <body>
-   <!-- Header -->
+    <!-- Header -->
     <header class="modern-header">
         <div class="header-container">
             <div class="logo-container">
                 <div class="logo">
-                    <img src="img/DyS.png" alt="Logo DyS Store">
+                    <img src="DyS.png" alt="Logo DyS Store">
                     <div class="logo-text">
                         <h1>D&S Store</h1>
-                     <p>Donde cada compra es una bendición.</p>
+                        <p>Donde cada compra es una bendición.</p>
                     </div>
-
                 </div>
                 <div class="header-actions">
                     <div class="search-bar">
@@ -44,23 +42,19 @@
     <!-- Hero banner -->
     <section class="hero-banner">
         <div class="hero-content">
-            <h2>PRODUCTOS NUEVOS Y DE CALIDAD</h2>
-            <p>Renovando tu hogar con lo mejor</p>
+            <h2>LIQUIDACIÓN DE MEDIO AÑO</h2>
+            <p>Hasta 50% de descuento en productos seleccionados</p>
             <button class="cta-button">Ver Ofertas</button>
         </div>
     </section>
-   
+
     <!-- Categorías -->
     <nav class="modern-categories">
         <div class="categories-container">
-            <button class="category-btn  active" data-category="utiles" >
-                <i class="fas fa-tag"></i>
-                <span>Oficina y escolar</span>
-            </button>
-             <!--<button class="category-btn active" data-category="temporada">
+            <button class="category-btn active" data-category="all">
                 <i class="fas fa-th-large"></i>
-                <span>Temporada</span>
-            </button>-->
+                <span>Todos</span>
+            </button>
             <button class="category-btn" data-category="audio">
                 <i class="fas fa-headphones"></i>
                 <span>Audio</span>
@@ -73,30 +67,13 @@
                 <i class="fas fa-tools"></i>
                 <span>Herramientas</span>
             </button>
-            <button class="category-btn" data-category="ropa-hombre">
-                <i class="fas fa-tshirt"></i>
-                <span>Ropa para Hombre</span>
-            </button>
-            <button class="category-btn" data-category="ropa-mujer">
-                <i class="fas fa-vest"></i>
-                <span>Ropa para Mujer</span>
-            </button>
             <button class="category-btn" data-category="belleza">
                 <i class="fas fa-spa"></i>
                 <span>Belleza</span>
             </button>
-            <button class="category-btn" data-category="tecnologia">
-                <i class="fas fa-laptop"></i>
-                <span>Tecnología</span>
-            </button>
-
             <button class="category-btn" data-category="ofertas">
                 <i class="fas fa-tag"></i>
-                <span>BeBe</span>
-            </button>
-        <button class="category-btn" data-category="exterior">
-              <i class="fas fa-mountain"></i>
-                <span>Exterior</span>
+                <span>Ofertas</span>
             </button>
         </div>
     </nav>
@@ -129,10 +106,8 @@
             
             <div class="modal-body">
                 <div class="cart-content">
-                    <!-- Sección de productos en el carrito -->
                     <div class="cart-items-container">
                         <div class="cart-items" id="cartItemsList">
-                            <!-- Mensaje cuando el carrito está vacío -->
                             <div class="empty-cart-message">
                                 <i class="fas fa-shopping-bag"></i>
                                 <p>Tu carrito está vacío</p>
@@ -141,7 +116,6 @@
                         </div>
                     </div>
                     
-                    <!-- Resumen del pedido -->
                     <div class="cart-summary">
                         <h3>Resumen del Pedido</h3>
                         
@@ -163,30 +137,25 @@
                                 <span id="summary-total">Q0.00</span>
                             </div>
                         </div>
-                        <!-- <div class="delivery-options">
-                            <h4>Opciones de entrega</h4>
-                            <select id="deliveryMethod">
-                                <option value="pickup" selected>Recoger en tienda - Gratis</option>
-                                <option value="standard">Envío estándar (3-5 días) - Q25.00</option>
-                                <option value="express">Envío express (24 horas) - Q50.00</option>
-                            </select>
-                        </div> -->
-                      
-                  
-                    
+                        
+                        <div class="delivery-options">
+                            <h4>Envío a domicilio</h4>
+                            <p class="form-hint">Seleccione su región y zona/municipio en el checkout para calcular el envío</p>
+                        </div>
+
                         <button class="btn-checkout" id="proceedCheckout">
                             <i class="fas fa-shopping-bag"></i> Proceder al pago
                         </button>
                        
-                       <div class="payment-alert">
-                       <strong>🧾 Instrucciones de Pago:</strong>
-                     <ol>
-                    <li>Realiza un <strong>depósito o transferencia</strong> por el monto total de tu pedido.</li>
-                     <li>Envía el <strong>comprobante</strong> por este chat.</li>
-                     <li>Tu pedido será preparado <strong>una vez confirmado el pago</strong>.</li>
-                       </ol>
-                      <p>¡Gracias por tu confianza! 💖</p>
-                     </div>
+                        <div class="payment-alert">
+                            <strong>🧾 Instrucciones de Pago:</strong>
+                            <ol>
+                                <li>Realiza un <strong>depósito o transferencia</strong> por el monto total de tu pedido.</li>
+                                <li>Envía el <strong>comprobante</strong> por WhatsApp.</li>
+                                <li>Tu pedido será preparado <strong>una vez confirmado el pago</strong>.</li>
+                            </ol>
+                            <p>¡Gracias por tu confianza! 💖</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,8 +188,8 @@
                             <input type="tel" id="phone" placeholder="Ej: 5555-1234" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Correo Electrónico*</label>
-                            <input type="email" id="email" placeholder="Ej: juan@example.com" required>
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" placeholder="Ej: juan@example.com">
                         </div>
                     </div>
                     
@@ -229,18 +198,26 @@
                             <i class="fas fa-truck"></i> Dirección de envío
                         </h3>
                         <div class="form-group">
-                            <label for="address">Dirección exacta*</label>
-                            <textarea id="address" rows="3" placeholder="Calle, avenida, número, colonia, zona, ciudad..." required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="deliveryMethodCheckout">Método de envío*</label>
-                            <select id="deliveryMethodCheckout" required>
-                                <option value="pickup">Recoger en tienda - Gratis</option>
-                                <option value="standard">Envío estándar (2-3 días) - Q25.00</option>
-                                <option value="express">Envío exterior (3-5 días) - Guatex - Q50.00</option>
-
+                            <label for="region">Región*</label>
+                            <select id="region" required>
+                                <option value="">Seleccione una región</option>
+                                <option value="Ciudad de Guatemala">Ciudad de Guatemala</option>
+                                <option value="Área Metropolitana">Área Metropolitana</option>
+                                <option value="Departamentos">Departamentos</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="zone">Zona/Municipio/Departamento*</label>
+                            <select id="zone" disabled required>
+                                <option value="">Primero seleccione una región</option>
+                            </select>
+                            <small class="form-hint">Los precios mostrados son según tarifas Guatex para paquetes de ~1kg</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección exacta*</label>
+                            <textarea id="address" rows="3" 
+                                placeholder="Calle, avenida, número, colonia, referencias cercanas..." 
+                                required></textarea>
                         </div>
                     </div>
                     
@@ -269,10 +246,9 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn-checkout">
-                        <i class="fab fa-whatsapp"></i> Confirmar y enviar pedido
-                    </button>
-                    
+                   <button type="submit" id="confirmOrderBtn" class="btn-confirm-order">
+    <i class="fas fa-paper-plane"></i> Confirmar Pedido
+</button>
                 </form>
             </div>
         </div>
@@ -282,7 +258,7 @@
     <footer class="modern-footer">
         <div class="footer-container">
             <div class="footer-section">
-                <h3> D&S Store</h3>
+                <h3>D&S Store</h3>
                 <p>Donde cada compra es una bendición.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -293,25 +269,26 @@
             <div class="footer-section">
                 <h3>Categorías</h3>
                 <ul>
-                    <li><a href="ropa-hombre">Ropa para Hombre</a></li>
-                    <li><a href="ropa-mujer">Ropa para Mujer</a></li>
-                    <li><a href="bebe">BeBe</a></li>
-                    <!-- <li><a href="#">Deporte y aire libre</a></li> -->
+                    <li><a href="#">Audio</a></li>
+                    <li><a href="#">Hogar</a></li>
+                    <li><a href="#">Herramientas</a></li>
+                    <li><a href="#">Belleza</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Información</h3>
                 <ul>
-                     <!--<a href="#">Sobre nosotros</a></li>--> 
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
                     <li><a href="terms.html">Términos y condiciones</a></li>
-                    
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contacto</h3>
                 <ul>
                     <li><i class="fas fa-phone"></i> +502 5639-3305</li>
-                    <li><i class="fas fa-envelope"></i> gtdavidsara@gmail.com</li>
+                    <li><i class="fas fa-envelope"></i> info@dysstore.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> Ciudad de Guatemala</li>
                 </ul>
             </div>
@@ -324,6 +301,5 @@
     <script src="config.js"></script>
     <script src="products.js"></script>
     <script src="app.js"></script>
-    
 </body>
 </html>
