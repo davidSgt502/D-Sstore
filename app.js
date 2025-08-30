@@ -81,214 +81,187 @@ document.addEventListener('DOMContentLoaded', function() {
             return isValid;
         },
 
-        // Función optimizada para generar mensaje de WhatsApp
-    generateWhatsAppMessage: (formData, cartItems, total) => {
-    const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
-    const orderNumber = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
-    
-    // Calcular subtotal y costo de envío
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shippingCost = total - subtotal;
-    
-    const messageParts = [
-        `*🛒 PEDIDO REALIZADO - ${APP_CONFIG.storeName.toUpperCase()}*%0A%0A`,
-        `*📋 Número de Pedido:* ${orderNumber}%0A`,
-        `*📅 Fecha y Hora:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}%0A%0A`,
-        
-        `*👤 INFORMACIÓN DEL CLIENTE*%0A`,
-        `• *Nombre:* ${formData.name}%0A`,
-        `• *Teléfono:* ${formData.phone}%0A`,
-        formData.email ? `• *Email:* ${formData.email}%0A` : '',
-        `• *Dirección:* ${formData.address}%0A`,
-        `• *Región:* ${region}%0A`,
-        `• *Zona/Municipio:* ${zone}%0A%0A`,
-        
-        `*📦 DETALLES DEL PEDIDO*%0A`,
-        ...cartItems.map(item => `➤ ${item.title}%0A   Cantidad: ${item.quantity}%0A   Precio: Q${(item.price * item.quantity).toFixed(2)}%0A`),
-        `%0A`,
-        
-        `*💰 RESUMEN DE PAGO*%0A`,
-        `• Subtotal: Q${subtotal.toFixed(2)}%0A`,
-        `• Costo de envío: Q${shippingCost.toFixed(2)}%0A`,
-        `• *TOTAL A PAGAR: Q${total.toFixed(2)}*%0A%0A`,
-        
-        `*💳 DATOS BANCARIOS PARA PAGO*%0A`,
-        `• *Banco:* ${APP_CONFIG.bankName}%0A`,
-        `• *Número de Cuenta:* ${APP_CONFIG.accountNumber}%0A`,
-        `• *Tipo de Cuenta:* ${APP_CONFIG.accountType}%0A`,
-        `• *A nombre de:* ${APP_CONFIG.accountHolder}%0A%0A`,
-        
-        `*📋 INSTRUCCIONES*%0A`,
-        `1. Realice la transferencia o depósito con el monto exacto de *Q${total.toFixed(2)}*%0A`,
-        `2. Envíe el PDF con los detalles de su pedido%0A`,
-        `3. Envíe el comprobante de pago por este mismo chat%0A`,
-        `4. Su pedido será procesado y enviado una vez confirmado el pago%0A`,
-        `5. Recibirá una confirmación con el número de guía de envío%0A%0A`,
-        
-        `*⏰ Tiempo de entrega:* 24-48 horas después de confirmado el pago%0A`,
-        `*🚚 Método de envío:* ${APP_CONFIG.shippingMethods.standard.name}%0A%0A`,
-        
-        `¡Gracias por su compra! 🙏%0A*${APP_CONFIG.storeName}*`
-    ];
-    
-    return encodeURIComponent(messageParts.filter(part => part !== '').join(''));
-},
-
-// Función optimizada para generar PDF con manejo mejorado de imágenes
-// Reemplaza la función generateOrderPDF con esta versión mejorada
-generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    
-    // Configuración
-    const margin = 15;
-    const pageWidth = 210;
-    const contentWidth = pageWidth - (margin * 2);
-    
-    // Colores corporativos (puedes ajustarlos según tu marca)
-    const primaryColor = [57, 181, 74];  // Verde
-    const secondaryColor = [41, 128, 185]; // Azul
-    const accentColor = [231, 76, 60]; // Rojo
-    const darkColor = [44, 62, 80]; // Gris oscuro
-    const lightColor = [245, 245, 245]; // Gris claro
-    
-    // Variables de posición
-    let yPosition = 15;
-    
-    // ===== ENCABEZADO PROFESIONAL =====
-    // Logo (usando texto como alternativa si no hay imagen)
-    try {
-        // Intenta cargar el logo
-        const logoImg = new Image();
-        logoImg.src = 'img/ds.png';
-        doc.addImage(logoImg, 'PNG', margin, yPosition, 30, 30);
-    } catch (e) {
-        // Si falla, usar texto
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(16);
-        doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-        doc.text(APP_CONFIG.storeName.toUpperCase(), margin, yPosition + 10);
-    }
-    
-    // Información de la empresa
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(100, 100, 100);
-    doc.text("Donde cada compra es una bendición", margin, yPosition + 17);
-    doc.text("Ciudad de Guatemala", margin, yPosition + 22);
-    doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, margin, yPosition + 27);
-    
-    // Número de pedido y fecha (alineado a la derecha)
-    const orderNumber = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
-    const currentDate = new Date().toLocaleDateString('es-GT', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-    
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text(`Pedido: ${orderNumber}`, pageWidth - margin, yPosition + 10, { align: 'right' });
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(100, 100, 100);
-    doc.text(currentDate, pageWidth - margin, yPosition + 15, { align: 'right' });
-    
-    yPosition = 45;
-    
-    // Línea separadora
-    doc.setDrawColor(200, 200, 200);
-    doc.line(margin, yPosition, pageWidth - margin, yPosition);
-    yPosition += 10;
-    
-    // ===== INFORMACIÓN DEL CLIENTE =====
-    const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
-    
-    // Título sección
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text("INFORMACIÓN DEL CLIENTE", margin, yPosition);
-    
-    yPosition += 8;
-    
-    // Información del cliente en dos columnas
-    const clientInfoLeft = [
-        `Nombre: ${formData.name}`,
-        `Teléfono: +502 ${formData.phone}`,
-        formData.email ? `Email: ${formData.email}` : null
-    ].filter(Boolean);
-    
-    const clientInfoRight = [
-        `Dirección: ${formData.address}`,
-        region ? `Región: ${region}` : null,
-        zone ? `Zona: ${zone}` : null
-    ].filter(Boolean);
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(80, 80, 80);
-    
-    // Columna izquierda
-    clientInfoLeft.forEach((info, i) => {
-        doc.text(info, margin, yPosition + (i * 6));
-    });
-    
-    // Columna derecha
-    clientInfoRight.forEach((info, i) => {
-        doc.text(info, pageWidth / 2, yPosition + (i * 6));
-    });
-    
-    yPosition += Math.max(clientInfoLeft.length, clientInfoRight.length) * 6 + 15;
-    
-    // ===== DETALLES DEL PEDIDO =====
-    // Encabezado de la tabla
-    doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.rect(margin, yPosition, contentWidth, 10, 'F');
-    
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(255, 255, 255);
-    
-    const colWidths = [15, 95, 25, 25, 30];
-    const colPositions = [margin];
-    
-    for (let i = 1; i < colWidths.length; i++) {
-        colPositions[i] = colPositions[i-1] + colWidths[i-1];
-    }
-    
-    // Encabezados de tabla
-    doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
-    doc.text("Producto", colPositions[1] + 5, yPosition + 7);
-    doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
-    doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
-    doc.text("Total", colPositions[4] + 5, yPosition + 7);
-    
-    yPosition += 15;
-    
-    // Productos
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    
-    cartItems.forEach((item, index) => {
-        // Verificar si necesita nueva página
-        if (yPosition > 250) {
-            doc.addPage();
-            yPosition = 20;
+        // Función optimizada para generar mensaje de WhatsApp - VERSIÓN MEJORADA
+        generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
+            const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
             
-            // Volver a dibujar encabezados en nueva página
+            // Calcular subtotal y costo de envío
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shippingCost = total - subtotal;
+            
+            const messageParts = [
+                `*🛒 NUEVO PEDIDO - ${APP_CONFIG.storeName.toUpperCase()}*%0A%0A`,
+                
+                `*📋 Información del Pedido*%0A`,
+                `• *Número de orden:* ${orderNumber}%0A`,
+                `• *Fecha y hora:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}%0A%0A`,
+                
+                `*👤 Datos del Cliente*%0A`,
+                `• *Nombre:* ${formData.name}%0A`,
+                `• *Teléfono:* ${formData.phone}%0A`,
+                formData.email ? `• *Email:* ${formData.email}%0A` : '',
+                `• *Dirección:* ${formData.address}%0A`,
+                `• *Región:* ${region}%0A`,
+                `• *Zona/Municipio:* ${zone}%0A%0A`,
+                
+                `*📦 Productos solicitados*%0A`,
+                ...cartItems.map(item => `➤ *${item.title}*%0A   Cantidad: ${item.quantity}%0A   Precio unitario: Q${item.price.toFixed(2)}%0A   Subtotal: Q${(item.price * item.quantity).toFixed(2)}%0A%0A`),
+                
+                `*💰 Resumen de Pago*%0A`,
+                `• Subtotal: Q${subtotal.toFixed(2)}%0A`,
+                `• Costo de envío: Q${shippingCost.toFixed(2)}%0A`,
+                `• *TOTAL A PAGAR: Q${total.toFixed(2)}*%0A%0A`,
+                
+                `*💳 Instrucciones de Pago*%0A`,
+                `1. *Realice el pago por el monto exacto de Q${total.toFixed(2)}*%0A`,
+                `2. *Banco:* ${APP_CONFIG.bankName}%0A`,
+                `3. *Cuenta:* ${APP_CONFIG.accountNumber}%0A`,
+                `4. *Tipo:* ${APP_CONFIG.accountType}%0A`,
+                `5. *Titular:* ${APP_CONFIG.accountHolder}%0A%0A`,
+                
+                `*📋 Proceso de confirmación*%0A`,
+                `1. Transfiera/deposite el monto exacto%0A`,
+                `2. *Envíe el comprobante* por este chat%0A`,
+                `3. *Adjunte el PDF* con los detalles de su pedido%0A`,
+                `4. Su pedido se procesará al confirmar el pago%0A%0A`,
+                
+                `*🚚 Información de envío*%0A`,
+                `• *Método:* ${APP_CONFIG.shippingMethods.standard.name}%0A`,
+                `• *Tiempo de entrega:* 24-48 horas después de confirmado el pago%0A%0A`,
+                
+                `¡Gracias por confiar en nosotros! 🌟%0A*${APP_CONFIG.storeName}*`
+            ];
+            
+            return encodeURIComponent(messageParts.filter(part => part !== '').join(''));
+        },
+
+        // Función optimizada para generar PDF con manejo mejorado de imágenes
+        generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total, orderNumber) => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Configuración
+            const margin = 15;
+            const pageWidth = 210;
+            const contentWidth = pageWidth - (margin * 2);
+            
+            // Colores corporativos (puedes ajustarlos según tu marca)
+            const primaryColor = [57, 181, 74];  // Verde
+            const secondaryColor = [41, 128, 185]; // Azul
+            const accentColor = [231, 76, 60]; // Rojo
+            const darkColor = [44, 62, 80]; // Gris oscuro
+            const lightColor = [245, 245, 245]; // Gris claro
+            
+            // Variables de posición
+            let yPosition = 15;
+            
+            // ===== ENCABEZADO PROFESIONAL =====
+            // Logo (usando texto como alternativa si no hay imagen)
+            try {
+                // Intenta cargar el logo
+                const logoImg = new Image();
+                logoImg.src = 'img/ds.png';
+                doc.addImage(logoImg, 'PNG', margin, yPosition, 30, 30);
+            } catch (e) {
+                // Si falla, usar texto
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(16);
+                doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+                doc.text(APP_CONFIG.storeName.toUpperCase(), margin, yPosition + 10);
+            }
+            
+            // Información de la empresa
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Donde cada compra es una bendición", margin, yPosition + 17);
+            doc.text("Ciudad de Guatemala", margin, yPosition + 22);
+            doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, margin, yPosition + 27);
+            
+            // Número de pedido y fecha (alineado a la derecha)
+            const currentDate = new Date().toLocaleDateString('es-GT', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+            doc.text(`Pedido: ${orderNumber}`, pageWidth - margin, yPosition + 10, { align: 'right' });
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(100, 100, 100);
+            doc.text(currentDate, pageWidth - margin, yPosition + 15, { align: 'right' });
+            
+            yPosition = 45;
+            
+            // Línea separadora
+            doc.setDrawColor(200, 200, 200);
+            doc.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 10;
+            
+            // ===== INFORMACIÓN DEL CLIENTE =====
+            const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
+            
+            // Título sección
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+            doc.text("INFORMACIÓN DEL CLIENTE", margin, yPosition);
+            
+            yPosition += 8;
+            
+            // Información del cliente en dos columnas
+            const clientInfoLeft = [
+                `Nombre: ${formData.name}`,
+                `Teléfono: +502 ${formData.phone}`,
+                formData.email ? `Email: ${formData.email}` : null
+            ].filter(Boolean);
+            
+            const clientInfoRight = [
+                `Dirección: ${formData.address}`,
+                region ? `Región: ${region}` : null,
+                zone ? `Zona: ${zone}` : null
+            ].filter(Boolean);
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(80, 80, 80);
+            
+            // Columna izquierda
+            clientInfoLeft.forEach((info, i) => {
+                doc.text(info, margin, yPosition + (i * 6));
+            });
+            
+            // Columna derecha
+            clientInfoRight.forEach((info, i) => {
+                doc.text(info, pageWidth / 2, yPosition + (i * 6));
+            });
+            
+            yPosition += Math.max(clientInfoLeft.length, clientInfoRight.length) * 6 + 15;
+            
+            // ===== DETALLES DEL PEDIDO =====
+            // Encabezado de la tabla
             doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
             doc.rect(margin, yPosition, contentWidth, 10, 'F');
             
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
+            
+            const colWidths = [15, 95, 25, 25, 30];
+            const colPositions = [margin];
+            
+            for (let i = 1; i < colWidths.length; i++) {
+                colPositions[i] = colPositions[i-1] + colWidths[i-1];
+            }
+            
+            // Encabezados de tabla
             doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
             doc.text("Producto", colPositions[1] + 5, yPosition + 7);
             doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
@@ -296,136 +269,162 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
             doc.text("Total", colPositions[4] + 5, yPosition + 7);
             
             yPosition += 15;
+            
+            // Productos
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(9);
             doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+            
+            cartItems.forEach((item, index) => {
+                // Verificar si necesita nueva página
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                    
+                    // Volver a dibujar encabezados en nueva página
+                    doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+                    doc.rect(margin, yPosition, contentWidth, 10, 'F');
+                    
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(10);
+                    doc.setTextColor(255, 255, 255);
+                    doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
+                    doc.text("Producto", colPositions[1] + 5, yPosition + 7);
+                    doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
+                    doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
+                    doc.text("Total", colPositions[4] + 5, yPosition + 7);
+                    
+                    yPosition += 15;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9);
+                    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+                }
+                
+                // Fondo alternado para filas
+                if (index % 2 === 0) {
+                    doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
+                    doc.rect(margin, yPosition - 3, contentWidth, 10, 'F');
+                }
+                
+                // Cantidad
+                doc.text(item.quantity.toString(), colPositions[0] + 5, yPosition + 3);
+                
+                // Nombre del producto (con ajuste para textos largos)
+                const productName = item.title.length > 30 ? item.title.substring(0, 27) + "..." : item.title;
+                doc.text(productName, colPositions[1] + 5, yPosition + 3);
+                
+                // Precio unitario
+                doc.text(`Q${item.price.toFixed(2)}`, colPositions[2] + 5, yPosition + 3, { align: 'right' });
+                
+                // Descuento (si aplica)
+                const discount = item.originalPrice ? (item.originalPrice - item.price) * item.quantity : 0;
+                doc.text(discount > 0 ? `-Q${discount.toFixed(2)}` : '-', colPositions[3] + 5, yPosition + 3, { align: 'right' });
+                
+                // Total del producto
+                doc.text(`Q${(item.price * item.quantity).toFixed(2)}`, colPositions[4] + 5, yPosition + 3, { align: 'right' });
+                
+                yPosition += 6;
+            });
+            
+            // Línea al final de la tabla
+            doc.setDrawColor(200, 200, 200);
+            doc.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 10;
+            
+            // ===== TOTALES =====
+            const totalsX = pageWidth - margin - 40;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.text("Subtotal:", totalsX, yPosition);
+            doc.text(`Q${subtotal.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+            yPosition += 6;
+            
+            doc.text("Costo de envío:", totalsX, yPosition);
+            doc.text(`Q${shippingCost.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+            yPosition += 6;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.text("TOTAL:", totalsX, yPosition);
+            doc.text(`Q${total.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+            yPosition += 15;
+            
+            // ===== MÉTODO DE PAGO =====
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+            doc.text("MÉTODO DE PAGO", margin, yPosition);
+            yPosition += 7;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(80, 80, 80);
+            
+            const paymentInfo = [
+                `Banco: ${APP_CONFIG.bankName}`,
+                `Cuenta: ${APP_CONFIG.accountNumber}`,
+                `Tipo: ${APP_CONFIG.accountType}`,
+                `A nombre de: ${APP_CONFIG.accountHolder}`
+            ];
+            
+            paymentInfo.forEach(info => {
+                doc.text(info, margin, yPosition);
+                yPosition += 5;
+            });
+            
+            yPosition += 10;
+            
+            // ===== INSTRUCCIONES =====
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+            doc.text("INSTRUCCIONES", margin, yPosition);
+            yPosition += 7;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            
+            const instructions = [
+                "1. Realice el pago según los datos bancarios indicados",
+                "2. Envíe el comprobante por WhatsApp al número indicado",
+                "3. Su pedido será procesado al confirmar el pago",
+                "4. Recibirá una confirmación de entrega una vez enviado",
+                "5. Envíe el PDF con los detalles de su pedido"
+            ];
+            
+            instructions.forEach(instruction => {
+                doc.text(instruction, margin, yPosition);
+                yPosition += 5;
+            });
+            
+            yPosition += 15;
+            
+            // ===== FIRMA Y SELLO =====
+            if (yPosition > 200) {
+                doc.addPage();
+                yPosition = 20;
+            }
+            
+            doc.setDrawColor(200, 200, 200);
+            doc.line(margin, yPosition, margin + 80, yPosition);
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(9);
+            doc.setTextColor(150, 150, 150);
+            doc.text("Firma de conformidad", margin, yPosition + 5);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Documento generado automáticamente - " + new Date().toLocaleDateString(), pageWidth / 2, 285, { align: 'center' });
+            
+            // Generar PDF
+            const fileName = `Nota_Envio_${orderNumber}_${formData.name.replace(/\s+/g, '_')}.pdf`;
+            const pdfBlob = doc.output('blob');
+            
+            return { blob: pdfBlob, fileName, orderNumber };
         }
-        
-        // Fondo alternado para filas
-        if (index % 2 === 0) {
-            doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
-            doc.rect(margin, yPosition - 3, contentWidth, 10, 'F');
-        }
-        
-        // Cantidad
-        doc.text(item.quantity.toString(), colPositions[0] + 5, yPosition + 3);
-        
-        // Nombre del producto (con ajuste para textos largos)
-        const productName = item.title.length > 30 ? item.title.substring(0, 27) + "..." : item.title;
-        doc.text(productName, colPositions[1] + 5, yPosition + 3);
-        
-        // Precio unitario
-        doc.text(`Q${item.price.toFixed(2)}`, colPositions[2] + 5, yPosition + 3, { align: 'right' });
-        
-        // Descuento (si aplica)
-        const discount = item.originalPrice ? (item.originalPrice - item.price) * item.quantity : 0;
-        doc.text(discount > 0 ? `-Q${discount.toFixed(2)}` : '-', colPositions[3] + 5, yPosition + 3, { align: 'right' });
-        
-        // Total del producto
-        doc.text(`Q${(item.price * item.quantity).toFixed(2)}`, colPositions[4] + 5, yPosition + 3, { align: 'right' });
-        
-        yPosition += 6;
-    });
-    
-    // Línea al final de la tabla
-    doc.setDrawColor(200, 200, 200);
-    doc.line(margin, yPosition, pageWidth - margin, yPosition);
-    yPosition += 10;
-    
-    // ===== TOTALES =====
-    const totalsX = pageWidth - margin - 40;
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.text("Subtotal:", totalsX, yPosition);
-    doc.text(`Q${subtotal.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-    yPosition += 6;
-    
-    doc.text("Costo de envío:", totalsX, yPosition);
-    doc.text(`Q${shippingCost.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-    yPosition += 6;
-    
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text("TOTAL:", totalsX, yPosition);
-    doc.text(`Q${total.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-    yPosition += 15;
-    
-    // ===== MÉTODO DE PAGO =====
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text("MÉTODO DE PAGO", margin, yPosition);
-    yPosition += 7;
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(80, 80, 80);
-    
-    const paymentInfo = [
-        `Banco: ${APP_CONFIG.bankName}`,
-        `Cuenta: ${APP_CONFIG.accountNumber}`,
-        `Tipo: ${APP_CONFIG.accountType}`,
-        `A nombre de: ${APP_CONFIG.accountHolder}`
-    ];
-    
-    paymentInfo.forEach(info => {
-        doc.text(info, margin, yPosition);
-        yPosition += 5;
-    });
-    
-    yPosition += 10;
-    
-    // ===== INSTRUCCIONES =====
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text("INSTRUCCIONES", margin, yPosition);
-    yPosition += 7;
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    
-    const instructions = [
-        "1. Realice el pago según los datos bancarios indicados",
-        "2. Envíe el comprobante por WhatsApp al número indicado",
-        "3. Su pedido será procesado al confirmar el pago",
-        "4. Recibirá una confirmación de entrega una vez enviado",
-        "5. Envíe el PDF con los detalles de su pedido"
-    ];
-    
-    instructions.forEach(instruction => {
-        doc.text(instruction, margin, yPosition);
-        yPosition += 5;
-    });
-    
-    yPosition += 15;
-    
-    // ===== FIRMA Y SELLO =====
-    if (yPosition > 200) {
-        doc.addPage();
-        yPosition = 20;
-    }
-    
-    doc.setDrawColor(200, 200, 200);
-    doc.line(margin, yPosition, margin + 80, yPosition);
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(9);
-    doc.setTextColor(150, 150, 150);
-    doc.text("Firma de conformidad", margin, yPosition + 5);
-    
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(100, 100, 100);
-    doc.text("Documento generado automáticamente - " + new Date().toLocaleDateString(), pageWidth / 2, 285, { align: 'center' });
-    
-    // Generar PDF
-    const fileName = `Nota_Envio_${orderNumber}_${formData.name.replace(/\s+/g, '_')}.pdf`;
-    const pdfBlob = doc.output('blob');
-    
-    return { blob: pdfBlob, fileName, orderNumber };
-}
     };
 
     // FUNCIONES DE PRODUCTOS
@@ -900,10 +899,13 @@ generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total) => {
             const total = subtotal + shippingCost;
 
             try {
+                // Generar número de orden único
+                const orderNumber = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+                
                 // Operaciones en paralelo para mayor velocidad
                 const [pdfResult, whatsappMessage] = await Promise.all([
-                    utils.generateOrderPDF(formData, state.cart, subtotal, shippingCost, total),
-                    utils.generateWhatsAppMessage(formData, state.cart, total)
+                    utils.generateOrderPDF(formData, state.cart, subtotal, shippingCost, total, orderNumber),
+                    utils.generateWhatsAppMessage(formData, state.cart, total, orderNumber)
                 ]);
 
                 // Descargar PDF en segundo plano
