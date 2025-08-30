@@ -1630,7 +1630,7 @@ const PRODUCTS = [
     {
         id: 4502,
         title: "Luces LED 50 metros amarillas",
-        price: 25,
+        price: 130,
         category: "navidad",
         image: "img/Luces LED 50 metros amarillas.jpg",
         description: "",
@@ -1639,7 +1639,7 @@ const PRODUCTS = [
     {
         id: 4503,
         title: "Luces LED 50 metros blancas",
-        price: 25,
+        price: 130,
         category: "navidad",
         image: "img/Luces LED 50 metros blancas.jpg",
         description: "",
@@ -1648,7 +1648,7 @@ const PRODUCTS = [
     {
       id:4504,
       title:"Luces LED 50 metros de colores",
-      price:25,
+      price:130,
       category:"navidad",
       image: "img/Luces LED 50 metros de colores.jpg",
       description: "",
@@ -1657,7 +1657,7 @@ const PRODUCTS = [
     {
       id:4505,
       title:"Luces LED 100 metros de colores",
-      price:25,
+      price:225,
       category:"navidad",
       image: "img/Luces LED 100 metros de colores.png",
       description: "",
@@ -1666,7 +1666,7 @@ const PRODUCTS = [
      {
       id:4505,
       title:"Luces LED de cortina 1.5 mts amarillas",
-      price:25,
+      price:39,
       category:"navidad",
       image: "img/Luces LED de cortina 1.5 mts amarillas.jpg",
       description: "",
@@ -1675,7 +1675,7 @@ const PRODUCTS = [
       {
       id:4506,
       title:"Luces LED de cortina 1.5 mts blancas",
-      price:25,
+      price:39,
       category:"navidad",
       image: "img/Luces LED de cortina 1.5 mts blancas.jpg",
       description: "",
@@ -1684,7 +1684,7 @@ const PRODUCTS = [
      {
       id:4507,
       title:"Luces LED de cortina 1.5 mts colores",
-      price:25,
+      price:40,
       category:"navidad",
       image: "img/Luces LED de cortina 1.5 mts de colores.jpg",
       description: "",
@@ -1693,7 +1693,7 @@ const PRODUCTS = [
     {
       id:4508,
       title:"Luces LED solares manguera 10mts blanca",
-      price:25,
+      price:115,
       category:"navidad",
       image: "img/Luces LED solares manguera 10mts blanca.jpg",
       description: "",
@@ -1702,7 +1702,7 @@ const PRODUCTS = [
     {
       id:4509,
       title:"Luces LED solares manguera 10mts colores",
-      price:25,
+      price:115,
       category:"navidad",
       image: "img/Luces LED solares manguera 10mts colores.jpg",
       description: "",
@@ -1711,7 +1711,7 @@ const PRODUCTS = [
     {
       id:4510,
       title:"Luces LED solares manguera 10mts amarillo",
-      price:25,
+      price:115,
       category:"navidad",
       image: "img/Luces LED solares manguera 10ts amarillo.jpg",
       description: "",
@@ -1720,7 +1720,7 @@ const PRODUCTS = [
     {
       id:4511,
       title:"Luces navideñas amarillas 5 metros",
-      price:25,
+      price:40,
       category:"navidad",
       image: "img/Luces navideñas amarillas 5 metros.jpg",
       description: "",
@@ -1729,7 +1729,7 @@ const PRODUCTS = [
     {
       id:4512,
       title:"Luces navideñas amarillas 11 metros",
-      price:25,
+      price:55,
       category:"navidad",
       image: "img/Luces navideñas amarillas 11 metros.jpg",
       description: "",
@@ -1738,7 +1738,7 @@ const PRODUCTS = [
     {
       id:4513,
       title:"Luces navideñas blancos 11 metros",
-      price:25,
+      price:55,
       category:"navidad",
       image: "img/Luces navideñas blancas 11 metros.jpg",
       description: "",
@@ -1747,7 +1747,7 @@ const PRODUCTS = [
     {
       id:4514,
       title:"Luces navideñas colores 11 metros",
-      price:25,
+      price:55,
       category:"navidad",
       image: "img/Luces navideñas colores 11 metros.jpg",
       description: "",
@@ -1756,7 +1756,7 @@ const PRODUCTS = [
     {
       id:4515,
       title:"Luces navideñas colores 5 metros",
-      price:25,
+      price:45,
       category:"navidad",
       image: "img/Luces navideñas colores 5 metros.jpg",
       description: "",
@@ -1765,7 +1765,7 @@ const PRODUCTS = [
     {
       id:4515,
       title:"Luces navideñas colores 9 metros musical",
-      price:25,
+      price:45,
       category:"navidad",
       image: "img/Luces navideñas colores 9 metros musical.jpg",
       description: "",
