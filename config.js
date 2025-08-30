@@ -3,6 +3,7 @@ const APP_CONFIG = {
     storeName: "D&S Store",
     storeSlogan: "Productos de calidad a tu alcance",
     whatsappNumber: "56393305",
+    storeEmail: "gtdavidsara@gmail.com",
     bankName: "Banco Bantrab",
     accountNumber: "2100136130",
     accountHolder: "Evert Lennin David Revolorio Trujillo ",
