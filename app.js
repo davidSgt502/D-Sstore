@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return isValid;
         },
 
-       // Función optimizada para generar mensaje de WhatsApp - VERSIÓN MEJORADA
+// Función optimizada para generar mensaje de WhatsApp - VERSIÓN MEJORADA
 generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
     
@@ -89,50 +89,52 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shippingCost = total - subtotal;
     
-    const messageParts = [
-        `*🛒 NUEVO PEDIDO - ${APP_CONFIG.storeName.toUpperCase()}*%0A%0A`,
-        
-        `*📋 Información del Pedido*%0A`,
-        `• *Número de orden:* ${orderNumber}%0A`,
-        `• *Fecha y hora:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}%0A%0A`,
-        
-        `*👤 Datos del Cliente*%0A`,
-        `• *Nombre:* ${formData.name}%0A`,
-        `• *Teléfono:* ${formData.phone}%0A`,
-        formData.email ? `• *Email:* ${formData.email}%0A` : '',
-        `• *Dirección:* ${formData.address}%0A`,
-        `• *Región:* ${region}%0A`,
-        `• *Zona/Municipio:* ${zone}%0A%0A`,
-        
-        `*📦 Productos solicitados*%0A`,
-        ...cartItems.map(item => `➤ *${item.title}*%0A   Cantidad: ${item.quantity}%0A   Precio unitario: Q${item.price.toFixed(2)}%0A   Subtotal: Q${(item.price * item.quantity).toFixed(2)}%0A%0A`),
-        
-        `*💰 Resumen de Pago*%0A`,
-        `• Subtotal: Q${subtotal.toFixed(2)}%0A`,
-        `• Costo de envío: Q${shippingCost.toFixed(2)}%0A`,
-        `• *TOTAL A PAGAR: Q${total.toFixed(2)}*%0A%0A`,
-        
-        `*💳 Instrucciones de Pago*%0A`,
-        `1. *Realice el pago por el monto exacto de Q${total.toFixed(2)}*%0A`,
-        `2. *Banco:* ${APP_CONFIG.bankName}%0A`,
-        `3. *Cuenta:* ${APP_CONFIG.accountNumber}%0A`,
-        `4. *Tipo:* ${APP_CONFIG.accountType}%0A`,
-        `5. *Titular:* ${APP_CONFIG.accountHolder}%0A%0A`,
-        
-        `*📋 Proceso de confirmación*%0A`,
-        `1. Transfiera/deposite el monto exacto%0A`,
-        `2. *Envíe el comprobante* por este chat%0A`,
-        `3. *Adjunte el PDF* con los detalles de su pedido%0A`,
-        `4. Su pedido se procesará al confirmar el pago%0A%0A`,
-        
-        `*🚚 Información de envío*%0A`,
-        `• *Método:* ${APP_CONFIG.shippingMethods.standard.name}%0A`,
-        `• *Tiempo de entrega:* 24-48 horas después de confirmado el pago%0A%0A`,
-        
-        `¡Gracias por confiar en nosotros! 🌟%0A*${APP_CONFIG.storeName}*`
-    ];
+    // Construir el mensaje con saltos de línea adecuados
+    let message = `*🛒 NUEVO PEDIDO - ${APP_CONFIG.storeName.toUpperCase()}*\n\n`;
     
-    return encodeURIComponent(messageParts.filter(part => part !== '').join(''));
+    message += `*📋 Información del Pedido*\n`;
+    message += `• *Número de orden:* ${orderNumber}\n`;
+    message += `• *Fecha y hora:* ${new Date().toLocaleDateString('es-GT', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}\n\n`;
+    
+    message += `*👤 Datos del Cliente*\n`;
+    message += `• *Nombre:* ${formData.name}\n`;
+    message += `• *Teléfono:* ${formData.phone}\n`;
+    if (formData.email) message += `• *Email:* ${formData.email}\n`;
+    message += `• *Dirección:* ${formData.address}\n`;
+    message += `• *Región:* ${region}\n`;
+    message += `• *Zona/Municipio:* ${zone}\n\n`;
+    
+    message += `*📦 Productos solicitados*\n`;
+    cartItems.forEach(item => {
+        message += `➤ *${item.title}*\n   Cantidad: ${item.quantity}\n   Precio unitario: Q${item.price.toFixed(2)}\n   Subtotal: Q${(item.price * item.quantity).toFixed(2)}\n\n`;
+    });
+    
+    message += `*💰 Resumen de Pago*\n`;
+    message += `• Subtotal: Q${subtotal.toFixed(2)}\n`;
+    message += `• Costo de envío: Q${shippingCost.toFixed(2)}\n`;
+    message += `• *TOTAL A PAGAR: Q${total.toFixed(2)}*\n\n`;
+    
+    message += `*💳 Instrucciones de Pago*\n`;
+    message += `1. *Realice el pago por el monto exacto de Q${total.toFixed(2)}*\n`;
+    message += `2. *Banco:* ${APP_CONFIG.bankName}\n`;
+    message += `3. *Cuenta:* ${APP_CONFIG.accountNumber}\n`;
+    message += `4. *Tipo:* ${APP_CONFIG.accountType}\n`;
+    message += `5. *Titular:* ${APP_CONFIG.accountHolder}\n\n`;
+    
+    message += `*📋 Proceso de confirmación*\n`;
+    message += `1. Transfiera/deposite el monto exacto\n`;
+    message += `2. *Envíe el comprobante* por este chat\n`;
+    message += `3. *Adjunte el PDF* con los detalles de su pedido\n`;
+    message += `4. Su pedido se procesará al confirmar el pago\n\n`;
+    
+    message += `*🚚 Información de envío*\n`;
+    message += `• *Método:* ${APP_CONFIG.shippingMethods.standard.name}\n`;
+    message += `• *Tiempo de entrega:* 24-48 horas después de confirmado el pago\n\n`;
+    
+    message += `¡Gracias por confiar en nosotros! 🌟\n*${APP_CONFIG.storeName}*`;
+    
+    // Codificar para URL (los \n se convierten en %0A automáticamente)
+    return encodeURIComponent(message);
 },
 
         // Función optimizada para generar PDF con manejo mejorado de imágenes
