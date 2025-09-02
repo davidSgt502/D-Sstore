@@ -475,6 +475,117 @@ body {
     background-color: rgba(255, 255, 255, 0.85);
 }
 
+/* Selectores de variantes de productos */
+.selector-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #718096;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.color-selector,
+.size-selector {
+    margin-bottom: 16px;
+}
+
+.color-options,
+.size-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-option.selected {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.3);
+}
+
+.color-option.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.size-option {
+    padding: 6px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 36px;
+    text-align: center;
+}
+
+.size-option:hover {
+    border-color: #cbd5e0;
+    background-color: #f7fafc;
+}
+
+.size-option.selected {
+    background-color: #4299e1;
+    color: white;
+    border-color: #4299e1;
+}
+
+.size-option.out-of-stock {
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Mejora responsiva para selectores */
+@media (max-width: 480px) {
+    .color-options,
+    .size-options {
+        justify-content: center;
+    }
+    
+    .color-option {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .size-option {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        min-width: 32px;
+    }
+}
+
+/* Animación para selección */
+@keyframes pulse-select {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.color-option.selected,
+.size-option.selected {
+    animation: pulse-select 0.3s ease;
+}
+
 .stock-badge {
     position: absolute;
     top: 50%;

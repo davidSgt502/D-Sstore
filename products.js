@@ -1420,7 +1420,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/Moldeador de cuerpo short S,M.jpg",
         description: "",
-        tallas: "M",
+         variants: {
+            colors: ["Azul claro", "Azul oscuro","Blanco"],
+            sizes: ["XS", "S", "M", "L"]
+        },
         stock: 12
     },
      {

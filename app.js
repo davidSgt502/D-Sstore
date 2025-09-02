@@ -454,30 +454,79 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
             filteredProducts.forEach(product => {
                 const isOutOfStock = product.stock <= 0;
                 
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image-container ${isOutOfStock ? 'out-of-stock' : ''}">
-                        <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
-                        ${product.badge ? `<span class="product-badge ${product.badge.type}">${product.badge.text}</span>` : ''}
-                        ${isOutOfStock ? '<span class="stock-badge">AGOTADO</span>' : ''}
-                        ${!isOutOfStock ? `<span class="stock-counter">${product.stock} disponibles</span>` : ''}
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-price-container">
-                            <div>
-                                ${product.originalPrice ? 
-                                    `<span class="product-original-price">${utils.formatPrice(product.originalPrice)}</span>` : ''}
-                                <span class="product-price">${utils.formatPrice(product.price)}</span>
-                            </div>
-                        </div>
-                        <button class="add-to-cart" data-id="${product.id}" ${isOutOfStock ? 'disabled' : ''}>
-                            <i class="fas fa-cart-plus"></i> ${isOutOfStock ? 'Agotado' : 'Agregar'}
-                        </button>
-                    </div>
-                `;
+                // En productFunctions.displayProducts, dentro del forEach:
+const productCard = document.createElement('div');
+productCard.className = 'product-card';
+productCard.innerHTML = `
+    <div class="product-image-container ${isOutOfStock ? 'out-of-stock' : ''}">
+        <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
+        ${product.badge ? `<span class="product-badge ${product.badge.type}">${product.badge.text}</span>` : ''}
+        ${isOutOfStock ? '<span class="stock-badge">AGOTADO</span>' : ''}
+        ${!isOutOfStock ? `<span class="stock-counter">${product.stock} disponibles</span>` : ''}
+    </div>
+    <div class="product-info">
+        <h3 class="product-title">${product.title}</h3>
+        <p class="product-description">${product.description}</p>
+        
+        <!-- Selector de colores -->
+        ${product.variants && product.variants.colors && product.variants.colors.length > 1 ? `
+        <div class="color-selector">
+            <span class="selector-label">Color:</span>
+            <div class="color-options">
+                ${product.variants.colors.map(color => `
+                    <button class="color-option" data-color="${color}" 
+                            style="background-color: ${getColorCode(color)}" 
+                            title="${color}"></button>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+        
+        <!-- Selector de tallas -->
+        ${product.variants && product.variants.sizes && product.variants.sizes.length > 1 ? `
+        <div class="size-selector">
+            <span class="selector-label">Talla:</span>
+            <div class="size-options">
+                ${product.variants.sizes.map(size => `
+                    <button class="size-option" data-size="${size}">${size}</button>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+        
+        <div class="product-price-container">
+            <div>
+                ${product.originalPrice ? 
+                    `<span class="product-original-price">${utils.formatPrice(product.originalPrice)}</span>` : ''}
+                <span class="product-price">${utils.formatPrice(product.price)}</span>
+            </div>
+        </div>
+        <button class="add-to-cart" data-id="${product.id}" ${isOutOfStock ? 'disabled' : ''}>
+            <i class="fas fa-cart-plus"></i> ${isOutOfStock ? 'Agotado' : 'Agregar'}
+        </button>
+    </div>
+`;
+
+// Función auxiliar para obtener código de color
+function getColorCode(colorName) {
+    const colorMap = {
+        'Negro': '#000000',
+        'Blanco': '#FFFFFF',
+        'Rojo': '#FF0000',
+        'Azul': '#0000FF',
+        'Verde': '#008000',
+        'Amarillo': '#FFFF00',
+        'Rosa': '#FFC0CB',
+        'Morado': '#800080',
+        'Gris': '#808080',
+        'Beige': '#F5F5DC',
+        'Marrón': '#A52A2A',
+        'Naranja': '#FFA500',
+        'Azul claro': '#87CEEB',
+        'Azul oscuro': '#00008B'
+    };
+    return colorMap[colorName] || '#CCCCCC';
+}
                 
                 DOM.productsGrid.appendChild(productCard);
             });
@@ -488,6 +537,34 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
                     cartFunctions.addToCart(productId);
                 });
             });
+
+            // Manejar selección de colores y tallas
+document.querySelectorAll('.product-card').forEach(card => {
+    // Selección de colores
+    card.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const colorOptions = this.parentElement.querySelectorAll('.color-option');
+            colorOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+    
+    // Selección de tallas
+    card.querySelectorAll('.size-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const sizeOptions = this.parentElement.querySelectorAll('.size-option');
+            sizeOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+    
+    // Seleccionar primera opción por defecto
+    const firstColor = card.querySelector('.color-option');
+    if (firstColor) firstColor.classList.add('selected');
+    
+    const firstSize = card.querySelector('.size-option');
+    if (firstSize) firstSize.classList.add('selected');
+});
         },
         
         searchProducts: utils.debounce(function(query) {
@@ -505,6 +582,8 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
             
             productFunctions.displayProducts('all', filtered);
         }, 300)
+
+        
     };
 
     // FUNCIONES DEL CARRITO
@@ -517,6 +596,19 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
                 return;
             }
             
+// Obtener las variantes seleccionadas
+    const productCard = document.querySelector(`.product-card [data-id="${productId}"]`)?.closest('.product-card');
+    let selectedColor = null;
+    let selectedSize = null;
+    
+    if (productCard) {
+        const colorOption = productCard.querySelector('.color-option.selected');
+        const sizeOption = productCard.querySelector('.size-option.selected');
+        
+        selectedColor = colorOption ? colorOption.dataset.color : null;
+        selectedSize = sizeOption ? sizeOption.dataset.size : null;
+    }
+
             if (product.stock <= 0) {
                 utils.showNotification('Este producto está agotado', 'fa-exclamation-circle');
                 return;
