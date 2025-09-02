@@ -1422,6 +1422,15 @@ const PRODUCTS = [
         description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
         stock: 12
     },
+     {
+        id: 3002,
+        title: "Vestido Camisero",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/Moldeador de cuerpo short S,M.jpg",
+        description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
+        stock: 12
+    },
 
     // CATEGORÍA: ropa-hombre (IDs 3501-3999)
     {
