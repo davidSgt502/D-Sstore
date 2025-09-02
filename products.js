@@ -1416,21 +1416,87 @@ const PRODUCTS = [
     {
         id: 3001,
         title: "Moldeador de cuerpo short S/M",
-        price: 65,
+        price: 70,
         category: "ropa-mujer",
         image: "img/Moldeador de cuerpo short S,M.jpg",
-        description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
+        description: "",
+        tallas: "M",
         stock: 12
     },
      {
         id: 3002,
-        title: "Vestido Camisero",
-        price: 100,
+        title: "Macaquinho de mezclilla",
+        price: 110,
         category: "ropa-mujer",
-        image: "img/Moldeador de cuerpo short S,M.jpg",
-        description: "MOLDEADOR DE CUERPO SHORT S/M Tela suave y elástica, cuello redondo, tirantes delgados, sin mangas, espalda abierta. Material: 78% Nylon / 22% Spandex",
+        image: "img/macaquinho de mezclilla.jpg",
+        description: "",
         stock: 12
     },
+    {
+        id: 3003,
+        title: "Vestido camisero de mezclilla sin mangas",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido camisero de mezclilla sin mangas.jpg",
+        description: "",
+        stock: 12
+    },
+     {
+        id: 3004,
+        title: "Falda acampanada color marron",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda acampanada color marron.jpg",
+        description: "",
+        stock: 12
+    },
+    {
+        id: 3005,
+        title: "Falda con botones frontales",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda con botones frontales.jpg",
+        description: "",
+        stock: 12
+    },
+     {
+        id: 3006,
+        title: "Falda de volantes morada",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda de volantes morada.jpg",
+        description: "",
+        stock: 12
+    },
+     {
+        id: 3007,
+        title: "Falda midi abotonada",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda midi abotonada.jpg",
+        description: "",
+        stock: 12
+    },
+     {
+        id: 3008,
+        title: "Falda midi de mezclilla con diseño de sirena",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda midi de mezclilla con diseño de sirena.jpg",
+        description: "",
+        stock: 12
+    },
+     {
+        id: 3009,
+        title: "Falda midi estampado de lunares",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/falda midi estampado de lunares.jpg",
+        description: "",
+        stock: 12
+    },
+
+
 
     // CATEGORÍA: ropa-hombre (IDs 3501-3999)
     {

@@ -369,7 +369,7 @@ body {
 }
 
 .product-image {
-    width: 75%;
+    width: 80%;
     max-width: 220px;
     height: auto;
     object-fit: cover;
@@ -445,7 +445,6 @@ body {
     font-weight: 700;
     color: #2d3748;
 }
-
 .add-to-cart {
     background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
     color: white;
