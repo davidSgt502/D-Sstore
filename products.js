@@ -1434,7 +1434,7 @@ const PRODUCTS = [
         image: "img/macaquinho de mezclilla.jpg",
         description: "",
         variants: {
-        colors: ["Gris","" ],
+        //Colors: ["Gris","" ],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1447,7 +1447,7 @@ const PRODUCTS = [
         image: "img/vestido camisero de mezclilla sin mangas.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro","color null"],
+        //colors: ["Azul claro","color null"],
         sizes: ["S", "M", "L"]
     },
         stock: 12
@@ -1460,7 +1460,7 @@ const PRODUCTS = [
         image: "img/falda acampanada color marron.jpg",
         description: "",
         variants: {
-        colors: ["Mosta", ""],
+        //colors: ["Mosta", ""],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1473,7 +1473,7 @@ const PRODUCTS = [
         image: "img/falda con botones frontales.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1486,7 +1486,7 @@ const PRODUCTS = [
         image: "img/falda de volantes morada.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1499,7 +1499,7 @@ const PRODUCTS = [
         image: "img/falda midi abotonada.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1512,7 +1512,7 @@ const PRODUCTS = [
         image: "img/falda midi de mezclilla con diseño de sirena.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
@@ -1525,7 +1525,22 @@ const PRODUCTS = [
         image: "img/falda midi estampado de lunares.jpg",
         description: "",
         variants: {
-        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
+        stock: 12
+    },
+    {
+        id: 30010,
+        title: "vestido tipo camisa con cinturón",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa con cinturón.jpeg",
+        description: "",
+        variants: {
+        colors: ["Rojo", "Amarillo", "Negro","azul claro","rosado oscuro","beige","morado claro",
+            "blanco","verde","rosa claro","morado oscuro"
+        ],
         sizes: ["XS", "S", "M", "L"]
     },
         stock: 12
