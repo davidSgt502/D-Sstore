@@ -674,27 +674,136 @@ productCard.innerHTML = `
 
 // Función auxiliar para obtener código de color
 function getColorCode(colorName) {
-    const colorMap = {
-        'Negro': '#000000',
-        'Blanco': '#FFFFFF',
-        'Rojo': '#FF0000',
-        'Azul': '#0000FF',
-        'Verde': '#008000',
-        'Amarillo': '#FFFF00',
-        'Rosa': '#FFC0CB',
-        'Morado': '#800080',
-        'Gris': '#808080',
-        'Beige': '#F5F5DC',
-        'Marrón': '#A52A2A',
-        'Naranja': '#FFA500',
-        'Azul claro': '#87CEEB',
-        'Azul oscuro': '#00008B',
-        'Mosta': '#d58700',
-        'color null': ''
+  const colorMap = {
+    // Colores básicos
+    'Negro': '#000000',
+    'Gris': '#808080',
+    'Gris oscuro': '#A9A9A9',
+    'Gris claro': '#D3D3D3',
+    'Gris muy claro': '#DCDCDC',
+    'Blanco': '#FFFFFF',
+    'Rojo': '#FF0000',
+    'Rojo oscuro': '#8B0000',
+    'Rojo fuego': '#B22222',
+    'Rosa': '#FFC0CB',
+    'Rosa fuerte': '#FF1493',
+    'Rosa pálido': '#FFE4E1',
+    'Rosa claro': '#FFB6C1',
+    'Fucsia': '#FF00FF',
+    'Magenta': '#FF00FF',
+    'Naranja': '#FFA500',
+    'Naranja oscuro': '#FF8C00',
+    'Coral': '#FF7F50',
+    'Tomate': '#FF6347',
+    'Salmón': '#FA8072',
+    'Salmón claro': '#FFA07A',
+    'Salmón oscuro': '#E9967A',
+    'Dorado': '#FFD700',
+    'Amarillo': '#FFFF00',
+    'Caqui': '#F0E68C',
+    'Mostaza': '#FFDB58',
+    'Trigo': '#F5DEB3',
+    'Mocasin': '#FFE4B5',
+    'Melón': '#FFEFD5',
+    'Durazno': '#FFDAB9',
+    'Miel': '#FFF8DC',
+    'Lino': '#FAF0E6',
+    'Marfil': '#FFFFF0',
+    'Beige': '#F5F5DC',
+    'Champaña': '#FFFACD',
+    'Limón': '#FFF44F',
 
-    };
-    return colorMap[colorName] || '#CCCCCC';
+    // Marrones y tierras
+    'Marrón': '#A52A2A',
+    'Marrón claro': '#CD853F',
+    'Marrón rojizo': '#8B4513',
+    'Chocolate': '#D2691E',
+    'Canela': '#A0522D',
+    'Arena': '#F4A460',
+    'Siena': '#A0522D',
+    'Siena tostado': '#D2B48C',
+    'Perú': '#CD853F',
+    'Café': '#6F4E37',
+
+    // Verdes
+    'Verde': '#008000',
+    'Verde oscuro': '#006400',
+    'Verde bosque': '#228B22',
+    'Verde oliva': '#808000',
+    'Verde amarillento': '#9ACD32',
+    'Verde césped': '#7CFC00',
+    'Verde lima': '#32CD32',
+    'Verde claro': '#90EE90',
+    'Verde pálido': '#98FB98',
+    'Verde menta': '#98FF98',
+    'Verde mar': '#3CB371',
+    'Verde mar oscuro': '#8FBC8F',
+    'Verde mar claro': '#20B2AA',
+    'Aguamarina': '#7FFFD4',
+    'Turquesa': '#40E0D0',
+    'Turquesa oscuro': '#00CED1',
+    'Turquesa medio': '#48D1CC',
+
+    // Azules
+    'Azul': '#0000FF',
+    'Azul oscuro': '#00008B',
+    'Azul medio': '#0000CD',
+    'Azul claro': '#ADD8E6',
+    'Azul cielo': '#87CEEB',
+    'Azul cielo claro': '#87CEFA',
+    'Azul acero': '#4682B4',
+    'Azul acero claro': '#B0C4DE',
+    'Azul cobalto': '#0047AB',
+    'Azul real': '#4169E1',
+    'Azul dodger': '#1E90FF',
+    'Azul profundo': '#191970',
+    'Azul cadete': '#5F9EA0',
+    'Azul turquesa': '#00BFFF',
+    'Azul pizarra': '#6A5ACD',
+    'Azul pizarra oscuro': '#483D8B',
+    'Azul pizarra claro': '#8470FF',
+    'Azul marino': '#000080',
+    'Cian': '#00FFFF',
+    'Aqua': '#00FFFF',
+    'Cian claro': '#E0FFFF',
+    'Cian oscuro': '#008B8B',
+
+    // Morados
+    'Morado': '#800080',
+    'Morado oscuro': '#4B0082',
+    'Índigo': '#4B0082',
+    'Violeta': '#EE82EE',
+    'Violeta oscuro': '#9400D3',
+    'Violeta claro': '#9370DB',
+    'Orquídea': '#DA70D6',
+    'Orquídea oscura': '#9932CC',
+    'Orquídea media': '#BA55D3',
+    'Lavanda': '#E6E6FA',
+    'Lavanda pálida': '#DDA0DD',
+    'Lila': '#C8A2C8',
+    'Ciruelo': '#DDA0DD',
+    'Malva': '#E0B0FF',
+
+    // Metales y especiales
+    'Plateado': '#C0C0C0',
+    'Oro viejo': '#B8860B',
+    'Oro oscuro': '#FFD700',
+    'Cobre': '#B87333',
+
+    // Extras CSS
+    'Azul petróleo': '#2F4F4F',
+    'Verde azulado': '#008080',
+    'Verde esmeralda': '#50C878',
+    'Aguamarina medio': '#66CDAA',
+    'Carmesí': '#DC143C',
+    'Caoba': '#C04000',
+    'Ambar': '#FFBF00',
+    'Mostaza': '#FFDB58'
+  };
+
+  return colorMap[colorName] || '#CCCCCC';
 }
+
                 
                 DOM.productsGrid.appendChild(productCard);
             });
