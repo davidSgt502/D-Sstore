@@ -1734,7 +1734,7 @@ const PRODUCTS = [
         price: 40,
         category: "navidad",
         image: "img/Adorno grande de baston.jpg",
-        description: "se puede colgar en la pared, ventana, manteles, ramas, puertas y otros lugares a voluntad",
+        description: "",
         stock: 12,
     },
     {
