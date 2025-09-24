@@ -1426,116 +1426,13 @@ const PRODUCTS = [
     },
     stock: 12
 },
-     {
+    {
         id: 3002,
-        title: "Macaquinho de mezclilla",
-        price: 110,
-        category: "ropa-mujer",
-        image: "img/macaquinho de mezclilla.jpg",
-        description: "",
-        variants: {
-        //Colors: ["Gris","" ],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-    {
-        id: 3003,
-        title: "Vestido camisero de mezclilla sin mangas",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/vestido camisero de mezclilla sin mangas.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro","color null"],
-        sizes: ["S", "M", "L"]
-    },
-        stock: 12
-    },
-     {
-        id: 3004,
-        title: "Falda acampanada color marron",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda acampanada color marron.jpg",
-        description: "",
-        variants: {
-        //colors: ["Mosta", ""],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-    {
-        id: 3005,
-        title: "Falda con botones frontales",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda con botones frontales.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-     {
-        id: 3006,
-        title: "Falda de volantes morada",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda de volantes morada.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-     {
-        id: 3007,
-        title: "Falda midi abotonada",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda midi abotonada.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-     {
-        id: 3008,
-        title: "Falda midi de mezclilla con diseño de sirena",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda midi de mezclilla con diseño de sirena.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-     {
-        id: 3009,
-        title: "Falda midi estampado de lunares",
-        price: 100,
-        category: "ropa-mujer",
-        image: "img/falda midi estampado de lunares.jpg",
-        description: "",
-        variants: {
-        //colors: ["Azul claro", "Azul oscuro", "Blanco"],
-        sizes: ["XS", "S", "M", "L"]
-    },
-        stock: 12
-    },
-    {
-        id: 30010,
         title: "vestido tipo camisa con cinturón",
         price: 100,
         category: "ropa-mujer",
-        image: "img/vestido tipo camisa con cinturón.jpeg",
+        images: "img/vestido tipo camisa con cinturón.jpeg",
+
         description: "",
         variants: {
         colors: ["Rojo", "Amarillo", "Negro","azul claro","rosado oscuro","beige","morado claro",
