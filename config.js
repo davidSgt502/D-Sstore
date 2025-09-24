@@ -1,14 +1,37 @@
-// Configuración de la aplicación
+/// Configuración de la aplicación
 const APP_CONFIG = {
     storeName: "D&S Store",
     storeSlogan: "Productos de calidad a tu alcance",
     whatsappNumber: "56393305",
     storeEmail: "gtdavidsara@gmail.com",
-    bankName: "Banco Bantrab",
-    accountNumber: "2100136130",
-    accountHolder: "Evert Lennin David Revolorio Trujillo ",
-    accountType: "Ahorros",
-   
+
+    // Modificar shippingBancks para incluir información de logos
+    shippingBancks: [
+    {
+        name: "Banco Bantrab",
+        accountNumber: "2100136130",
+        accountHolder: "Evert Lennin David Revolorio Trujillo", 
+        accountType: "Ahorros"
+    },
+    {
+        name: "Banco Bi",
+        accountNumber: "modificar",
+        accountHolder: "Evert Lennin David Revolorio Trujillo", 
+        accountType: "Monetaria"
+    },
+    {
+        name: "Banco Zigui",
+        accountNumber: "modificar",
+        accountHolder: "Evert Lennin David Revolorio Trujillo", 
+        accountType: "Ahorros"
+    },
+    {
+        name: "Banco Nexa",
+        accountNumber: "modificar",
+        accountHolder: "Evert Lennin David Revolorio Trujillo", 
+        accountType: "Ahorros"
+    }
+],
     // Precios de envío basados en Guatex para paquetes de 1kg
     shippingZones: {
         "Ciudad de Guatemala": {
@@ -34,7 +57,7 @@ const APP_CONFIG = {
             "Zona 20": 45,
             "Zona 21": 45
         },
-        "Área Metropolitana": {
+        /*"Área Metropolitana": {
             "Mixco": 50,
             "Villa Nueva": 50,
             "San Miguel Petapa": 50,
@@ -44,29 +67,11 @@ const APP_CONFIG = {
             "Amatitlán": 60,
             "Villa Canales": 65,
             "San Juan Sacatepéquez": 70
-        },
+        },*/
         "Departamentos": {
-            "Sacatepéquez (Antigua)": 80,
-            "Escuintla": 90,
-            "Chimaltenango": 85,
-            "Quetzaltenango": 120,
-            "Retalhuleu": 130,
-            "Suchitepéquez": 140,
-            "Totonicapán": 125,
-            "Sololá": 110,
             "Chiquimula": 150,
-            "Jalapa": 145,
             "Zacapa": 155,
-            "El Progreso": 140,
-            "Baja Verapaz": 130,
-            "Alta Verapaz": 160,
-            "Petén": 200,
-            "Izabal": 180,
-            "Huehuetenango": 170,
-            "Quiché": 160,
-            "San Marcos": 150,
-            "Santa Rosa": 120,
-            "Jutiapa": 140
+            "Alta Verapaz": 160
         }
     },
     

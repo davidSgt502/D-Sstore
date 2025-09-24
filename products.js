@@ -1414,18 +1414,18 @@ const PRODUCTS = [
 
     // CATEGORÍA: ropa-mujer (IDs 3001-3499)
     {
-        id: 3001,
-        title: "Moldeador de cuerpo short S/M",
-        price: 70,
-        category: "ropa-mujer",
-        image: "img/Moldeador de cuerpo short S,M.jpg",
-        description: "",
-         variants: {
-            colors: ["Azul claro", "Azul oscuro","Blanco"],
-            sizes: ["XS", "S", "M", "L"]
-        },
-        stock: 12
+    id: 3001,
+    title: "Moldeador de cuerpo short ",
+    price: 70,
+    category: "ropa-mujer",
+    image: "img/Moldeador de cuerpo short S,M.jpg",
+    description: "",
+    variants: {
+        ///colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: [ "S", "M"]
     },
+    stock: 12
+},
      {
         id: 3002,
         title: "Macaquinho de mezclilla",
@@ -1433,6 +1433,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/macaquinho de mezclilla.jpg",
         description: "",
+        variants: {
+        colors: ["Gris","" ],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
     {
@@ -1442,6 +1446,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/vestido camisero de mezclilla sin mangas.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro","color null"],
+        sizes: ["S", "M", "L"]
+    },
         stock: 12
     },
      {
@@ -1451,6 +1459,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda acampanada color marron.jpg",
         description: "",
+        variants: {
+        colors: ["Mosta", ""],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
     {
@@ -1460,6 +1472,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda con botones frontales.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
      {
@@ -1469,6 +1485,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda de volantes morada.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
      {
@@ -1478,6 +1498,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda midi abotonada.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
      {
@@ -1487,6 +1511,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda midi de mezclilla con diseño de sirena.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
      {
@@ -1496,6 +1524,10 @@ const PRODUCTS = [
         category: "ropa-mujer",
         image: "img/falda midi estampado de lunares.jpg",
         description: "",
+        variants: {
+        colors: ["Azul claro", "Azul oscuro", "Blanco"],
+        sizes: ["XS", "S", "M", "L"]
+    },
         stock: 12
     },
 

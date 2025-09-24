@@ -89,6 +89,11 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shippingCost = total - subtotal;
     
+    // Obtener información bancaria
+    const bankInfo = APP_CONFIG.shippingBancks;
+    const firstBank = Object.keys(bankInfo)[0];
+    const bankDetails = bankInfo[firstBank];
+    
     // Construir el mensaje con saltos de línea adecuados
     let message = `*🛒 NUEVO PEDIDO - ${APP_CONFIG.storeName.toUpperCase()}*\n\n`;
     
@@ -106,7 +111,12 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     
     message += `*📦 Productos solicitados*\n`;
     cartItems.forEach(item => {
-        message += `➤ *${item.title}*\n   Cantidad: ${item.quantity}\n   Precio unitario: Q${item.price.toFixed(2)}\n   Subtotal: Q${(item.price * item.quantity).toFixed(2)}\n\n`;
+        message += `➤ *${item.title}*\n`;
+        message += `   Cantidad: ${item.quantity}\n`;
+        if (item.selectedColor) message += `   Color: ${item.selectedColor}\n`;
+        if (item.selectedSize) message += `   Talla: ${item.selectedSize}\n`;
+        message += `   Precio unitario: Q${item.price.toFixed(2)}\n`;
+        message += `   Subtotal: Q${(item.price * item.quantity).toFixed(2)}\n\n`;
     });
     
     message += `*💰 Resumen de Pago*\n`;
@@ -114,12 +124,11 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     message += `• Costo de envío: Q${shippingCost.toFixed(2)}\n`;
     message += `• *TOTAL A PAGAR: Q${total.toFixed(2)}*\n\n`;
     
-    message += `*💳 Instrucciones de Pago*\n`;
-    message += `1. *Realice el pago por el monto exacto de Q${total.toFixed(2)}*\n`;
-    message += `2. *Banco:* ${APP_CONFIG.bankName}\n`;
-    message += `3. *Cuenta:* ${APP_CONFIG.accountNumber}\n`;
-    message += `4. *Tipo:* ${APP_CONFIG.accountType}\n`;
-    message += `5. *Titular:* ${APP_CONFIG.accountHolder}\n\n`;
+    message += `*💳 Información Bancaria*\n`;
+    message += `• *Banco:* ${firstBank}\n`;
+    message += `• *Cuenta:* ${bankDetails.accountNumber}\n`;
+    message += `• *Tipo:* ${bankDetails.accountType1}\n`;
+    message += `• *Titular:* ${bankDetails.accountHolder}\n\n`;
     
     message += `*📋 Proceso de confirmación*\n`;
     message += `1. Transfiera/deposite el monto exacto\n`;
@@ -133,300 +142,448 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     
     message += `¡Gracias por confiar en nosotros! 🌟\n*${APP_CONFIG.storeName}*`;
     
-    // Codificar para URL (los \n se convierten en %0A automáticamente)
+    // Codificar para URL
     return encodeURIComponent(message);
 },
 
-        // Función optimizada para generar PDF con manejo mejorado de imágenes
-        generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total, orderNumber) => {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Configuración
-            const margin = 15;
-            const pageWidth = 210;
-            const contentWidth = pageWidth - (margin * 2);
-            
-            // Colores corporativos (puedes ajustarlos según tu marca)
-            const primaryColor = [57, 181, 74];  // Verde
-            const secondaryColor = [41, 128, 185]; // Azul
-            const accentColor = [231, 76, 60]; // Rojo
-            const darkColor = [44, 62, 80]; // Gris oscuro
-            const lightColor = [245, 245, 245]; // Gris claro
-            
-            // Variables de posición
-            let yPosition = 15;
-            
-            // ===== ENCABEZADO PROFESIONAL =====
-            // Logo (usando texto como alternativa si no hay imagen)
-            try {
-                // Intenta cargar el logo
-                const logoImg = new Image();
-                logoImg.src = 'img/ds.png';
-                doc.addImage(logoImg, 'PNG', margin, yPosition, 30, 30);
-            } catch (e) {
-                // Si falla, usar texto
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-                doc.text(APP_CONFIG.storeName.toUpperCase(), margin, yPosition + 10);
-            }
-            
-            // Información de la empresa
+        
+// En app.js, reemplazar la función generateOrderPDF completa con este código:
+
+generateOrderPDF: (formData, cartItems, subtotal, shippingCost, total, orderNumber) => {
+    const { jsPDF } = window.jspdf;
+
+    // Crear documento en formato carta (Letter)
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "letter"
+    });
+
+    // Configuración
+    const margin = 15;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const contentWidth = pageWidth - (margin * 2);
+
+    // Colores corporativos
+    const primaryColor = [66, 153, 225]; // Azul
+    const darkColor = [45, 55, 72];      // Gris oscuro
+    const lightColor = [247, 250, 252];  // Gris claro
+
+    let yPosition = 15;
+    let currentPage = 1;
+
+    // Función para agregar nueva página
+    const addNewPage = () => {
+        doc.addPage();
+        currentPage++;
+        yPosition = 15;
+        
+        // Agregar número de página en el pie
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text(`Página ${currentPage}`, pageWidth / 2, pageHeight - 5, { align: 'center' });
+    };
+
+    // Función para verificar espacio y agregar nueva página si es necesario
+    const checkPageBreak = (requiredSpace = 10) => {
+        if (yPosition + requiredSpace > pageHeight - 20) {
+            addNewPage();
+            return true;
+        }
+        return false;
+    };
+
+    // ===== ENCABEZADO (en cada página) =====
+    const drawHeader = () => {
+        try {
+            const logoImg = new Image();
+            logoImg.src = 'img/DyS.png';
+            doc.addImage(logoImg, 'PNG', margin, yPosition, 25, 25);
+        } catch (e) {
+            console.log("No se pudo cargar el logo:", e);
+        }
+
+        // Información de la tienda
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(...primaryColor);
+        doc.text(APP_CONFIG.storeName.toUpperCase(), margin + 30, yPosition + 10);
+        
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Donde cada compra es una bendición", margin + 30, yPosition + 15);
+        doc.text("Ciudad de Guatemala", margin + 30, yPosition + 20);
+        doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, margin + 30, yPosition + 25);
+
+        // Información del pedido (derecha)
+        const currentDate = new Date().toLocaleDateString('es-GT', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(...darkColor);
+        doc.text(`Pedido: ${orderNumber}`, pageWidth - margin, yPosition + 10, { align: 'right' });
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.text(currentDate, pageWidth - margin, yPosition + 15, { align: 'right' });
+
+        yPosition = 45;
+    };
+
+    // Dibujar encabezado en la primera página
+    drawHeader();
+
+    // ===== INFORMACIÓN DEL CLIENTE =====
+    checkPageBreak(25); // Verificar espacio para esta sección
+    
+    const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
+    
+    // Título
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(...darkColor);
+    doc.text("INFORMACIÓN DEL CLIENTE", margin, yPosition);
+    
+    // Línea decorativa
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.5);
+    doc.line(margin, yPosition + 2, margin + 50, yPosition + 2);
+    
+    yPosition += 10;
+
+    // Datos del cliente
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    
+    const clientData = [
+        `Nombre: ${formData.name}`,
+        `Teléfono: ${formData.phone}`,
+        formData.email ? `Email: ${formData.email}` : null,
+        `Dirección: ${formData.address}`,
+        region ? `Región: ${region}` : null,
+        zone ? `Zona/Municipio: ${zone}` : null
+    ].filter(Boolean);
+
+    clientData.forEach((line, index) => {
+        // Verificar si necesitamos nueva página antes de agregar cada línea
+        if (checkPageBreak(5)) {
+            // Dibujar encabezado en la nueva página
+            drawHeader();
             doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text("Donde cada compra es una bendición", margin, yPosition + 17);
-            doc.text("Ciudad de Guatemala", margin, yPosition + 22);
-            doc.text(`Tel: +502 ${APP_CONFIG.whatsappNumber} • ${APP_CONFIG.storeEmail}`, margin, yPosition + 27);
-            
-            // Número de pedido y fecha (alineado a la derecha)
-            const currentDate = new Date().toLocaleDateString('es-GT', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            doc.setFont('helvetica', 'bold');
             doc.setFontSize(10);
-            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-            doc.text(`Pedido: ${orderNumber}`, pageWidth - margin, yPosition + 10, { align: 'right' });
+        }
+        doc.text(line, margin, yPosition);
+        yPosition += 5;
+    });
+    
+    yPosition += 10;
+
+    // ===== DETALLES DEL PEDIDO =====
+    checkPageBreak(20); // Verificar espacio para esta sección
+    
+    // Encabezado de la tabla
+    doc.setFillColor(...primaryColor);
+    doc.rect(margin, yPosition, contentWidth, 8, 'F');
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(255, 255, 255);
+    
+    // Columnas
+    const colWidths = [15, 70, 40, 25, 30];
+    const colPositions = [margin];
+    for (let i = 1; i < colWidths.length; i++) {
+        colPositions[i] = colPositions[i - 1] + colWidths[i - 1];
+    }
+    
+    doc.text("Cant.", colPositions[0] + (colWidths[0] / 2), yPosition + 5, { align: 'center' });
+    doc.text("Producto", colPositions[1] + 2, yPosition + 5);
+    doc.text("Variantes", colPositions[2] + 2, yPosition + 5);
+    doc.text("P. Unit.", colPositions[3] + (colWidths[3] / 2), yPosition + 5, { align: 'center' });
+    doc.text("Total", colPositions[4] + (colWidths[4] / 2), yPosition + 5, { align: 'center' });
+    
+    yPosition += 10;
+
+    // Productos
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...darkColor);
+    
+    cartItems.forEach((item, index) => {
+        // Verificar si necesitamos nueva página antes de agregar cada producto
+        if (checkPageBreak(10)) {
+            // Dibujar encabezado en la nueva página
+            drawHeader();
             
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            doc.setTextColor(100, 100, 100);
-            doc.text(currentDate, pageWidth - margin, yPosition + 15, { align: 'right' });
-            
-            yPosition = 45;
-            
-            // Línea separadora
-            doc.setDrawColor(200, 200, 200);
-            doc.line(margin, yPosition, pageWidth - margin, yPosition);
-            yPosition += 10;
-            
-            // ===== INFORMACIÓN DEL CLIENTE =====
-            const [region, zone] = formData.zone ? formData.zone.split('|') : ['', ''];
-            
-            // Título sección
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(12);
-            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-            doc.text("INFORMACIÓN DEL CLIENTE", margin, yPosition);
-            
-            yPosition += 8;
-            
-            // Información del cliente en dos columnas
-            const clientInfoLeft = [
-                `Nombre: ${formData.name}`,
-                `Teléfono: +502 ${formData.phone}`,
-                formData.email ? `Email: ${formData.email}` : null
-            ].filter(Boolean);
-            
-            const clientInfoRight = [
-                `Dirección: ${formData.address}`,
-                region ? `Región: ${region}` : null,
-                zone ? `Zona: ${zone}` : null
-            ].filter(Boolean);
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
-            doc.setTextColor(80, 80, 80);
-            
-            // Columna izquierda
-            clientInfoLeft.forEach((info, i) => {
-                doc.text(info, margin, yPosition + (i * 6));
-            });
-            
-            // Columna derecha
-            clientInfoRight.forEach((info, i) => {
-                doc.text(info, pageWidth / 2, yPosition + (i * 6));
-            });
-            
-            yPosition += Math.max(clientInfoLeft.length, clientInfoRight.length) * 6 + 15;
-            
-            // ===== DETALLES DEL PEDIDO =====
-            // Encabezado de la tabla
-            doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-            doc.rect(margin, yPosition, contentWidth, 10, 'F');
+            // Volver a dibujar el encabezado de la tabla en la nueva página
+            doc.setFillColor(...primaryColor);
+            doc.rect(margin, yPosition, contentWidth, 8, 'F');
             
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
             
-            const colWidths = [15, 95, 25, 25, 30];
-            const colPositions = [margin];
+            doc.text("Cant.", colPositions[0] + (colWidths[0] / 2), yPosition + 5, { align: 'center' });
+            doc.text("Producto", colPositions[1] + 2, yPosition + 5);
+            doc.text("Variantes", colPositions[2] + 2, yPosition + 5);
+            doc.text("P. Unit.", colPositions[3] + (colWidths[3] / 2), yPosition + 5, { align: 'center' });
+            doc.text("Total", colPositions[4] + (colWidths[4] / 2), yPosition + 5, { align: 'center' });
             
-            for (let i = 1; i < colWidths.length; i++) {
-                colPositions[i] = colPositions[i-1] + colWidths[i-1];
-            }
-            
-            // Encabezados de tabla
-            doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
-            doc.text("Producto", colPositions[1] + 5, yPosition + 7);
-            doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
-            doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
-            doc.text("Total", colPositions[4] + 5, yPosition + 7);
-            
-            yPosition += 15;
-            
-            // Productos
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-            
-            cartItems.forEach((item, index) => {
-                // Verificar si necesita nueva página
-                if (yPosition > 250) {
-                    doc.addPage();
-                    yPosition = 20;
-                    
-                    // Volver a dibujar encabezados en nueva página
-                    doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-                    doc.rect(margin, yPosition, contentWidth, 10, 'F');
-                    
-                    doc.setFont('helvetica', 'bold');
-                    doc.setFontSize(10);
-                    doc.setTextColor(255, 255, 255);
-                    doc.text("Cant.", colPositions[0] + 3, yPosition + 7);
-                    doc.text("Producto", colPositions[1] + 5, yPosition + 7);
-                    doc.text("P. Unit.", colPositions[2] + 5, yPosition + 7);
-                    doc.text("Desc.", colPositions[3] + 5, yPosition + 7);
-                    doc.text("Total", colPositions[4] + 5, yPosition + 7);
-                    
-                    yPosition += 15;
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9);
-                    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-                }
-                
-                // Fondo alternado para filas
-                if (index % 2 === 0) {
-                    doc.setFillColor(lightColor[0], lightColor[1], lightColor[2]);
-                    doc.rect(margin, yPosition - 3, contentWidth, 10, 'F');
-                }
-                
-                // Cantidad
-                doc.text(item.quantity.toString(), colPositions[0] + 5, yPosition + 3);
-                
-                // Nombre del producto (con ajuste para textos largos)
-                const productName = item.title.length > 30 ? item.title.substring(0, 27) + "..." : item.title;
-                doc.text(productName, colPositions[1] + 5, yPosition + 3);
-                
-                // Precio unitario
-                doc.text(`Q${item.price.toFixed(2)}`, colPositions[2] + 5, yPosition + 3, { align: 'right' });
-                
-                // Descuento (si aplica)
-                const discount = item.originalPrice ? (item.originalPrice - item.price) * item.quantity : 0;
-                doc.text(discount > 0 ? `-Q${discount.toFixed(2)}` : '-', colPositions[3] + 5, yPosition + 3, { align: 'right' });
-                
-                // Total del producto
-                doc.text(`Q${(item.price * item.quantity).toFixed(2)}`, colPositions[4] + 5, yPosition + 3, { align: 'right' });
-                
-                yPosition += 6;
-            });
-            
-            // Línea al final de la tabla
-            doc.setDrawColor(200, 200, 200);
-            doc.line(margin, yPosition, pageWidth - margin, yPosition);
             yPosition += 10;
             
-            // ===== TOTALES =====
-            const totalsX = pageWidth - margin - 40;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(...darkColor);
+        }
+        
+        // Fondo alternado para mejor legibilidad
+        if (index % 2 === 0) {
+            doc.setFillColor(...lightColor);
+            doc.rect(margin, yPosition - 2, contentWidth, 10, 'F');
+        }
+        
+        // Cantidad
+        doc.text(item.quantity.toString(), colPositions[0] + (colWidths[0] / 2), yPosition + 3, { align: 'center' });
+        
+        // Nombre del producto (puede ocupar múltiples líneas)
+        const productName = doc.splitTextToSize(item.title, colWidths[1] - 4);
+        const lineHeight = 5; // Altura aproximada de cada línea
+        const lines = productName.length;
+        
+        // Si el nombre del producto tiene múltiples líneas, ajustar la posición Y
+        if (lines > 1) {
+            // Verificar si hay espacio suficiente para todas las líneas
+            if (checkPageBreak(lines * lineHeight)) {
+                // Si no hay espacio, crear nueva página y volver a dibujar este producto
+                drawHeader();
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(...darkColor);
+                
+                // Volver a dibujar el encabezado de la tabla
+                doc.setFillColor(...primaryColor);
+                doc.rect(margin, yPosition, contentWidth, 8, 'F');
+                
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(10);
+                doc.setTextColor(255, 255, 255);
+                
+                doc.text("Cant.", colPositions[0] + (colWidths[0] / 2), yPosition + 5, { align: 'center' });
+                doc.text("Producto", colPositions[1] + 2, yPosition + 5);
+                doc.text("Variantes", colPositions[2] + 2, yPosition + 5);
+                doc.text("P. Unit.", colPositions[3] + (colWidths[3] / 2), yPosition + 5, { align: 'center' });
+                doc.text("Total", colPositions[4] + (colWidths[4] / 2), yPosition + 5, { align: 'center' });
+                
+                yPosition += 10;
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(...darkColor);
+                
+                // Fondo alternado
+                if (index % 2 === 0) {
+                    doc.setFillColor(...lightColor);
+                    doc.rect(margin, yPosition - 2, contentWidth, 10, 'F');
+                }
+                
+                // Volver a agregar la cantidad
+                doc.text(item.quantity.toString(), colPositions[0] + (colWidths[0] / 2), yPosition + 3, { align: 'center' });
+            }
             
+            // Agregar el nombre del producto con múltiples líneas
+            doc.text(productName, colPositions[1] + 2, yPosition + 3);
+            yPosition += (lines - 1) * lineHeight;
+        } else {
+            doc.text(productName, colPositions[1] + 2, yPosition + 3);
+        }
+        
+        // Variantes (color/talla)
+        let variantsText = "";
+        if (item.selectedColor) variantsText += `Color: ${item.selectedColor}`;
+        if (item.selectedSize) {
+            variantsText += (variantsText ? ", " : "") + `Talla: ${item.selectedSize}`;
+        }
+        variantsText = variantsText || "-";
+        
+        // Verificar si el texto de variantes es demasiado largo
+        const variantsLines = doc.splitTextToSize(variantsText, colWidths[2] - 4);
+        if (variantsLines.length > 1) {
+            if (checkPageBreak(variantsLines.length * lineHeight)) {
+                // Manejar salto de página para variantes (similar al código anterior)
+                // Este es un caso complejo que podría requerir lógica adicional
+            }
+            doc.text(variantsLines, colPositions[2] + 2, yPosition + 3);
+            yPosition += (variantsLines.length - 1) * lineHeight;
+        } else {
+            doc.text(variantsText, colPositions[2] + 2, yPosition + 3);
+        }
+        
+        // Precio unitario
+        doc.text(`Q${item.price.toFixed(2)}`, colPositions[3] + (colWidths[3] / 2), yPosition + 3, { align: 'center' });
+        
+        // Total del item
+        doc.text(`Q${(item.price * item.quantity).toFixed(2)}`, colPositions[4] + (colWidths[4] / 2), yPosition + 3, { align: 'center' });
+        
+        yPosition += 10;
+    });
+    
+    yPosition += 5;
+    
+    // ===== TOTALES =====
+    checkPageBreak(20); // Verificar espacio para esta sección
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    
+    // Subtotal
+    doc.text("Subtotal:", pageWidth - margin - 40, yPosition);
+    doc.text(`Q${subtotal.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+    yPosition += 6;
+    
+    // Envío
+    doc.text("Envío:", pageWidth - margin - 40, yPosition);
+    doc.text(`Q${shippingCost.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+    yPosition += 8;
+    
+    // Total
+    doc.setFontSize(12);
+    doc.setTextColor(...primaryColor);
+    doc.text("TOTAL:", pageWidth - margin - 40, yPosition);
+    doc.text(`Q${total.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
+    yPosition += 15;
+    
+    // ===== MÉTODO DE PAGO =====
+    checkPageBreak(30); // Verificar espacio para esta sección
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(...darkColor);
+    doc.text("MÉTODO DE PAGO", margin, yPosition);
+    
+    // Línea decorativa
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.5);
+    doc.line(margin, yPosition + 2, margin + 45, yPosition + 2);
+    
+    yPosition += 10;
+    
+    // Mostrar información de todos los bancos
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    
+    APP_CONFIG.shippingBancks.forEach((bank, index) => {
+        // Verificar si necesitamos nueva página antes de agregar cada banco
+        if (checkPageBreak(20)) {
+            drawHeader();
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(10);
-            doc.text("Subtotal:", totalsX, yPosition);
-            doc.text(`Q${subtotal.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-            yPosition += 6;
-            
-            doc.text("Costo de envío:", totalsX, yPosition);
-            doc.text(`Q${shippingCost.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-            yPosition += 6;
-            
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(12);
-            doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-            doc.text("TOTAL:", totalsX, yPosition);
-            doc.text(`Q${total.toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
-            yPosition += 15;
-            
-            // ===== MÉTODO DE PAGO =====
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(11);
-            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-            doc.text("MÉTODO DE PAGO", margin, yPosition);
-            yPosition += 7;
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            doc.setTextColor(80, 80, 80);
-            
-            const paymentInfo = [
-                `Banco: ${APP_CONFIG.bankName}`,
-                `Cuenta: ${APP_CONFIG.accountNumber}`,
-                `Tipo: ${APP_CONFIG.accountType}`,
-                `A nombre de: ${APP_CONFIG.accountHolder}`
-            ];
-            
-            paymentInfo.forEach(info => {
-                doc.text(info, margin, yPosition);
-                yPosition += 5;
-            });
-            
-            yPosition += 10;
-            
-            // ===== INSTRUCCIONES =====
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(11);
-            doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-            doc.text("INSTRUCCIONES", margin, yPosition);
-            yPosition += 7;
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            
-            const instructions = [
-                "1. Realice el pago según los datos bancarios indicados",
-                "2. Envíe el comprobante por WhatsApp al número indicado",
-                "3. Su pedido será procesado al confirmar el pago",
-                "4. Recibirá una confirmación de entrega una vez enviado",
-                "5. Envíe el PDF con los detalles de su pedido"
-            ];
-            
-            instructions.forEach(instruction => {
-                doc.text(instruction, margin, yPosition);
-                yPosition += 5;
-            });
-            
-            yPosition += 15;
-            
-            // ===== FIRMA Y SELLO =====
-            if (yPosition > 200) {
-                doc.addPage();
-                yPosition = 20;
-            }
-            
-            doc.setDrawColor(200, 200, 200);
-            doc.line(margin, yPosition, margin + 80, yPosition);
-            doc.setFont('helvetica', 'italic');
-            doc.setFontSize(9);
-            doc.setTextColor(150, 150, 150);
-            doc.text("Firma de conformidad", margin, yPosition + 5);
-            
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text("Documento generado automáticamente - " + new Date().toLocaleDateString(), pageWidth / 2, 285, { align: 'center' });
-            
-            // Generar PDF
-            const fileName = `Nota_Envio_${orderNumber}_${formData.name.replace(/\s+/g, '_')}.pdf`;
-            const pdfBlob = doc.output('blob');
-            
-            return { blob: pdfBlob, fileName, orderNumber };
         }
+        
+        // Título del banco
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(...primaryColor);
+        doc.text(`${bank.name}:`, margin, yPosition);
+        
+        // Detalles de la cuenta
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(...darkColor);
+        doc.text(`Cuenta: ${bank.accountNumber}`, margin + 5, yPosition + 5);
+        doc.text(`Tipo: ${bank.accountType}`, margin + 5, yPosition + 10);
+        doc.text(`Titular: ${bank.accountHolder}`, margin + 5, yPosition + 15);
+        
+        yPosition += 20;
+    });
+    
+    yPosition += 10;
+    
+    // ===== INSTRUCCIONES =====
+    checkPageBreak(40); // Verificar espacio para esta sección
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(...darkColor);
+    doc.text("INSTRUCCIONES", margin, yPosition);
+    
+    // Línea decorativa
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.5);
+    doc.line(margin, yPosition + 2, margin + 35, yPosition + 2);
+    
+    yPosition += 10;
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...darkColor);
+    
+    const instructions = [
+        "1. Realice el pago según los datos bancarios mostrados",
+        "2. Envíe el comprobante por WhatsApp al número indicado",
+        "3. Su pedido será procesado al confirmar el pago",
+        "4. Recibirá confirmación de entrega por correo o WhatsApp",
+        "5. Conserve este documento como comprobante de su pedido"
+    ];
+    
+    instructions.forEach((instruction, index) => {
+        // Verificar si necesitamos nueva página antes de agregar cada instrucción
+        if (checkPageBreak(5)) {
+            drawHeader();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(...darkColor);
+        }
+        doc.text(instruction, margin, yPosition);
+        yPosition += 5;
+    });
+    
+    yPosition += 10;
+    
+    // ===== FIRMA =====
+    checkPageBreak(15); // Verificar espacio para esta sección
+    
+    doc.setDrawColor(200, 200, 200);
+    doc.line(margin, yPosition, margin + 70, yPosition);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    doc.setTextColor(150, 150, 150);
+    doc.text("Firma de conformidad", margin, yPosition + 4);
+    
+    // ===== PIE DE PÁGINA (solo en la última página) =====
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Documento generado automáticamente - ${new Date().toLocaleDateString()}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
+    doc.text(APP_CONFIG.storeName, pageWidth / 2, pageHeight - 5, { align: 'center' });
+
+    // Agregar número de página a todas las páginas excepto la primera
+    for (let i = 2; i <= currentPage; i++) {
+        doc.setPage(i);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text(`Página ${i}`, pageWidth / 2, pageHeight - 5, { align: 'center' });
+    }
+
+    // Volver a la primera página para exportar
+    doc.setPage(1);
+
+    // Exportar PDF
+    const fileName = `Nota_Envio_${orderNumber}_${formData.name.replace(/\s+/g, '_')}.pdf`;
+    const pdfBlob = doc.output('blob');
+
+    return { blob: pdfBlob, fileName, orderNumber };
+}
+
     };
 
     // FUNCIONES DE PRODUCTOS
@@ -457,6 +614,13 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
                 // En productFunctions.displayProducts, dentro del forEach:
 const productCard = document.createElement('div');
 productCard.className = 'product-card';
+// Acortar título si es muy largo
+const shortTitle = product.title.length > 40 ? 
+    product.title.substring(0, 37) + "..." : product.title;
+
+// Acortar descripción si es muy larga
+const shortDescription = product.description.length > 100 ?
+    product.description.substring(0, 97) + "..." : product.description;
 productCard.innerHTML = `
     <div class="product-image-container ${isOutOfStock ? 'out-of-stock' : ''}">
         <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
@@ -507,6 +671,7 @@ productCard.innerHTML = `
     </div>
 `;
 
+
 // Función auxiliar para obtener código de color
 function getColorCode(colorName) {
     const colorMap = {
@@ -523,7 +688,10 @@ function getColorCode(colorName) {
         'Marrón': '#A52A2A',
         'Naranja': '#FFA500',
         'Azul claro': '#87CEEB',
-        'Azul oscuro': '#00008B'
+        'Azul oscuro': '#00008B',
+        'Mosta': '#d58700',
+        'color null': ''
+
     };
     return colorMap[colorName] || '#CCCCCC';
 }
@@ -589,14 +757,14 @@ document.querySelectorAll('.product-card').forEach(card => {
     // FUNCIONES DEL CARRITO
     const cartFunctions = {
         addToCart: function(productId) {
-            const product = PRODUCTS.find(p => p.id === productId);
-            
-            if (!product) {
-                utils.showNotification('Producto no encontrado', 'fa-exclamation-circle');
-                return;
-            }
-            
-// Obtener las variantes seleccionadas
+    const product = PRODUCTS.find(p => p.id === productId);
+    
+    if (!product) {
+        utils.showNotification('Producto no encontrado', 'fa-exclamation-circle');
+        return;
+    }
+    
+    // Obtener las variantes seleccionadas
     const productCard = document.querySelector(`.product-card [data-id="${productId}"]`)?.closest('.product-card');
     let selectedColor = null;
     let selectedSize = null;
@@ -609,12 +777,18 @@ document.querySelectorAll('.product-card').forEach(card => {
         selectedSize = sizeOption ? sizeOption.dataset.size : null;
     }
 
+
             if (product.stock <= 0) {
                 utils.showNotification('Este producto está agotado', 'fa-exclamation-circle');
                 return;
             }
             
-            const existingItem = state.cart.find(item => item.id === productId);
+           // Buscar si ya existe el producto con las mismas variantes
+    const existingItem = state.cart.find(item => 
+        item.id === productId && 
+        item.selectedColor === selectedColor && 
+        item.selectedSize === selectedSize
+    );
             
             if (existingItem) {
                 if (existingItem.quantity >= product.stock) {
@@ -625,7 +799,9 @@ document.querySelectorAll('.product-card').forEach(card => {
             } else {
                 state.cart.push({
                     ...product,
-                    quantity: 1
+                    quantity: 1,
+                    selectedColor,
+                    selectedSize
                 });
             }
             
@@ -699,37 +875,45 @@ document.querySelectorAll('.product-card').forEach(card => {
                     closeCartBtn.addEventListener('click', this.closeCart.bind(this));
                 }
             } else {
-                DOM.cartItemsList.innerHTML = '';
-                
-                state.cart.forEach(item => {
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.dataset.id = item.id;
-                    cartItem.innerHTML = `
-                        <div class="cart-item-image">
-                            <img src="${item.image}" alt="${item.title}">
+        DOM.cartItemsList.innerHTML = '';
+        
+        state.cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.dataset.id = item.id;
+            
+            // Mostrar las variantes seleccionadas si existen
+            let variantsInfo = '';
+            if (item.selectedColor) variantsInfo += `<div class="cart-item-variant">Color: ${item.selectedColor}</div>`;
+            if (item.selectedSize) variantsInfo += `<div class="cart-item-variant">Talla: ${item.selectedSize}</div>`;
+            
+            cartItem.innerHTML = `
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.title}">
+                </div>
+                <div class="cart-item-details">
+                    <div class="cart-item-title">${item.title}</div>
+                    ${variantsInfo}
+                    <div class="cart-item-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn decrease"><i class="fas fa-minus"></i></button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn increase"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.title}</div>
-                            <div class="cart-item-actions">
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn decrease"><i class="fas fa-minus"></i></button>
-                                    <span class="quantity-display">${item.quantity}</span>
-                                    <button class="quantity-btn increase"><i class="fas fa-plus"></i></button>
-                                </div>
-                                <button class="remove-item">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-                            </div>
-                        </div>
-                        <div class="cart-item-price">
-                            <span class="current-price">${utils.formatPrice(item.price * item.quantity)}</span>
-                            ${item.originalPrice ? 
-                                `<span class="original-price">${utils.formatPrice(item.originalPrice * item.quantity)}</span>` : ''}
-                        </div>
-                    `;
+                        <button class="remove-item">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                </div>
+                <div class="cart-item-price">
+                    <span class="current-price">${utils.formatPrice(item.price * item.quantity)}</span>
+                    ${item.originalPrice ? 
+                        `<span class="original-price">${utils.formatPrice(item.originalPrice * item.quantity)}</span>` : ''}
+                </div>
+            `;
                     
                     DOM.cartItemsList.appendChild(cartItem);
+                    
                     
                     cartItem.querySelector('.decrease').addEventListener('click', this.decreaseQuantity.bind(this));
                     cartItem.querySelector('.increase').addEventListener('click', this.increaseQuantity.bind(this));
