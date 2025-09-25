@@ -849,7 +849,7 @@ const PRODUCTS = [
     {
         id: 1524,
         title: "Gancho dorado metalico",
-        price: 25.50,
+        price: 15,
         category: "belleza",
         image: "img/Gancho dorado metalico.jpg",
         description: "",
