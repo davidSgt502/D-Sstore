@@ -53,5 +53,6 @@ const APP_CONFIG = {
             days: "2-3 días",
             description: "Envío con Guatex (entrega en 2-3 días hábiles)" 
         }
-    }
+    },
+}
 };
