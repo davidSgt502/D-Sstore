@@ -31,19 +31,10 @@ const APP_CONFIG = {
             "Zona 5": 30,
             "Zona 6": 30,
             "Zona 7": 30,
-        /*"Área Metropolitana": {
-            "Mixco": 50,
-            "Villa Nueva": 50,
-            "San Miguel Petapa": 50,
-            "Santa Catarina Pinula": 55,
-            "San José Pinula": 55,
-            "Fraijanes": 60,
-            "Amatitlán": 60,
-            "Villa Canales": 65,
-            "San Juan Sacatepéquez": 70
-        },*/
+        },
         "Departamentos": {
-            "Alta Verapaz": 52
+            "Alta Verapaz": 52,
+            "Baja Verapaz": 52,
         }
     },
     
@@ -53,6 +44,6 @@ const APP_CONFIG = {
             days: "2-3 días",
             description: "Envío con Guatex (entrega en 2-3 días hábiles)" 
         }
-    },
-}
+    }
+
 };
