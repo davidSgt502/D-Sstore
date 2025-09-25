@@ -125,10 +125,7 @@ generateWhatsAppMessage: (formData, cartItems, total, orderNumber) => {
     message += `• *TOTAL A PAGAR: Q${total.toFixed(2)}*\n\n`;
     
     message += `*💳 Información Bancaria*\n`;
-    message += `• *Banco:* ${firstBank}\n`;
-    message += `• *Cuenta:* ${bankDetails.accountNumber}\n`;
-    message += `• *Tipo:* ${bankDetails.accountType1}\n`;
-    message += `• *Titular:* ${bankDetails.accountHolder}\n\n`;
+message += `📄 Revisar los datos completos en el PDF adjunto.\n\n`;
     
     message += `*📋 Proceso de confirmación*\n`;
     message += `1. Transfiera/deposite el monto exacto\n`;
