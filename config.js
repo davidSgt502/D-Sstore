@@ -33,8 +33,7 @@ const APP_CONFIG = {
             "Zona 7": 30,
         },
         "Departamentos": {
-            "Alta Verapaz": 52,
-            "Baja Verapaz": 52,
+            "Alta Verapaz": 52
         }
     },
     
