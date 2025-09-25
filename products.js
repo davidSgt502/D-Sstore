@@ -87,7 +87,7 @@ const PRODUCTS = [
     {
         id: 502,
         title: "Molde para hielos",
-        price: 150,
+        price: 15,
         
         category: "hogar",
         image: "img/Molde para hielos.jpg",
