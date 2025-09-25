@@ -15,48 +15,22 @@ const APP_CONFIG = {
     },
     {
         name: "Banco Bi",
-        accountNumber: "modificar",
+        accountNumber: "7174454251",
         accountHolder: "Evert Lennin David Revolorio Trujillo", 
         accountType: "Monetaria"
     },
-    {
-        name: "Banco Zigui",
-        accountNumber: "modificar",
-        accountHolder: "Evert Lennin David Revolorio Trujillo", 
-        accountType: "Ahorros"
-    },
-    {
-        name: "Banco Nexa",
-        accountNumber: "modificar",
-        accountHolder: "Evert Lennin David Revolorio Trujillo", 
-        accountType: "Ahorros"
-    }
+    
 ],
     // Precios de envío basados en Guatex para paquetes de 1kg
     shippingZones: {
         "Ciudad de Guatemala": {
-            "Zona 1": 25,
-            "Zona 2": 25,
-            "Zona 3": 25,
-            "Zona 4": 25,
-            "Zona 5": 25,
+            "Zona 1": 30,
+            "Zona 2": 30,
+            "Zona 3": 30,
+            "Zona 4": 30,
+            "Zona 5": 30,
             "Zona 6": 30,
             "Zona 7": 30,
-            "Zona 8": 30,
-            "Zona 9": 30,
-            "Zona 10": 30,
-            "Zona 11": 35,
-            "Zona 12": 35,
-            "Zona 13": 35,
-            "Zona 14": 35,
-            "Zona 15": 35,
-            "Zona 16": 40,
-            "Zona 17": 40,
-            "Zona 18": 40,
-            "Zona 19": 45,
-            "Zona 20": 45,
-            "Zona 21": 45
-        },
         /*"Área Metropolitana": {
             "Mixco": 50,
             "Villa Nueva": 50,
@@ -69,9 +43,7 @@ const APP_CONFIG = {
             "San Juan Sacatepéquez": 70
         },*/
         "Departamentos": {
-            "Chiquimula": 150,
-            "Zacapa": 155,
-            "Alta Verapaz": 160
+            "Alta Verapaz": 52
         }
     },
     
