@@ -35,7 +35,7 @@ const PRODUCTS = [
         category: "audio",
         image: "img/Audifonos bluetooth redmi play 6 azul.jpg",
         description: "Con hasta 36 horas de reproducción total al usar el estuche de carga, y 7,5 horas con una sola carga",
-        stock: 12 
+        stock: 12
     },
     {
         id: 5,
