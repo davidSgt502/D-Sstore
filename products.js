@@ -21,14 +21,12 @@ const PRODUCTS = [
     },
     {
         id: 3,
-        title: "Audifonos bluetooth XT81PRO",
-        price: 396,
-        originalPrice: 495,
+        title: "Adaptador de corriente tipo C",
+        price: 15,
         category: "audio",
-        image: "img/Audifonos bluetooth XT81PRO.jpg",
-        description: "Compatible con Bluetooth 5.1 recientemente actualizado, puede reducir la pérdida de señal y la desconexión causada por interferencias, sin retraso en la sincronización de la pantalla del juego",
-        badge: { text: "20% OFF", type: "discount" },
-        stock: 12 
+        image: "img/Adaptador de corriente tipo C.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 4,
@@ -88,13 +86,13 @@ const PRODUCTS = [
     },
     {
         id: 502,
-        title: "Base de metal para 3 tacos x4",
+        title: "Molde para hielos",
         price: 150,
-        originalPrice: 175,
+        
         category: "hogar",
-        image: "img/Base de metal para 3 tacos x4.jpg",
-        description: "Paquete de 4 soportes para tacos de , estantes para tacos, de acero inoxidable",
-        stock: 12 
+        image: "img/Molde para hielos.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 503,
@@ -107,12 +105,12 @@ const PRODUCTS = [
     },
     {
         id: 504,
-        title: "Bolsa de lavado de brasier",
+        title: "Funda elastica blanca para silla",
         price: 30,
         category: "hogar",
-        image: "img/Bolsa de lavado de brasier.jpg",
-        description: "Bolsa de malla suave, duradera y de doble capa",
-        stock: 12 
+        image: "img/Funda elastica blanca para silla.jpg",
+        description: "",
+        stock:12
     },
     {
         id: 505,
@@ -122,17 +120,16 @@ const PRODUCTS = [
         category: "hogar",
         image: "img/Bombilla led con ventilador.jpg",
         description: "Ventilador de techo con luz: luz de ventilador, diseño novedoso, ultraligero y nivel de alta tecnología",
-        badge: { text: "OFERTA", type: "offer" },
+       // badge: { text: "OFERTA", type: "offer" },
         stock: 12 
     },
     {
         id: 506,
-        title: "Botones para pantalones x3",
-        price: 36,
+        title: "Funda elastica negra para silla",
+        price: 30,
         category: "hogar",
-        image: "img/Botones para pantalones x3.png",
-        description: "Material de alta calidad: el extensor de botón está hecho de excelente material de metal y silicona con bordes lisos",
-        stock: 12 
+        image: "img/Funda elastica negra para silla.jpg",
+        description: "",
     },
     {
         id: 507,
@@ -163,26 +160,26 @@ const PRODUCTS = [
     },
     {
         id: 510,
-        title: "Dispensador de jabon",
+        title: "Pantalla para evitar salpicaduras",
         price: 35,
         category: "hogar",
-        image: "img/Dispensador de jabon.jpg",
-        description: "Diseño innovador: dispensador de jabón y esponja 2 en 1, puede obtener el detergente con una mano",
-        stock: 12 
+        image: "img/Pantalla para evitar salpicaduras.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 511,
-        title: "Dispensador de metal",
-        price: 150,
+        title: "Servidor de hielo 3 unidades",
+        price: 30,
         category: "hogar",
-        image: "img/Dispensador de metal.jpg",
-        description: "dispensador de papel higiénico está hecho de acero inoxidable 304 real",
-        stock: 12 
+        image: "img/Servidor de hielo 3 unidades.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 512,
         title: "Dispensador de papel jumbo",
-        price: 120,
+        price: 100,
         category: "hogar",
         image: "img/Dispensador de papel jumbo.png",
         description: "Dispensador de Papel Rollo Jumbo con Llave, Incluye Tarugos y Tornillos para su instalación.",
@@ -190,26 +187,26 @@ const PRODUCTS = [
     },
     {
         id: 513,
-        title: "Espátulas de silicona (5 unidades)",
-        price: 78,
+        title: "Servidor de miel",
+        price: 15,
         category: "hogar",
-        image: "img/Espatulas de silicon 5 unidades.jpg",
-        description: "Set de 5 espátulas de silicona grado alimenticio. Ideal para mezclar, batir huevos, freír carne y aplicar aceite. Material resistente al calor y duradero.",
-        stock: 12 
+        image: "img/Servidor de miel.jpg",
+        description: " a",
+        stock: 12
     },
     {
         id: 514,
-        title: "Espumador PRO y batidor recargable",
-        price: 100,
+        title: "Brochas de cocina 2 unidades",
+        price: 20,
         category: "hogar",
-        image: "img/Espumador PRO y batidor recargable.jpg",
-        description: "Espumador profesional con batidor recargable. Dimensiones: 26cm de largo. Ideal para preparar bebidas espumosas.",
+        image: "img/Brochas de cocina 2 unidades.jpg",
+        description: " ",
         stock: 12
     },
     {
         id: 515,
         title: "Esquineros protectores 4 piezas",
-        price: 40,
+        price: 20,
         category: "hogar",
         image: "img/Esquineros protectores 4 piezas.jpg",
         description: "",
@@ -218,7 +215,7 @@ const PRODUCTS = [
     {
         id: 516,
         title: "Exprimidor de pastas y cremas x3",
-        price: 35,
+        price: 25,
         category: "hogar",
         image: "img/Exprimidor de pastas y cremas x3.jpg",
         description: "",
@@ -230,13 +227,13 @@ const PRODUCTS = [
         price: 120,
         category: "hogar",
         image: "img/Funda elastica blanca para mesa.jpg",
-        description: "Apta para mesas de 180 (largo) x 75 (ancho) x 75 (alto) centimetros",
+        description: "",
         stock: 12
     },
     {
         id: 518,
         title: "Funda elastica negra para mesa",
-        price: 136,
+        price: 120,
         category: "hogar",
         image: "img/Funda elastica negra para mesa.jpg",
         description: "Apta para mesas de 180 (largo) x 75 (ancho) x 75 (alto) centimetros",
@@ -244,12 +241,12 @@ const PRODUCTS = [
     },
     {
         id: 519,
-        title: "Hervidora electrica xiaomi",
-        price: 330,
+        title: "Cuchara de pasta",
+        price: 24,
         category: "hogar",
-        image: "img/Hervidora electrica xiaomi.jpg",
-        description: "Hierve agua para tu té o café con el Hervidor Eléctrico Xiaomi 2. Este hervidor tiene una capacidad de 1.7 litros",
-        stock: 12 
+        image: "img/Cuchara de pasta.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 520,
@@ -262,12 +259,12 @@ const PRODUCTS = [
     },
     {
         id: 521,
-        title: "Limpia vidrios",
-        price: 25,
+        title: "Tabla de bambu 36x26 cm",
+        price: 55,
         category: "hogar",
-        image: "img/Limpia vidrios.jpg",
-        description: "La hoja flexible y resistente limpia las superficies sin rayas, elimina restos de jabón, cal y otra",
-        stock: 12 
+        image: "img/Tabla de bambu 36x26 cm.jpg",
+        description: "",
+        stock: 12
     },
     {
         id: 522,
@@ -284,7 +281,7 @@ const PRODUCTS = [
         price: 56,
         category: "hogar",
         image: "img/Limpiador de paredes OX 24 onzas.png",
-        description: "Puedes limpiar las paredes exteriores de contaminación (esmog) và polvo.",
+        description: "Puedes limpiar las paredes exteriores de contaminación",
         stock: 12
     },
     {
@@ -298,28 +295,28 @@ const PRODUCTS = [
     },
     {
         id: 525,
-        title: "Reparador de zippers (3 unidades)",
+        title: "Tasa medidora",
         price: 15,
         category: "hogar",
-        image: "img/Reparador de zippers (3 unidades).jpg",
+        image: "img/Tasa medidora.jpg",
         description: "Kit universal de reparación instantánea de zippers",
         stock: 12
     },
     {
         id: 526,
-        title: "Set de 6 cuchillos inoxidables para carne",
+        title: "Cortador de masa",
         price: 85,
         category: "hogar",
-        image: "img/Set de 6 cuchillos inoxidables para carne.png",
+        image: "img/Cortador de masa.jpg",
         description: "",
-        stock: 12
+        stock:12
     },
     {
         id: 527,
-        title: "Set de esponjas 5 unidades",
+        title: "Aislador en clip 2 unidades",
         price: 27,
         category: "hogar",
-        image: "img/Set de esponjas 5 unidades.jpg",
+        image: "img/Aislador en clip 2 unidades.jpg",
         description: "",
         stock: 12
     },
@@ -390,11 +387,11 @@ const PRODUCTS = [
     // CATEGORÍA: herramientas (IDs 1001-1499)
     {
         id: 1001,
-        title: "Aceite 3 en 1 Multiusos 236ml",
-        price: 60,
+        title: "Calibrador de llantas 50psi",
+        price: 20,
         category: "herramientas",
-        image: "img/Aceite 3 en 1 236ml Multiusos.jpg",
-        description: "Aceite multiusos que lubrica, penetra y limpia. Ideal para múltiples aplicaciones en herramientas y mecanismos.",
+        image: "img/Calibrador de llantas 50psi.jpg",
+        description: "",
         stock: 12
     },
     {
@@ -408,20 +405,20 @@ const PRODUCTS = [
     },
     {
         id: 1003,
-        title: "Brocas para metal 13 piezas",
+        title: "Cobertor para carro M",
         price: 95,
         category: "herramientas",
-        image: "img/Brocas de metal 13 piezas.jpg",
-        description: "Juego completo de 13 brocas para metal de diferentes tamaños, ideales para trabajos profesionales.",
+        image: "img/Cobertor para carro M.jpg",
+        description: "",
         stock: 12
     },
     {
         id: 1004,
-        title: "Cinta métrica 5 metros",
+        title: "Cobertor para moto M",
         price: 50,
         category: "herramientas",
-        image: "img/Cinta metrica 5 metros.jpg",
-        description: "Cinta métrica resistente de 5 metros con marcajes claros para mediciones precisas.",
+        image: "img/Cobertor para moto M.jpg",
+        description: "",
         stock: 12
     },
     {
@@ -435,11 +432,11 @@ const PRODUCTS = [
     },
     {
         id: 1006,
-        title: "Cuchillas 14 piezas",
+        title: "Cobertor para moto premium S",
         price: 85,
         category: "herramientas",
-        image: "img/Cuchillas 14 piezas.jpg",
-        description: "Set de 14 cuchillas de repuesto de alta calidad para diversas herramientas de corte.",
+        image: "img/Cobertor para moto premium S.jpg",
+        description: "",
         stock: 12
     },
     {
@@ -498,10 +495,10 @@ const PRODUCTS = [
     },
     {
         id: 1013,
-        title: "Chaleco para emergencias M y L",
-        price: 24,
+        title: "Lentes HD de vision nocturna y dia x2",
+        price: 35,
         category: "herramientas",
-        image: "img/Chaleco para emergencias M y L.jpg",
+        image: "img/Lentes HD de vision nocturna y dia x2.jpg",
         description: "",
         stock: 12
     },
@@ -516,10 +513,10 @@ const PRODUCTS = [
     },
     {
         id: 1015,
-        title: "Desarmador phillips 10cms",
-        price: 10,
+        title: "Kit para limpieza de cadenas de moto x3",
+        price: 95,
         category: "herramientas",
-        image: "img/Desarmador phillips 10cms.jpg",
+        image: "img/Kit para limpieza de cadenas de moto x3.jpg",
         description: "",
         stock: 12
     },
@@ -561,10 +558,10 @@ const PRODUCTS = [
     },
     {
         id: 1020,
-        title: "Llave multifuncion",
-        price: 65,
+        title: "Limpia parabrisas 1 litro",
+        price: 60,
         category: "herramientas",
-        image: "img/Llave multifuncion.jpg",
+        image: "img/Limpia parabrisas 1 litro.png",
         description: "",
         stock: 12
     },
@@ -579,10 +576,10 @@ const PRODUCTS = [
     },
     {
         id: 1022,
-        title: "Mini nivel magnetico",
-        price: 50,
+        title: "Limpiador de tapiceria 1 litro",
+        price: 60,
         category: "herramientas",
-        image: "img/Mini nivel magnetico.jpg",
+        image: "img/Limpiador de tapiceria 1 litro.jpg",
         description: "",
         stock: 12
     },
@@ -606,10 +603,10 @@ const PRODUCTS = [
     },
     {
         id: 1025,
-        title: "Set de espatulas 3 unidades",
-        price: 36,
+        title: "Shampoo con ultra cera 1 litro",
+        price: 50,
         category: "herramientas",
-        image: "img/Set de espatulas 3 unidades.jpg",
+        image: "img/Shampoo con ultra cera 1 litro.jpg",
         description: "",
         stock: 12
     },
@@ -633,10 +630,10 @@ const PRODUCTS = [
     },
     {
         id: 1028,
-        title: "Set de pala con estuche",
-        price: 135,
+        title: "Kit car clean 4 articulos",
+        price: 100,
         category: "herramientas",
-        image: "img/Set de pala con estuche.jpg",
+        image: "img/Kit car clean 4 articulos.png",
         description: "",
         stock: 12
     },
@@ -708,7 +705,7 @@ const PRODUCTS = [
     {
         id: 1508,
         title: "Cepillos para pestañas x5",
-        price: 13.50,
+        price: 12,
         category: "belleza",
         image: "img/Cepillos para pestañas x50.jpg",
         description: "",
@@ -717,7 +714,7 @@ const PRODUCTS = [
     {
         id: 1509,
         title: "Colitas de colores x10",
-        price: 13.50,
+        price: 12,
         category: "belleza",
         image: "img/Colitas de colores x100.jpg",
         description: "",
@@ -726,7 +723,7 @@ const PRODUCTS = [
     {
         id: 1510,
         title: "Colitas 10 unidades",
-        price: 13.50,
+        price: 12,
         category: "belleza",
         image: "img/Colitas 100 unidades.jpg",
         description: "",
@@ -734,20 +731,20 @@ const PRODUCTS = [
     },
     {
         id: 1511,
-        title: "Depiladora ecologica de cristal",
-        price: 45,
+        title: "Blanqueador de dientes",
+        price: 35,
         category: "belleza",
-        image: "img/Depiladora ecologica de cristal.jpg",
+        image: "img/Blanqueador de dientes.jpg",
         description: "",
         stock: 12
     },
     {
         id: 1512,
-        title: "Kit de extensiones de pestanas x150",
-        price: 120,
+        title: "Piojina shampoo 2 oz",
+        price: 26,
         category: "belleza",
-        image: "img/Kit de extensiones de pestanas x150.jpg",
-        description: "",
+        image: "img/Piojina shampoo 2 oz.jpg",
+        description: "Vence 2027",
         stock: 12
     },
     {
@@ -788,17 +785,17 @@ const PRODUCTS = [
     },
     {
         id: 1517,
-        title: "Perfilador de cejas 3 unidades",
-        price: 20,
+        title: "Crema corporal 400ml coco+ colageno",
+        price: 56,
         category: "belleza",
-        image: "img/Perfilador de cejas 3 unidades.jpg",
+        image: "img/Crema corporal 400ml coco+ colageno.jpg",
         description: "",
         stock: 12
     },
     {
         id: 1518,
         title: "Pinza para cejas",
-        price: 10.50,
+        price: 10,
         category: "belleza",
         image: "img/Pinza para cejas.jpg",
         description: "",
@@ -842,19 +839,19 @@ const PRODUCTS = [
     },
     {
         id: 1523,
-        title: "Set de manicure 5 en 1",
-        price: 84,
+        title: "Crema para peinar argan y berro 266ml",
+        price: 40,
         category: "belleza",
-        image: "img/Set de manicure 5 en 1.jpg",
+        image: "img/Crema para peinar argan y berro 266ml.jpg",
         description: "",
         stock: 12
     },
     {
         id: 1524,
-        title: "Set de manicure de metal x8",
+        title: "Gancho dorado metalico",
         price: 25.50,
         category: "belleza",
-        image: "img/Set de manicure de metal x8.jpg",
+        image: "img/Gancho dorado metalico.jpg",
         description: "",
         stock: 12
     },
@@ -887,10 +884,10 @@ const PRODUCTS = [
     },
     {
         id: 1528,
-        title: "Tijeras para cejas",
-        price: 20,
+        title: "Rasuradora Recargable 3 en 1",
+        price: 160,
         category: "belleza",
-        image: "img/Tijeras para cejas.jpg",
+        image: "img/Rasuradora Recargable 3 en 1.jpg",
         description: "",
         stock: 12
     },
@@ -1428,7 +1425,7 @@ const PRODUCTS = [
 },
     {
         id: 3002,
-        title: "vestido tipo camisa con cinturón",
+        title: "Vestido tipo camisa con cinturón",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa con cinturón.jpg",
@@ -1441,7 +1438,7 @@ const PRODUCTS = [
     },
     {
         id: 3003,
-        title: "vestido tipo camisa color blanco",
+        title: "Vestido tipo camisa color blanco",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa color blanco.jpg",
@@ -1454,7 +1451,7 @@ const PRODUCTS = [
     },
 {
         id: 3004,
-        title: "vestido tipo camisa color ciruela",
+        title: "Vestido tipo camisa color ciruela",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa color ciruela.jpg",
@@ -1467,7 +1464,7 @@ const PRODUCTS = [
     },
     {
         id: 3005,
-        title: "vestido tipo camisa color malva",
+        title: "Vestido tipo camisa color malva",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa color malva.jpg",
@@ -1480,7 +1477,7 @@ const PRODUCTS = [
     },
      {
         id: 3006,
-        title: "vestido tipo camisa color morado claro",
+        title: "Vestido tipo camisa color morado claro",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa color morado claro.jpg",
@@ -1493,7 +1490,7 @@ const PRODUCTS = [
     },
     {
         id: 3007,
-        title: "vestido tipo camisa color rosa",
+        title: "Vestido tipo camisa color rosa",
         price: 100,
         category: "ropa-mujer",
         image: "img/vestido tipo camisa color rosa.jpg",
@@ -1503,7 +1500,151 @@ const PRODUCTS = [
     },
         stock: 12
     },
-    
+     {
+        id: 3008,
+        title: "Vestido tipo camisa con cinturón",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa con cinturón.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+{
+        id: 3009,
+        title: "Vestido tipo camisa de semi lona",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa de semi lona.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+    {
+        id: 3010,
+        title: "Vestido tipo camisa",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+    {
+        id: 3011,
+        title: "Vestido azul",
+        price: 130,
+        category: "ropa-mujer",
+        image: "img/vestido azul.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+    {
+        id: 3012,
+        title: "Conjunto rojo con diseño",
+        price: 125,
+        category: "ropa-mujer",
+        image: "img/Conjunto rojo con diseño .jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+     {
+        id: 3013,
+        title: "Vestido largo rosa",
+        price: 145,
+        category: "ropa-mujer",
+        image: "img/Vestido largo rosa.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+{
+        id: 3014,
+        title: "Vestido fucsia intenso talla unica",
+        price: 140,
+        category: "ropa-mujer",
+        image: "img/Vestido fucsia intenso.jpg",
+        description: "",
+        variants: {
+       //sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+    {
+        id: 3015,
+        title: "Vestido midi casual de manga abullonada",
+        price: 150,
+        category: "ropa-mujer",
+        image: "img/Vestido midi casual  de manga abullonada.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+{
+        id: 3016,
+        title: "Vestido largo color mostaza",
+        price: 130,
+        category: "ropa-mujer",
+        image: "img/Vestido largo color mostaza.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L","2XL"]
+    },
+        stock: 12
+    },
+    {
+        id: 3017,
+        title: "Vestido blanco y negro talla unica",
+        price: 90,
+        category: "ropa-mujer",
+        image: "img/Vestido blanco y negro.jpg",
+        description: "",
+        variants: {
+        //sizes: ["XL", "M", "L","2XL"]
+    },
+        stock: 12
+    },
+    {
+        id: 3018,
+        title: "vestido maxi con estampado floral hombros descubiertos",
+        price: 140,
+        category: "ropa-mujer",
+        image: "img/vestido maxi con estampado floral hombros descubiertos.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+     {
+        id: 3019,
+        title: "vestido largo bardot",
+        price: 140,
+        category: "ropa-mujer",
+        image: "img/vestido largo bardot.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+
 
 
 
@@ -1705,7 +1846,7 @@ const PRODUCTS = [
     {
         id: 4501,
         title: "Adorno grande de baston",
-        price: 40,
+        price: 35,
         category: "navidad",
         image: "img/Adorno grande de baston.jpg",
         description: "",
@@ -1831,7 +1972,7 @@ const PRODUCTS = [
     {
       id:4514,
       title:"Luces navideñas colores 11 metros",
-      price:55,
+      price:60,
       category:"navidad",
       image: "img/Luces navideñas colores 11 metros.jpg",
       description: "",
@@ -1855,7 +1996,70 @@ const PRODUCTS = [
       description: "",
       stock: 30,
     },
-    
+    {
+      id:4516,
+      title:"Luces LED amarillas con musica 11 metros",
+      price:65,
+      category:"navidad",
+      image: "img/Luces LED amarillas con musica 11 metros.png",
+      description: "",
+      stock: 30,
+    },
+     {
+      id:4517,
+      title:"Luces LED solares de 11 metros blancas",
+      price:95,
+      category:"navidad",
+      image: "img/Luces LED solares de 11 metros blancas.jpg",
+      description: "",
+      stock: 30,
+    },
+     {
+      id:4518,
+      title:"Luces LED solares de 11 metros amarillas",
+      price:95,
+      category:"navidad",
+      image: "img/Luces LED solares de 11 metros amarillas.jpg",
+      description: "",
+      stock: 30,
+    },
+     {
+      id:4519,
+      title:"Luces LED solares de 11 metros de colores",
+      price:95,
+      category:"navidad",
+      image: "img/Luces LED solares de 11 metros de colores.jpg",
+      description: "",
+      stock: 30,
+    },
+      {
+      id:4520,
+      title:"Manguera de luces de colores 10 metros",
+      price:95,
+      category:"navidad",
+      image: "img/Manguera de luces de colores 10 metros.jpg",
+      description: "",
+      stock: 30,
+    },
+ {
+      id:4521,
+      title:"Luces navideñas tipo cascada de colores  10 metros",
+      price:95,
+      category:"navidad",
+      image: "img/Luces navideñas tipo cascada 10 metros.jpg",
+      description: "",
+      stock: 30,
+    },
+{
+      id:4522,
+      title:"luces navideñas tipo cascada azules 5 metors ",
+      price:40,
+      category:"navidad",
+      image: "img/luces navideñas en cascada azules.jpg",
+      description: "",
+      stock: 30,
+    },
+
 
 
 ];
