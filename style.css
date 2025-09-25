@@ -368,27 +368,31 @@ body {
     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 }
 
+/* Estilos para imágenes mejoradas y centradas */
 .product-image-container {
     position: relative;
-    height: 220px;
+    height: 240px; /* Altura aumentada para mejor presentación */
     overflow: hidden;
-    background: #f7fafc;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .product-image {
-    width: 80%;
-    max-width: 220px;
+    width: auto;
     height: auto;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    padding: 16px;
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 8px;
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.08);
+    transform: scale(1.1);
+    filter: brightness(1.05);
 }
 
 .product-badge {
