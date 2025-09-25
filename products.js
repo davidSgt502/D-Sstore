@@ -1431,7 +1431,7 @@ const PRODUCTS = [
         title: "vestido tipo camisa con cinturón",
         price: 100,
         category: "ropa-mujer",
-        images: "img/vestido tipo camisa con cinturón.jpg",
+        image: "img/vestido tipo camisa con cinturón.jpg",
 
         description: "",
         variants: {
@@ -1439,6 +1439,71 @@ const PRODUCTS = [
     },
         stock: 12
     },
+    {
+        id: 3003,
+        title: "vestido tipo camisa color blanco",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa color blanco.jpg",
+
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+{
+        id: 3004,
+        title: "vestido tipo camisa color ciruela",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa color ciruela.jpg",
+
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+    {
+        id: 3005,
+        title: "vestido tipo camisa color malva",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa color malva.jpg",
+
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+     {
+        id: 3006,
+        title: "vestido tipo camisa color morado claro",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa color morado claro.jpg",
+
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+    {
+        id: 3007,
+        title: "vestido tipo camisa color rosa",
+        price: 100,
+        category: "ropa-mujer",
+        image: "img/vestido tipo camisa color rosa.jpg",
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"] 
+    },
+        stock: 12
+    },
+    
 
 
 
