@@ -1427,34 +1427,20 @@ const PRODUCTS = [
     stock: 12
 },
     {
-  id: 3002,
-  title: "vestido tipo camisa con cinturón",
-  price: 100,
-  category: "ropa-mujer",
-  images: [
-    "img/vestido tipo camisa con cinturón.jpeg",
-    "img/vestido tipo camisa con cinturón-2.jpeg",
-    "img/vestido tipo camisa con cinturón-3.jpeg"
-  ],
-  description: "",
-  variants: {
-    colors: [
-      { name: "Rojo", code: "#FF0000" },
-      { name: "Amarillo", code: "#FFFF00" },
-      { name: "Negro", code: "#000000" },
-      { name: "Azul claro", code: "#ADD8E6" },
-      { name: "Rosado oscuro", code: "#E75480" },
-      { name: "Beige", code: "#F5F5DC" },
-      { name: "Morado claro", code: "#9370DB" },
-      { name: "Blanco", code: "#FFFFFF" },
-      { name: "Verde", code: "#008000" },
-      { name: "Rosa claro", code: "#FFB6C1" },
-      { name: "Morado oscuro", code: "#4B0082" }
-    ],
-    sizes: ["XS", "S", "M", "L"]
-  },
-  stock: 12
-},
+        id: 3002,
+        title: "vestido tipo camisa con cinturón",
+        price: 100,
+        category: "ropa-mujer",
+        images: "img/vestido tipo camisa con cinturón.jpg",
+
+        description: "",
+        variants: {
+        sizes: ["XL", "M", "L"]
+    },
+        stock: 12
+    },
+
+
 
     // CATEGORÍA: ropa-hombre (IDs 3501-3999)
     {
